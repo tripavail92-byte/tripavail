@@ -12,10 +12,14 @@ class SignupScreen extends StatefulWidget {
 }
 
 class _SignupScreenState extends State<SignupScreen> {
-  final TextEditingController _nameController = TextEditingController();
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _confirmPasswordController = TextEditingController();
+  final TextEditingController _nameController =
+      TextEditingController();
+  final TextEditingController _emailController =
+      TextEditingController();
+  final TextEditingController _passwordController =
+      TextEditingController();
+  final TextEditingController _confirmPasswordController =
+      TextEditingController();
 
   @override
   void dispose() {
@@ -60,7 +64,7 @@ class _SignupScreenState extends State<SignupScreen> {
                   ),
                   child: Center(
                     child: Text(
-                      "Logo",
+                      AppLabels.logo,
                       style: AppTextStyle.headlineSmall,
                     ),
                   ),
@@ -81,7 +85,7 @@ class _SignupScreenState extends State<SignupScreen> {
 
               ///
               Text(
-                "Create Your Account",
+                AppLabels.createYourAccount,
                 style: AppTextStyle.headlineSmall,
               ),
 
@@ -90,7 +94,7 @@ class _SignupScreenState extends State<SignupScreen> {
 
               ///
               Text(
-                "Join Trip Avail and start exploring amazing destinations with AI powered recommendations.",
+                AppLabels.createAccountDescription,
                 style: AppTextStyle.bodyMedium,
                 textAlign: TextAlign.center,
               ),
@@ -98,18 +102,19 @@ class _SignupScreenState extends State<SignupScreen> {
 
               PrimaryTextField(
                 controller: _nameController,
-                label: 'Full Name',
-                hintText: "Please enter your full name",
+                label: AppLabels.fullName,
+                hintText: AppLabels.fullNameHint,
                 mandatory: true,
                 keyboardType: TextInputType.name,
                 inputAction: TextInputAction.next,
-                textCapitalization: TextCapitalization.words,
+                textCapitalization:
+                    TextCapitalization.words,
               ),
 
               PrimaryTextField(
                 controller: _emailController,
-                label: 'Email',
-                hintText: "Please enter your email",
+                label: AppLabels.email,
+                hintText: AppLabels.emailHint,
                 mandatory: true,
                 keyboardType: TextInputType.emailAddress,
                 inputAction: TextInputAction.next,
@@ -118,16 +123,16 @@ class _SignupScreenState extends State<SignupScreen> {
 
               PasswordTextField(
                 controller: _passwordController,
-                label: 'Password',
-                hintText: "Please enter your password",
+                label: AppLabels.password,
+                hintText: AppLabels.passwordHint,
                 mandatory: true,
                 inputAction: TextInputAction.next,
               ),
 
               PasswordTextField(
                 controller: _confirmPasswordController,
-                label: 'Confirm Password',
-                hintText: "Please confirm your password",
+                label: AppLabels.confirmPassword,
+                hintText: AppLabels.confirmPasswordHint,
                 mandatory: true,
                 inputAction: TextInputAction.done,
               ),
@@ -140,7 +145,7 @@ class _SignupScreenState extends State<SignupScreen> {
                 onPressed: () {
                   // TODO: Implement signup logic
                 },
-                title: 'Create Account',
+                title: AppLabels.createAccount,
                 height: height * 0.06,
                 width: width * 0.8,
               ),
@@ -157,7 +162,7 @@ class _SignupScreenState extends State<SignupScreen> {
                     color: AppColors.greyColor,
                   ),
                   Text(
-                    "or",
+                    AppLabels.or,
                     style: AppTextStyle.bodyMedium,
                   ),
                   Container(
@@ -175,7 +180,7 @@ class _SignupScreenState extends State<SignupScreen> {
                 onPressed: () {
                   // TODO: Implement Google signup
                 },
-                title: 'Continue with Google',
+                title: AppLabels.continueWithGoogle,
                 height: height * 0.06,
                 width: width * 0.8,
                 backgroundColor: AppColors.white,
@@ -186,7 +191,7 @@ class _SignupScreenState extends State<SignupScreen> {
                 onPressed: () {
                   // TODO: Implement Apple signup
                 },
-                title: 'Continue with Apple',
+                title: AppLabels.continueWithApple,
                 height: height * 0.06,
                 width: width * 0.8,
                 backgroundColor: AppColors.black,
@@ -200,7 +205,7 @@ class _SignupScreenState extends State<SignupScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    "Already have an account?",
+                    AppLabels.alreadyHaveAccount,
                     style: AppTextStyle.bodyMedium,
                   ),
 
@@ -213,7 +218,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       Navigator.pop(context);
                     },
                     child: Text(
-                      "Sign in",
+                      AppLabels.signIn,
                       style: AppTextStyle.titleSmall
                           .copyWith(
                             color: AppColors.primaryColor,
