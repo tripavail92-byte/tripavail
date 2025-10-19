@@ -106,7 +106,7 @@ class _LoginScreenState extends State<LoginScreen> {
               //
               PrimaryButton(
                 onPressed: () {},
-                title: 'Continue with Email',
+                title: 'Login',
                 height: height * 0.06,
                 width: width * 0.8,
               ),
