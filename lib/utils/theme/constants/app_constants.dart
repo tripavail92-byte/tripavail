@@ -17,6 +17,29 @@ class AppColors {
   static const Color negativeColor = Color(0xFFFF6961);
 }
 
+/// Role-based visual definitions
+class AppRoleGradients {
+  // Traveller: linear-gradient(135deg, #FF385C 0%, #FF6B9D 100%)
+  static const LinearGradient traveller = LinearGradient(
+    colors: [Color(0xFFFF385C), Color(0xFFFF6B9D)],
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+  );
+
+  // Placeholders for future roles
+  static const LinearGradient hotelManager = LinearGradient(
+    colors: [Color(0xFF3A7BD5), Color(0xFF00D2FF)],
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+  );
+
+  static const LinearGradient tourOperator = LinearGradient(
+    colors: [Color(0xFF8E2DE2), Color(0xFF4A00E0)],
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+  );
+}
+
 /// Light theme color definitions
 /// Used when the app is in light mode
 class AppLightThemeColors {

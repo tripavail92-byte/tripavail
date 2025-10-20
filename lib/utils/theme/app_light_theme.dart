@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tripavail/utils/app_text_styles.dart';
 import 'package:tripavail/utils/theme/constants/app_constants.dart';
+import 'package:tripavail/utils/theme/constants/app_radii.dart';
+import 'package:tripavail/utils/theme/extension/role_theme_extension.dart';
 import 'package:tripavail/utils/theme/extension/theme_extension.dart';
 
 final lightTheme = ThemeData.light().copyWith(
@@ -92,18 +94,18 @@ final lightTheme = ThemeData.light().copyWith(
         color: AppColors.primaryColor.withValues(alpha: 0.3),
         width: 1,
       ),
-      borderRadius: BorderRadius.circular(10),
+      borderRadius: AppRadii.s,
     ),
     disabledBorder: OutlineInputBorder(
       borderSide: const BorderSide(
         color: AppLightThemeColors.lightGreyColor,
         width: 1,
       ),
-      borderRadius: BorderRadius.circular(10),
+      borderRadius: AppRadii.s,
     ),
     focusedBorder: OutlineInputBorder(
       borderSide: const BorderSide(color: AppColors.primaryColor, width: 1),
-      borderRadius: BorderRadius.circular(10),
+      borderRadius: AppRadii.s,
     ),
   ),
   // Ensure cursor is visible in light mode
@@ -115,5 +117,6 @@ final lightTheme = ThemeData.light().copyWith(
   buttonTheme: const ButtonThemeData(buttonColor: AppColors.primaryColor),
   extensions: [
     const CustomThemeExtension(positiveColor: AppColors.positiveColor),
+    RoleThemeExtension.traveller,
   ],
 );
