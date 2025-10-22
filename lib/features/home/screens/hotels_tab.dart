@@ -101,8 +101,8 @@ class _HotelCard extends StatelessWidget {
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 colors: [
-                  theme.primaryColor.withOpacity(0.4),
-                  theme.primaryColor.withOpacity(0.2),
+                  theme.primaryColor.withValues(alpha: 0.4),
+                  theme.primaryColor.withValues(alpha: 0.2),
                 ],
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
@@ -115,7 +115,7 @@ class _HotelCard extends StatelessWidget {
               child: Icon(
                 Icons.hotel,
                 size: 64,
-                color: Colors.white.withOpacity(0.7),
+                color: Colors.white.withValues(alpha: 0.7),
               ),
             ),
           ),

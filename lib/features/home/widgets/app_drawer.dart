@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:tripavail/features/profile/profile_screen.dart';
 import 'package:tripavail/utils/app_text_styles.dart';
 import 'package:tripavail/utils/theme/constants/app_constants.dart';
 import 'package:tripavail/utils/theme/constants/app_spacing.dart';
-import 'package:get/get.dart';
-import 'package:tripavail/features/profile/profile_screen.dart';
 
 class AppDrawer extends StatelessWidget {
   const AppDrawer({super.key});
@@ -64,8 +64,8 @@ class AppDrawer extends StatelessWidget {
                   Text(
                     'traveler@tripavail.com',
                     style: AppTextStyle.bodySmall.copyWith(
-                      color: AppColors.white.withOpacity(
-                        0.9,
+                      color: AppColors.white.withValues(
+                        alpha: 0.9,
                       ),
                     ),
                   ),
@@ -169,7 +169,7 @@ class AppDrawer extends StatelessWidget {
                 'Version 1.0.0',
                 style: AppTextStyle.bodySmall.copyWith(
                   color: theme.textTheme.bodySmall?.color
-                      ?.withOpacity(0.5),
+                      ?.withValues(alpha: 0.5),
                 ),
                 textAlign: TextAlign.center,
               ),

@@ -1,10 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:tripavail/features/profile/widgets/section_card.dart';
 import 'package:tripavail/utils/app_text_styles.dart';
 import 'package:tripavail/utils/theme/constants/app_constants.dart';
-import 'package:tripavail/utils/theme/extension/role_theme_extension.dart';
 import 'package:tripavail/utils/theme/constants/app_spacing.dart';
-import 'package:tripavail/features/profile/widgets/section_card.dart';
+import 'package:tripavail/utils/theme/extension/role_theme_extension.dart';
 
 class ProfileHeaderCard extends StatelessWidget {
   final String name;
@@ -133,7 +133,7 @@ class ProfileHeaderCard extends StatelessWidget {
             'Member since $joinDate',
             style: AppTextStyle.bodySmall.copyWith(
               color: theme.textTheme.bodySmall?.color
-                  ?.withOpacity(0.6),
+                  ?.withValues(alpha: 0.6),
             ),
           ),
           AppSpacing.v16(),
@@ -142,7 +142,7 @@ class ProfileHeaderCard extends StatelessWidget {
             textAlign: TextAlign.center,
             style: AppTextStyle.bodyMedium.copyWith(
               color: theme.textTheme.bodyMedium?.color
-                  ?.withOpacity(0.85),
+                  ?.withValues(alpha: 0.85),
               height: 1.5,
             ),
           ),

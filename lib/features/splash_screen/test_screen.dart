@@ -1,6 +1,6 @@
+import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'dart:math';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -9,7 +9,8 @@ class SplashScreen extends StatefulWidget {
   State<SplashScreen> createState() => _SplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderStateMixin {
+class _SplashScreenState extends State<SplashScreen>
+    with SingleTickerProviderStateMixin {
   late AnimationController _controller;
 
   @override
@@ -47,10 +48,13 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
                 child: Column(
                   children: [
                     AnimatedOpacity(
-                      opacity: _controller.value > 0.1 ? 1 : 0,
+                      opacity: _controller.value > 0.1
+                          ? 1
+                          : 0,
                       duration: Duration(milliseconds: 600),
                       child: Transform.scale(
-                        scale: 0.8 + 0.2 * _controller.value,
+                        scale:
+                            0.8 + 0.2 * _controller.value,
                         child: Text(
                           'TripAvail',
                           style: TextStyle(
@@ -60,7 +64,8 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
                             letterSpacing: 2,
                             shadows: [
                               Shadow(
-                                color: Colors.black.withOpacity(0.3),
+                                color: Colors.black
+                                    .withValues(alpha: 0.3),
                                 blurRadius: 12,
                                 offset: Offset(0, 4),
                               ),
@@ -71,7 +76,9 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
                     ),
                     SizedBox(height: 14),
                     AnimatedOpacity(
-                      opacity: _controller.value > 0.2 ? 1 : 0,
+                      opacity: _controller.value > 0.2
+                          ? 1
+                          : 0,
                       duration: Duration(milliseconds: 600),
                       child: Text(
                         'Explore the world. Experience luxury. Travel proud.',
@@ -85,14 +92,22 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
                     ),
                     SizedBox(height: 36),
                     AnimatedOpacity(
-                      opacity: _controller.value > 0.4 ? 1 : 0,
+                      opacity: _controller.value > 0.4
+                          ? 1
+                          : 0,
                       duration: Duration(milliseconds: 600),
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          padding: EdgeInsets.symmetric(horizontal: 48, vertical: 16),
-                          backgroundColor: const Color(0xFFD4AF37),
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 48,
+                            vertical: 16,
+                          ),
+                          backgroundColor: const Color(
+                            0xFFD4AF37,
+                          ),
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(30),
+                            borderRadius:
+                                BorderRadius.circular(30),
                           ),
                           elevation: 12,
                         ),
@@ -130,40 +145,66 @@ class _GlobePainter extends CustomPainter {
     // Background
     canvas.drawRect(
       Rect.fromLTWH(0, 0, size.width, size.height),
-      Paint()..shader = LinearGradient(
-        colors: [Color(0xFF232526), Color(0xFF283E51)],
-        begin: Alignment.topCenter,
-        end: Alignment.bottomCenter,
-      ).createShader(Rect.fromLTWH(0, 0, size.width, size.height)),
+      Paint()
+        ..shader =
+            LinearGradient(
+              colors: [
+                Color(0xFF232526),
+                Color(0xFF283E51),
+              ],
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+            ).createShader(
+              Rect.fromLTWH(0, 0, size.width, size.height),
+            ),
     );
 
     // Glowing globe
-    final globeCenter = Offset(size.width / 2, size.height * 0.38);
+    final globeCenter = Offset(
+      size.width / 2,
+      size.height * 0.38,
+    );
     final globeRadius = size.width * 0.32;
     canvas.drawCircle(
       globeCenter,
       globeRadius,
       Paint()
-        ..shader = RadialGradient(
-          colors: [Color(0xFFD4AF37), Color(0xFF232526), Colors.transparent],
-          stops: [0.0, 0.7, 1.0],
-        ).createShader(Rect.fromCircle(center: globeCenter, radius: globeRadius)),
+        ..shader =
+            RadialGradient(
+              colors: [
+                Color(0xFFD4AF37),
+                Color(0xFF232526),
+                Colors.transparent,
+              ],
+              stops: [0.0, 0.7, 1.0],
+            ).createShader(
+              Rect.fromCircle(
+                center: globeCenter,
+                radius: globeRadius,
+              ),
+            ),
     );
     canvas.drawCircle(
       globeCenter,
       globeRadius * (0.98 + 0.02 * sin(progress * 2 * pi)),
       Paint()
-        ..color = Colors.white.withOpacity(0.08 + 0.08 * sin(progress * 2 * pi))
-        ..maskFilter = MaskFilter.blur(BlurStyle.normal, 16),
+        ..color = Colors.white.withValues(
+          alpha: 0.08 + 0.08 * sin(progress * 2 * pi),
+        )
+        ..maskFilter = MaskFilter.blur(
+          BlurStyle.normal,
+          16,
+        ),
     );
 
     // Flight paths
     final pathPaint = Paint()
-      ..color = Colors.white.withOpacity(0.18)
+      ..color = Colors.white.withValues(alpha: 0.18)
       ..strokeWidth = 3
       ..style = PaintingStyle.stroke;
     for (int i = 0; i < 3; i++) {
-      double angle = pi / 4 + i * pi / 6 + progress * pi / 2;
+      double angle =
+          pi / 4 + i * pi / 6 + progress * pi / 2;
       Path path = Path();
       path.moveTo(globeCenter.dx, globeCenter.dy);
       path.quadraticBezierTo(
@@ -176,22 +217,58 @@ class _GlobePainter extends CustomPainter {
     }
 
     // Moving travel icons
-    _drawIcon(canvas, globeCenter + Offset(globeRadius * cos(progress * pi * 2), -globeRadius * sin(progress * pi * 2)), Icons.flight, Colors.blueAccent, 1-progress);
-    _drawIcon(canvas, globeCenter + Offset(-globeRadius * cos(progress * pi), globeRadius * sin(progress * pi)), Icons.hotel, Colors.amber, progress);
-    _drawIcon(canvas, globeCenter + Offset(globeRadius * cos(progress * pi * 1.5), globeRadius * sin(progress * pi * 1.5)), Icons.explore, Colors.greenAccent, 0.5+0.5*sin(progress*2*pi));
+    _drawIcon(
+      canvas,
+      globeCenter +
+          Offset(
+            globeRadius * cos(progress * pi * 2),
+            -globeRadius * sin(progress * pi * 2),
+          ),
+      Icons.flight,
+      Colors.blueAccent,
+      1 - progress,
+    );
+    _drawIcon(
+      canvas,
+      globeCenter +
+          Offset(
+            -globeRadius * cos(progress * pi),
+            globeRadius * sin(progress * pi),
+          ),
+      Icons.hotel,
+      Colors.amber,
+      progress,
+    );
+    _drawIcon(
+      canvas,
+      globeCenter +
+          Offset(
+            globeRadius * cos(progress * pi * 1.5),
+            globeRadius * sin(progress * pi * 1.5),
+          ),
+      Icons.explore,
+      Colors.greenAccent,
+      0.5 + 0.5 * sin(progress * 2 * pi),
+    );
   }
 
-  void _drawIcon(Canvas canvas, Offset pos, IconData icon, Color color, double glow) {
+  void _drawIcon(
+    Canvas canvas,
+    Offset pos,
+    IconData icon,
+    Color color,
+    double glow,
+  ) {
     final textPainter = TextPainter(
       text: TextSpan(
         text: String.fromCharCode(icon.codePoint),
         style: TextStyle(
           fontSize: 38,
           fontFamily: icon.fontFamily,
-          color: color.withOpacity(0.85),
+          color: color.withValues(alpha: 0.85),
           shadows: [
             Shadow(
-              color: color.withOpacity(glow),
+              color: color.withValues(alpha: glow),
               blurRadius: 18,
             ),
           ],
@@ -204,5 +281,6 @@ class _GlobePainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(covariant _GlobePainter oldDelegate) => oldDelegate.progress != progress;
+  bool shouldRepaint(covariant _GlobePainter oldDelegate) =>
+      oldDelegate.progress != progress;
 }

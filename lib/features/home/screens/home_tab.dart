@@ -24,7 +24,7 @@ class HomeTab extends StatelessWidget {
               gradient: LinearGradient(
                 colors: [
                   theme.primaryColor,
-                  theme.primaryColor.withOpacity(0.8),
+                  theme.primaryColor.withValues(alpha: 0.8),
                 ],
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
@@ -51,7 +51,9 @@ class HomeTab extends StatelessWidget {
                 Text(
                   'AI-powered recommendations just for you',
                   style: AppTextStyle.bodyMedium.copyWith(
-                    color: Colors.white.withOpacity(0.9),
+                    color: Colors.white.withValues(
+                      alpha: 0.9,
+                    ),
                   ),
                 ),
               ],
@@ -170,7 +172,7 @@ class _QuickActionCard extends StatelessWidget {
           Container(
             padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
-              color: color.withOpacity(0.1),
+              color: color.withValues(alpha: 0.1),
               shape: BoxShape.circle,
             ),
             child: Icon(icon, color: color, size: 28),
@@ -228,8 +230,8 @@ class _DestinationCard extends StatelessWidget {
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 colors: [
-                  theme.primaryColor.withOpacity(0.6),
-                  theme.primaryColor.withOpacity(0.3),
+                  theme.primaryColor.withValues(alpha: 0.6),
+                  theme.primaryColor.withValues(alpha: 0.3),
                 ],
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
@@ -242,7 +244,7 @@ class _DestinationCard extends StatelessWidget {
               child: Icon(
                 Icons.location_city,
                 size: 48,
-                color: Colors.white.withOpacity(0.8),
+                color: Colors.white.withValues(alpha: 0.8),
               ),
             ),
           ),

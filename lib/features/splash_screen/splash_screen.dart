@@ -2,14 +2,13 @@ import 'dart:async';
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:tripavail/utils/app_labels.dart';
-import 'package:tripavail/utils/theme/constants/app_constants.dart';
 import 'package:tripavail/utils/app_text_styles.dart';
+import 'package:tripavail/utils/theme/constants/app_constants.dart';
+import 'package:tripavail/widgets/app_scaffold.dart';
 
 import '../onboarding/onboarding_screen.dart';
-import 'package:tripavail/widgets/app_scaffold.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -359,11 +358,15 @@ class _SplashScreenState extends State<SplashScreen>
                                 gradient: RadialGradient(
                                   colors: [
                                     AppColors.primaryColor
-                                        .withOpacity(
-                                          glowOpacity * 0.3,
+                                        .withValues(
+                                          alpha:
+                                              glowOpacity *
+                                              0.3,
                                         ),
                                     AppColors.primaryColor
-                                        .withOpacity(0.0),
+                                        .withValues(
+                                          alpha: 0.0,
+                                        ),
                                   ],
                                 ),
                               ),
@@ -391,8 +394,8 @@ class _SplashScreenState extends State<SplashScreen>
                                       BoxShadow(
                                         color: AppColors
                                             .primaryColor
-                                            .withOpacity(
-                                              0.4,
+                                            .withValues(
+                                              alpha: 0.4,
                                             ),
                                         blurRadius: 30,
                                         spreadRadius: 5,
@@ -497,9 +500,9 @@ class _AnimatedBackground extends StatelessWidget {
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
           colors: [
-            AppColors.primaryColor.withOpacity(0.1),
+            AppColors.primaryColor.withValues(alpha: 0.1),
             Colors.transparent,
-            AppColors.primaryColor.withOpacity(0.05),
+            AppColors.primaryColor.withValues(alpha: 0.05),
           ],
         ),
       ),
@@ -605,7 +608,9 @@ class _FloatingOrbState extends State<_FloatingOrb>
                 shape: BoxShape.circle,
                 gradient: RadialGradient(
                   colors: [
-                    AppColors.primaryColor.withOpacity(0.3),
+                    AppColors.primaryColor.withValues(
+                      alpha: 0.3,
+                    ),
                     Colors.transparent,
                   ],
                 ),
@@ -659,7 +664,7 @@ class _FloatingParticles extends StatelessWidget {
                   height: 4,
                   decoration: BoxDecoration(
                     color: AppColors.primaryColor
-                        .withOpacity(0.3),
+                        .withValues(alpha: 0.3),
                     shape: BoxShape.circle,
                   ),
                 ),
@@ -713,7 +718,7 @@ class _LoadingIndicator extends StatelessWidget {
                       height: 8,
                       decoration: BoxDecoration(
                         color: AppColors.primaryColor
-                            .withOpacity(0.7),
+                            .withValues(alpha: 0.7),
                         shape: BoxShape.circle,
                       ),
                     ),
@@ -814,7 +819,7 @@ class _TravelHotel extends StatelessWidget {
           BoxShadow(
             color: const Color(
               0xFFE53E3E,
-            ).withOpacity(glowIntensity * 0.4),
+            ).withValues(alpha: glowIntensity * 0.4),
             blurRadius: 15,
             spreadRadius: 2,
           ),
@@ -922,7 +927,7 @@ class _TravelPlane extends StatelessWidget {
               BoxShadow(
                 color: const Color(
                   0xFF3182CE,
-                ).withOpacity(0.3),
+                ).withValues(alpha: 0.3),
                 blurRadius: 10,
                 offset: const Offset(0, 4),
               ),
@@ -954,7 +959,9 @@ class _TravelCar extends StatelessWidget {
         borderRadius: BorderRadius.circular(8),
         boxShadow: [
           BoxShadow(
-            color: const Color(0xFF3182CE).withOpacity(0.3),
+            color: const Color(
+              0xFF3182CE,
+            ).withValues(alpha: 0.3),
             blurRadius: 8,
             offset: const Offset(0, 3),
           ),
@@ -1021,7 +1028,9 @@ class _TravelTourBus extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
         boxShadow: [
           BoxShadow(
-            color: const Color(0xFFE53E3E).withOpacity(0.3),
+            color: const Color(
+              0xFFE53E3E,
+            ).withValues(alpha: 0.3),
             blurRadius: 10,
             offset: const Offset(0, 4),
           ),
@@ -1037,7 +1046,7 @@ class _TravelTourBus extends StatelessWidget {
               width: 44,
               height: 8,
               decoration: BoxDecoration(
-                color: Colors.white.withOpacity(0.9),
+                color: Colors.white.withValues(alpha: 0.9),
                 borderRadius: BorderRadius.circular(4),
               ),
               child: const Center(
@@ -1163,7 +1172,7 @@ class _MountainPainter extends CustomPainter {
 
     // Snow on peaks
     final snowPaint = Paint()
-      ..color = Colors.white.withOpacity(0.8)
+      ..color = Colors.white.withValues(alpha: 0.8)
       ..style = PaintingStyle.fill;
 
     final snowPath = Path();

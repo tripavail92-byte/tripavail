@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:tripavail/features/authentication/email_entry_screen.dart';
 import 'package:tripavail/utils/app_labels.dart';
 import 'package:tripavail/utils/app_text_styles.dart';
 import 'package:tripavail/utils/theme/constants/app_constants.dart';
-import 'package:tripavail/widgets/primary_button.dart';
 import 'package:tripavail/utils/theme/constants/app_spacing.dart';
-import 'widgets/auth_scaffold.dart';
-import 'widgets/auth_header.dart';
+import 'package:tripavail/widgets/primary_button.dart';
 
-import 'email_entry_screen.dart';
+import 'widgets/auth_header.dart';
+import 'widgets/auth_scaffold.dart';
 
 class AuthWelcomeScreen extends StatelessWidget {
   const AuthWelcomeScreen({super.key});
@@ -23,7 +23,7 @@ class AuthWelcomeScreen extends StatelessWidget {
         AppLabels.termsAndPrivacy,
         style: AppTextStyle.bodySmall.copyWith(
           color: theme.textTheme.bodySmall?.color
-              ?.withOpacity(0.6),
+              ?.withValues(alpha: 0.6),
         ),
         textAlign: TextAlign.center,
       ),

@@ -82,8 +82,8 @@ class _TourCard extends StatelessWidget {
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 colors: [
-                  theme.primaryColor.withOpacity(0.3),
-                  theme.primaryColor.withOpacity(0.1),
+                  theme.primaryColor.withValues(alpha: 0.3),
+                  theme.primaryColor.withValues(alpha: 0.1),
                 ],
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,

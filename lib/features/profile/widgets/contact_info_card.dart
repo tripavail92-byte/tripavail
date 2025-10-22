@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:tripavail/features/profile/widgets/section_card.dart';
 import 'package:tripavail/utils/app_text_styles.dart';
 import 'package:tripavail/utils/theme/constants/app_spacing.dart';
-import 'package:tripavail/features/profile/widgets/section_card.dart';
 
 class ContactInfoCard extends StatelessWidget {
   final String email;
@@ -150,7 +150,7 @@ class _ContactRow extends StatelessWidget {
                           .textTheme
                           .bodySmall
                           ?.color
-                          ?.withOpacity(0.6),
+                          ?.withValues(alpha: 0.6),
                     ),
                   ),
                   AppSpacing.v8(),
@@ -206,14 +206,14 @@ class _ContactRow extends StatelessWidget {
                                 .textTheme
                                 .bodySmall
                                 ?.color
-                                ?.withOpacity(0.5),
+                                ?.withValues(alpha: 0.5),
                           ),
                     ),
             const SizedBox(width: 12),
             Icon(
               Icons.chevron_right,
-              color: theme.iconTheme.color?.withOpacity(
-                0.5,
+              color: theme.iconTheme.color?.withValues(
+                alpha: 0.5,
               ),
               size: 18,
             ),

@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:tripavail/features/profile/widgets/profile_header_card.dart';
+import 'package:get/get.dart';
 import 'package:tripavail/features/profile/widgets/contact_info_card.dart';
 import 'package:tripavail/features/profile/widgets/payment_methods_card.dart';
-import 'package:get/get.dart';
+import 'package:tripavail/features/profile/widgets/profile_header_card.dart';
 import 'package:tripavail/utils/app_text_styles.dart';
+import 'package:tripavail/utils/choose_photo_bottom_sheet.dart';
+import 'package:tripavail/utils/profile_storage.dart';
 import 'package:tripavail/utils/theme/constants/app_constants.dart';
 import 'package:tripavail/utils/theme/constants/app_spacing.dart';
 import 'package:tripavail/utils/theme/extension/role_theme_extension.dart';
 import 'package:tripavail/widgets/app_scaffold.dart';
+import 'package:tripavail/widgets/otp_input.dart';
 import 'package:tripavail/widgets/primary_appbar.dart';
 import 'package:tripavail/widgets/primary_button.dart';
-import 'package:tripavail/utils/choose_photo_bottom_sheet.dart';
-import 'package:tripavail/utils/profile_storage.dart';
-import 'package:tripavail/widgets/otp_input.dart';
 
 class ProfileData {
   String name;
@@ -308,7 +307,7 @@ class _ProfileScreenState extends State<ProfileScreen>
           style: AppTextStyle.bodySmall.copyWith(
             fontWeight: FontWeight.w600,
             color: theme.textTheme.bodySmall?.color
-                ?.withOpacity(0.9),
+                ?.withValues(alpha: 0.9),
           ),
         ),
         const SizedBox(height: 2),
@@ -613,7 +612,7 @@ class _PhoneVerificationScreenState
               'We sent a 6-digit code to:',
               style: AppTextStyle.bodySmall.copyWith(
                 color: theme.textTheme.bodySmall?.color
-                    ?.withOpacity(0.7),
+                    ?.withValues(alpha: 0.7),
               ),
             ),
             AppSpacing.v8(),

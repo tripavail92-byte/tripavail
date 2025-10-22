@@ -1,24 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:flutter/services.dart';
 import 'package:tripavail/utils/app_labels.dart';
 import 'package:tripavail/utils/app_text_styles.dart';
+import 'package:tripavail/utils/theme/constants/app_spacing.dart';
 import 'package:tripavail/widgets/primary_button.dart';
 import 'package:tripavail/widgets/primary_text_field.dart';
-import 'package:tripavail/utils/theme/constants/app_spacing.dart';
-import 'widgets/auth_scaffold.dart';
 
 import 'otp_screen.dart';
+import 'widgets/auth_scaffold.dart';
 
 class EmailEntryScreen extends StatefulWidget {
   const EmailEntryScreen({super.key});
 
   @override
-  State<EmailEntryScreen> createState() => _EmailEntryScreenState();
+  State<EmailEntryScreen> createState() =>
+      _EmailEntryScreenState();
 }
 
-class _EmailEntryScreenState extends State<EmailEntryScreen> {
-  final TextEditingController emailController = TextEditingController();
+class _EmailEntryScreenState
+    extends State<EmailEntryScreen> {
+  final TextEditingController emailController =
+      TextEditingController();
 
   @override
   void dispose() {
@@ -33,9 +35,15 @@ class _EmailEntryScreenState extends State<EmailEntryScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Text(AppLabels.whatsYourEmailTitle, style: AppTextStyle.headlineMedium),
+          Text(
+            AppLabels.whatsYourEmailTitle,
+            style: AppTextStyle.headlineMedium,
+          ),
           AppSpacing.v8(),
-          Text(AppLabels.emailCodeSubtitle, style: AppTextStyle.bodyMedium),
+          Text(
+            AppLabels.emailCodeSubtitle,
+            style: AppTextStyle.bodyMedium,
+          ),
           AppSpacing.v24(),
           PrimaryTextField(
             controller: emailController,
@@ -49,7 +57,11 @@ class _EmailEntryScreenState extends State<EmailEntryScreen> {
           const Spacer(),
           PrimaryButton(
             onPressed: () {
-              Get.to(() => OtpVerificationScreen(email: emailController.text));
+              Get.to(
+                () => OtpVerificationScreen(
+                  email: emailController.text,
+                ),
+              );
             },
             title: AppLabels.continueAction,
             height: 52,
@@ -61,5 +73,3 @@ class _EmailEntryScreenState extends State<EmailEntryScreen> {
     );
   }
 }
-
-

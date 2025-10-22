@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tripavail/features/home/main_navigation.dart';
-import 'package:tripavail/utils/app_text_styles.dart';
 import 'package:tripavail/utils/app_labels.dart';
-import 'package:tripavail/utils/theme/constants/app_spacing.dart';
-import 'package:tripavail/widgets/primary_button.dart';
+import 'package:tripavail/utils/app_text_styles.dart';
 import 'package:tripavail/utils/location_service.dart';
 import 'package:tripavail/utils/profile_storage.dart';
+import 'package:tripavail/utils/theme/constants/app_spacing.dart';
+import 'package:tripavail/widgets/primary_button.dart';
+
 import 'widgets/auth_scaffold.dart';
 
 class SetupLocationScreen extends StatefulWidget {
@@ -64,7 +65,7 @@ class _SetupLocationScreenState
             'We use your location to personalize pickup points, hotel distance, and trip suggestions.',
             style: AppTextStyle.bodyMedium.copyWith(
               color: theme.textTheme.bodyMedium?.color
-                  ?.withOpacity(0.7),
+                  ?.withValues(alpha: 0.7),
             ),
           ),
           AppSpacing.v24(),

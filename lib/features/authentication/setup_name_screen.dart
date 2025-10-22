@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:tripavail/features/authentication/setup_location_screen.dart';
 import 'package:tripavail/utils/app_labels.dart';
 import 'package:tripavail/utils/app_text_styles.dart';
+import 'package:tripavail/utils/theme/constants/app_spacing.dart';
 import 'package:tripavail/widgets/primary_button.dart';
 import 'package:tripavail/widgets/primary_text_field.dart';
-import 'package:tripavail/utils/theme/constants/app_spacing.dart';
+
 import 'widgets/auth_scaffold.dart';
-import 'package:tripavail/features/authentication/flow/setup_location_screen.dart';
 
 class SetupNameScreen extends StatefulWidget {
   const SetupNameScreen({super.key});
@@ -74,7 +75,7 @@ class _SetupNameScreenState extends State<SetupNameScreen> {
                     .textTheme
                     .bodyMedium
                     ?.color
-                    ?.withOpacity(0.7),
+                    ?.withValues(alpha: 0.7),
               ),
             ),
           ),

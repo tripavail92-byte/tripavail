@@ -109,7 +109,7 @@ class _AnimatedTravelerIllustrationState
                           ),
                           shadowColor: const Color(
                             0xFFF44336,
-                          ).withOpacity(0.3),
+                          ).withValues(alpha: 0.3),
                           borderRadius: 8,
                           handleWidth: base * 0.45,
                           bounceDistance: -6,
@@ -137,7 +137,7 @@ class _AnimatedTravelerIllustrationState
                           ),
                           shadowColor: const Color(
                             0xFF00BCD4,
-                          ).withOpacity(0.3),
+                          ).withValues(alpha: 0.3),
                           borderRadius: 10,
                           handleWidth: base * 0.55,
                           bounceDistance: -8,
@@ -171,7 +171,7 @@ class _AnimatedTravelerIllustrationState
                           ),
                           shadowColor: const Color(
                             0xFF7B1FA2,
-                          ).withOpacity(0.3),
+                          ).withValues(alpha: 0.3),
                           borderRadius: 7,
                           handleWidth: base * 0.36,
                           bounceDistance: -4,

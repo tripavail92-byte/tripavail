@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tripavail/utils/app_labels.dart';
 import 'package:tripavail/utils/app_text_styles.dart';
-import 'package:tripavail/widgets/primary_button.dart';
-import 'package:tripavail/widgets/otp_input.dart';
 import 'package:tripavail/utils/theme/constants/app_spacing.dart';
-import 'widgets/auth_scaffold.dart';
+import 'package:tripavail/widgets/otp_input.dart';
+import 'package:tripavail/widgets/primary_button.dart';
 
 import 'setup_name_screen.dart';
+import 'widgets/auth_scaffold.dart';
 
 class OtpVerificationScreen extends StatefulWidget {
   final String email;
@@ -44,7 +44,7 @@ class _OtpVerificationScreenState
             AppLabels.otpSentTo(widget.email),
             style: AppTextStyle.bodyMedium.copyWith(
               color: theme.textTheme.bodyMedium?.color
-                  ?.withOpacity(0.7),
+                  ?.withValues(alpha: 0.7),
             ),
           ),
           AppSpacing.v32(),

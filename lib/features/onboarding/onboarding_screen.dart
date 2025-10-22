@@ -2,15 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import 'package:tripavail/utils/app_text_styles.dart';
+import 'package:tripavail/common/controllers/preference_controller.dart';
 import 'package:tripavail/utils/app_labels.dart';
+import 'package:tripavail/utils/preference_labels.dart';
 import 'package:tripavail/utils/theme/constants/app_constants.dart';
 import 'package:tripavail/utils/theme/constants/app_spacing.dart';
 import 'package:tripavail/widgets/primary_button.dart';
-import 'package:tripavail/utils/preference_labels.dart';
-import 'package:tripavail/common/controllers/preference_controller.dart';
 
-import '../authentication/flow/auth_welcome_screen.dart';
+import '../authentication/auth_welcome_screen.dart';
 import 'widgets/animated_suitcases.dart';
 
 class OnboardingScreen extends StatefulWidget {
