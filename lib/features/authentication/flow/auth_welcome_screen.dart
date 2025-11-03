@@ -24,9 +24,7 @@ class AuthWelcomeScreen extends StatelessWidget {
               child: ConstrainedBox(
                 constraints: const BoxConstraints(maxWidth: 560),
                 child: Padding(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: (width * 0.08).clamp(16.0, 28.0),
-                  ),
+                  padding: EdgeInsets.symmetric(horizontal: width * 0.08),
                   child: SingleChildScrollView(
                     child: ConstrainedBox(
                       constraints: BoxConstraints(
