@@ -57,10 +57,6 @@ class _PartnerWorkspaceScreenState extends State<PartnerWorkspaceScreen> {
       ? DrawerDefinitions.hotelManagerMeta
       : DrawerDefinitions.tourOperatorMeta;
 
-  PartnerDashboardController _controllerForRole(PartnerRole role) {
-    return Get.find<PartnerDashboardController>(tag: role.name);
-  }
-
   void _handleDrawerItem(String id, String screen) {
     setState(() {
       _selectedItemId = id;
@@ -135,7 +131,6 @@ class _PartnerWorkspaceScreenState extends State<PartnerWorkspaceScreen> {
                 Expanded(
                   child: GetX<PartnerDashboardController>(
                     tag: _activeRole.name,
-                    init: _controllerForRole(_activeRole),
                     builder: (controller) {
                       if (controller.isLoading.value) {
                         return const Center(child: CircularProgressIndicator());
