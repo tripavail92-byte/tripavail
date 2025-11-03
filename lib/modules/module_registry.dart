@@ -1,5 +1,3 @@
-import 'package:get/get.dart';
-
 import 'app_module.dart';
 
 class ModuleRegistry {
@@ -18,7 +16,4 @@ class ModuleRegistry {
       register(module);
     }
   }
-
-  static List<GetPage<dynamic>> get pages =>
-      _modules.expand((module) => module.pages).toList();
 }

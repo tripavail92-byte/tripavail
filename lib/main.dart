@@ -80,7 +80,6 @@ class _MyAppState extends State<MyApp> {
       darkTheme: darkTheme,
       themeMode: themeMode,
       home: const SplashScreen(),
-      getPages: ModuleRegistry.pages,
       builder: (context, child) {
         return MediaQuery(
           data: MediaQuery.of(
