@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:tripavail/features/splash_screen/splash_screen.dart';
+import 'package:tripavail/modules/auth/auth_module.dart';
+import 'package:tripavail/modules/core/core_module.dart';
+import 'package:tripavail/modules/hotel_manager/hotel_manager_module.dart';
+import 'package:tripavail/modules/module_registry.dart';
+import 'package:tripavail/modules/tour_operator/tour_operator_module.dart';
+import 'package:tripavail/modules/traveler/traveler_module.dart';
+import 'package:tripavail/modules/traveler/traveler_routes.dart';
 import 'package:tripavail/utils/app_labels.dart';
 import 'package:tripavail/utils/preference_labels.dart';
 import 'package:tripavail/utils/theme/app_dark_theme.dart';
@@ -14,15 +20,21 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   // Set edge-to-edge mode - status bar visible but integrated
-  SystemChrome.setEnabledSystemUIMode(
-    SystemUiMode.edgeToEdge,
-  );
+  SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
 
-  runApp(MyApp());
+  ModuleRegistry.registerDefaults([
+    CoreModule(),
+    AuthModule(),
+    TravelerModule(),
+    HotelManagerModule(),
+    TourOperatorModule(),
+  ]);
+
+  runApp(const MyApp());
 }
 
 class MyApp extends StatefulWidget {
@@ -33,8 +45,9 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  final AppPreferencesController appPreferencesController =
-      Get.put(AppPreferencesController());
+  final AppPreferencesController appPreferencesController = Get.put(
+    AppPreferencesController(),
+  );
 
   ThemeMode themeMode = ThemeMode.system;
 
@@ -45,8 +58,9 @@ class _MyAppState extends State<MyApp> {
   }
 
   Future<void> loadTheme() async {
-    String? savedTheme = await appPreferencesController
-        .getString(key: AppPreferenceLabels.userTheme);
+    String? savedTheme = await appPreferencesController.getString(
+      key: AppPreferenceLabels.userTheme,
+    );
 
     setState(() {
       themeMode = ThemeMode.values.firstWhere(
@@ -65,7 +79,8 @@ class _MyAppState extends State<MyApp> {
       theme: lightTheme,
       darkTheme: darkTheme,
       themeMode: themeMode,
-      home: const SplashScreen(),
+      initialRoute: TravelerRoutes.splash,
+      getPages: ModuleRegistry.pages,
       builder: (context, child) {
         return MediaQuery(
           data: MediaQuery.of(

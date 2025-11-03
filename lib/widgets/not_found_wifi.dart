@@ -16,7 +16,6 @@ class NotFoundWifiPage extends StatelessWidget {
     double width = size.width;
     return PopScope(
       canPop: false,
-      // ignore: deprecated_member_use
       onPopInvoked: ((didPop) {
         if (didPop) {
           return;

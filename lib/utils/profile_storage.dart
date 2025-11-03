@@ -16,8 +16,9 @@ class ProfileStorage {
     await prefs.setDouble(_keyLat, latitude);
     await prefs.setDouble(_keyLng, longitude);
     if (city != null) await prefs.setString(_keyCity, city);
-    if (label != null)
+    if (label != null) {
       await prefs.setString(_keyLocationLabel, label);
+    }
   }
 
   static Future<

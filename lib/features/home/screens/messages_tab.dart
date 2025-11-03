@@ -92,8 +92,8 @@ class _MessageCard extends StatelessWidget {
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 colors: [
-                  theme.primaryColor.withValues(alpha: 0.3),
-                  theme.primaryColor.withValues(alpha: 0.1),
+                  theme.primaryColor.withValues(alpha:0.3),
+                  theme.primaryColor.withValues(alpha:0.1),
                 ],
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,

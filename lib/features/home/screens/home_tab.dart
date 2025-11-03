@@ -36,24 +36,22 @@ class HomeTab extends StatelessWidget {
               children: [
                 Text(
                   'Discover Your Next',
-                  style: AppTextStyle.headlineMedium
-                      .copyWith(color: Colors.white),
+                  style: AppTextStyle.headlineMedium.copyWith(
+                    color: Colors.white,
+                  ),
                 ),
                 Text(
                   'Adventure',
-                  style: AppTextStyle.headlineMedium
-                      .copyWith(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                      ),
+                  style: AppTextStyle.headlineMedium.copyWith(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
                 AppSpacing.v12(),
                 Text(
                   'AI-powered recommendations just for you',
                   style: AppTextStyle.bodyMedium.copyWith(
-                    color: Colors.white.withValues(
-                      alpha: 0.9,
-                    ),
+                    color: Colors.white.withValues(alpha: 0.9),
                   ),
                 ),
               ],
@@ -157,14 +155,10 @@ class _QuickActionCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: isDark
-            ? const Color(0xFF2E2E2E)
-            : Colors.white,
+        color: isDark ? const Color(0xFF2E2E2E) : Colors.white,
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
-          color: isDark
-              ? const Color(0xFF444444)
-              : const Color(0xFFE0E0E0),
+          color: isDark ? const Color(0xFF444444) : const Color(0xFFE0E0E0),
         ),
       ),
       child: Column(
@@ -200,26 +194,16 @@ class _DestinationCard extends StatelessWidget {
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
 
-    final destinations = [
-      'Paris',
-      'Tokyo',
-      'New York',
-      'London',
-      'Dubai',
-    ];
+    final destinations = ['Paris', 'Tokyo', 'New York', 'London', 'Dubai'];
 
     return Container(
       width: 160,
       margin: const EdgeInsets.only(right: 12),
       decoration: BoxDecoration(
-        color: isDark
-            ? const Color(0xFF2E2E2E)
-            : Colors.white,
+        color: isDark ? const Color(0xFF2E2E2E) : Colors.white,
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
-          color: isDark
-              ? const Color(0xFF444444)
-              : const Color(0xFFE0E0E0),
+          color: isDark ? const Color(0xFF444444) : const Color(0xFFE0E0E0),
         ),
       ),
       child: Column(

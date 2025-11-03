@@ -28,13 +28,13 @@ class AppRoleGradients {
 
   // Placeholders for future roles
   static const LinearGradient hotelManager = LinearGradient(
-    colors: [Color(0xFF3A7BD5), Color(0xFF00D2FF)],
+    colors: [Color(0xFF9D4EDD), Color(0xFF00D4FF)],
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
   );
 
   static const LinearGradient tourOperator = LinearGradient(
-    colors: [Color(0xFF8E2DE2), Color(0xFF4A00E0)],
+    colors: [Color(0xFFFD5E53), Color(0xFFFD5E53)],
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
   );
@@ -44,15 +44,10 @@ class AppRoleGradients {
 /// Used when the app is in light mode
 class AppLightThemeColors {
   static const Color appBackgroundColor = Color(0xFFFFFFFF);
-  static const Color secondaryButtonColor = Color(
-    0xFFEEEFF1,
-  );
+  static const Color secondaryButtonColor = Color(0xFFEEEFF1);
   static const Color primaryTextColor = Color(0xFF000229);
-  static const Color primaryButtonTextColor = Color(
-    0xFFFFFFFF,
-  );
-  static const Color secondaryButtonTextColor =
-      AppColors.primaryColor;
+  static const Color primaryButtonTextColor = Color(0xFFFFFFFF);
+  static const Color secondaryButtonTextColor = AppColors.primaryColor;
   static const Color lightGreyColor = Color(0xFFEEEFF1);
   static const Color bottomSheetColor = Color(0xFFFFFFFF);
   static const Color iconColor = primaryTextColor;
@@ -62,15 +57,10 @@ class AppLightThemeColors {
 /// Used when the app is in dark mode
 class AppDarkThemeColors {
   static const Color appBackgroundColor = Color(0xFF2E2E2E);
-  static const Color secondaryButtonColor = Color(
-    0xFF454545,
-  );
+  static const Color secondaryButtonColor = Color(0xFF454545);
   static const Color primaryTextColor = Color(0xFFFFFFFF);
-  static const Color primaryButtonTextColor = Color(
-    0xFFFFFFFF,
-  );
-  static const Color secondaryButtonTextColor =
-      AppColors.primaryColor;
+  static const Color primaryButtonTextColor = Color(0xFFFFFFFF);
+  static const Color secondaryButtonTextColor = AppColors.primaryColor;
   static const Color lightGreyColor = Color(0xFF454545);
   static const Color bottomSheetColor = Color(0xFF393939);
   static const Color iconColor = primaryTextColor;

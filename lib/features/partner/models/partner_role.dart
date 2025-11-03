@@ -1,0 +1,1 @@
+enum PartnerRole { hotelManager, tourOperator }

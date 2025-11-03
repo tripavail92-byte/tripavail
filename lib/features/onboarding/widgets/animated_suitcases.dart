@@ -41,12 +41,14 @@ class _AnimatedTravelerIllustrationState
     );
 
     Future.delayed(const Duration(milliseconds: 300), () {
-      if (mounted)
+      if (mounted) {
         _suitcase2Controller.repeat(reverse: true);
+      }
     });
     Future.delayed(const Duration(milliseconds: 600), () {
-      if (mounted)
+      if (mounted) {
         _suitcase3Controller.repeat(reverse: true);
+      }
     });
   }
 
@@ -109,7 +111,7 @@ class _AnimatedTravelerIllustrationState
                           ),
                           shadowColor: const Color(
                             0xFFF44336,
-                          ).withValues(alpha: 0.3),
+                          ).withValues(alpha:0.3),
                           borderRadius: 8,
                           handleWidth: base * 0.45,
                           bounceDistance: -6,
@@ -137,7 +139,7 @@ class _AnimatedTravelerIllustrationState
                           ),
                           shadowColor: const Color(
                             0xFF00BCD4,
-                          ).withValues(alpha: 0.3),
+                          ).withValues(alpha:0.3),
                           borderRadius: 10,
                           handleWidth: base * 0.55,
                           bounceDistance: -8,
@@ -171,7 +173,7 @@ class _AnimatedTravelerIllustrationState
                           ),
                           shadowColor: const Color(
                             0xFF7B1FA2,
-                          ).withValues(alpha: 0.3),
+                          ).withValues(alpha:0.3),
                           borderRadius: 7,
                           handleWidth: base * 0.36,
                           bounceDistance: -4,
