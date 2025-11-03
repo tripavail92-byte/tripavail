@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:tripavail/utils/app_text_styles.dart';
-import 'package:tripavail/utils/theme/constants/app_spacing.dart';
-
 class HotelsTab extends StatelessWidget {
   const HotelsTab({super.key});
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-
+    final screenSize = MediaQuery.of(context).size;
+    final width = screenSize.width;
+    final height = screenSize.height;
     return SingleChildScrollView(
-      padding: AppSpacing.horizontalPadding(context),
+      padding: EdgeInsets.symmetric(horizontal: (width * 0.08).clamp(16.0, 28.0)),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          AppSpacing.v24(),
+          SizedBox(height: height * 0.03),
 
           // Search Bar
           Container(
@@ -44,7 +44,7 @@ class HotelsTab extends StatelessWidget {
             ),
           ),
 
-          AppSpacing.v24(),
+          SizedBox(height: height * 0.03),
 
           Text(
             'Featured Hotels',
@@ -53,7 +53,7 @@ class HotelsTab extends StatelessWidget {
             ),
           ),
 
-          AppSpacing.v16(),
+          SizedBox(height: height * 0.02),
 
           // Hotel Cards
           ListView.builder(
@@ -148,7 +148,7 @@ class _HotelCard extends StatelessWidget {
                     ),
                   ],
                 ),
-                AppSpacing.v8(),
+                SizedBox(height: MediaQuery.of(context).size.height * 0.01),
                 Row(
                   children: [
                     ...List.generate(
@@ -171,7 +171,7 @@ class _HotelCard extends StatelessWidget {
                     ),
                   ],
                 ),
-                AppSpacing.v12(),
+                SizedBox(height: MediaQuery.of(context).size.height * 0.015),
                 Row(
                   mainAxisAlignment:
                       MainAxisAlignment.spaceBetween,

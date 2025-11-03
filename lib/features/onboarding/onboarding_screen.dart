@@ -2,14 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import 'package:tripavail/utils/app_labels.dart';
-import 'package:tripavail/utils/theme/constants/app_constants.dart';
-import 'package:tripavail/utils/theme/constants/app_spacing.dart';
-import 'package:tripavail/widgets/primary_button.dart';
-import 'package:tripavail/utils/preference_labels.dart';
 import 'package:tripavail/common/controllers/preference_controller.dart';
+import 'package:tripavail/features/authentication/flow/auth_welcome_screen.dart';
+import 'package:tripavail/utils/app_labels.dart';
+import 'package:tripavail/utils/preference_labels.dart';
+import 'package:tripavail/utils/theme/constants/app_constants.dart';
+import 'package:tripavail/widgets/primary_button.dart';
 
-import 'package:tripavail/modules/auth/auth_routes.dart';
 import 'widgets/animated_suitcases.dart';
 
 class OnboardingScreen extends StatefulWidget {
@@ -36,7 +35,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       key: AppPreferenceLabels.hasOnboarded,
       value: true,
     );
-    Get.offAllNamed(AuthRoutes.welcome);
+    Get.offAll(() => const AuthWelcomeScreen());
   }
 
   @override
@@ -57,11 +56,16 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           itemCount: pages.length,
           itemBuilder: (context, index) {
             final data = pages[index];
+            final screenSize = MediaQuery.of(context).size;
+            final width = screenSize.width;
+            final height = screenSize.height;
             return Container(
               decoration: _getBackgroundDecoration(context, data.type),
               child: SafeArea(
                 child: Padding(
-                  padding: AppSpacing.horizontalPadding(context),
+                  padding: EdgeInsets.symmetric(
+                    horizontal: (width * 0.08).clamp(16.0, 28.0),
+                  ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
@@ -80,14 +84,14 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Expanded(child: _buildIllustration(data, index)),
-                            AppSpacing.v32(),
+                            SizedBox(height: height * 0.04),
                             Text(
                               data.title,
                               style: Theme.of(context).textTheme.headlineMedium
                                   ?.copyWith(fontWeight: FontWeight.w900),
                               textAlign: TextAlign.center,
                             ),
-                            AppSpacing.v12(),
+                            SizedBox(height: height * 0.015),
                             Text(
                               data.subtitle,
                               style: Theme.of(context).textTheme.bodyLarge,
@@ -96,7 +100,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                           ],
                         ),
                       ),
-                      AppSpacing.v24(),
+                      SizedBox(height: height * 0.03),
                       Center(
                         child: SmoothPageIndicator(
                           controller: controller,
@@ -113,7 +117,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                           ),
                         ),
                       ),
-                      AppSpacing.v24(),
+                      SizedBox(height: height * 0.03),
                       PrimaryButton(
                         onPressed: () async {
                           final next = controller.page!.round() + 1;
@@ -131,7 +135,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                         height: 52,
                         width: double.infinity,
                       ),
-                      AppSpacing.v16(),
+                      SizedBox(height: height * 0.02),
                     ],
                   ),
                 ),

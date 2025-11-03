@@ -1,72 +1,73 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tripavail/features/partner/models/partner_role.dart';
+import 'package:tripavail/features/partner/partner_workspace_screen.dart';
 import 'package:tripavail/utils/app_text_styles.dart';
 import 'package:tripavail/utils/theme/constants/app_constants.dart';
-import 'package:tripavail/utils/theme/constants/app_spacing.dart';
-import 'package:tripavail/widgets/app_scaffold.dart';
 import 'package:tripavail/widgets/primary_button.dart';
-
-import 'package:tripavail/modules/partner/partner_routes.dart';
 
 class PartnerEntryScreen extends StatelessWidget {
   const PartnerEntryScreen({super.key});
 
   void _openWorkspace(PartnerRole role) {
-    final route = role == PartnerRole.hotelManager
-        ? PartnerRoutes.hotelWorkspace
-        : PartnerRoutes.tourWorkspace;
-    Get.toNamed(route);
+    Get.to(() => PartnerWorkspaceScreen(initialRole: role));
   }
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-
-    return AppScaffold(
+    final screenSize = MediaQuery.of(context).size;
+    final width = screenSize.width;
+    final height = screenSize.height;
+    return Scaffold(
       backgroundColor: theme.scaffoldBackgroundColor,
-      child: SingleChildScrollView(
-        padding:
-            AppSpacing.horizontalPadding(context) +
-            const EdgeInsets.symmetric(vertical: 32),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Text(
-              'Partner Conversion',
-              style: AppTextStyle.headlineSmall.copyWith(
-                fontWeight: FontWeight.w700,
+      body: SafeArea(
+        child: SingleChildScrollView(
+          padding: EdgeInsets.symmetric(
+            horizontal: (width * 0.08).clamp(16.0, 28.0),
+            vertical: 32,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Text(
+                'Partner Conversion',
+                style: AppTextStyle.headlineSmall.copyWith(
+                  fontWeight: FontWeight.w700,
+                ),
               ),
-            ),
-            AppSpacing.v8(),
-            Text(
-              'Choose the workspace tailored to how you collaborate with TripAvail.',
-              style: AppTextStyle.bodyMedium.copyWith(
-                color: theme.textTheme.bodyMedium?.color?.withValues(alpha:0.75),
+              SizedBox(height: height * 0.01),
+              Text(
+                'Choose the workspace tailored to how you collaborate with TripAvail.',
+                style: AppTextStyle.bodyMedium.copyWith(
+                  color: theme.textTheme.bodyMedium?.color?.withValues(
+                    alpha: 0.75,
+                  ),
+                ),
               ),
-            ),
-            AppSpacing.v24(),
-            _PartnerRoleCard(
-              title: 'Hotel Manager',
-              subtitle:
-                  'Manage rates, availability, and guest experiences with precision.',
-              gradient: AppRoleGradients.hotelManager,
-              icon: Icons.apartment_rounded,
-              onTap: () => _openWorkspace(PartnerRole.hotelManager),
-              actionLabel: 'Enter Hotel Manager Suite',
-            ),
-            AppSpacing.v24(),
-            _PartnerRoleCard(
-              title: 'Tour Operator',
-              subtitle:
-                  'Design unforgettable journeys, automate itineraries, and stay in sync with travelers.',
-              gradient: AppRoleGradients.tourOperator,
-              icon: Icons.route_outlined,
-              onTap: () => _openWorkspace(PartnerRole.tourOperator),
-              actionLabel: 'Enter Tour Operator Suite',
-            ),
-            AppSpacing.v40(),
-          ],
+              SizedBox(height: height * 0.03),
+              _PartnerRoleCard(
+                title: 'Hotel Manager',
+                subtitle:
+                    'Manage rates, availability, and guest experiences with precision.',
+                gradient: AppRoleGradients.hotelManager,
+                icon: Icons.apartment_rounded,
+                onTap: () => _openWorkspace(PartnerRole.hotelManager),
+                actionLabel: 'Enter Hotel Manager Suite',
+              ),
+              SizedBox(height: height * 0.03),
+              _PartnerRoleCard(
+                title: 'Tour Operator',
+                subtitle:
+                    'Design unforgettable journeys, automate itineraries, and stay in sync with travelers.',
+                gradient: AppRoleGradients.tourOperator,
+                icon: Icons.route_outlined,
+                onTap: () => _openWorkspace(PartnerRole.tourOperator),
+                actionLabel: 'Enter Tour Operator Suite',
+              ),
+              SizedBox(height: height * 0.05),
+            ],
+          ),
         ),
       ),
     );
@@ -101,7 +102,7 @@ class _PartnerRoleCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(28),
           boxShadow: [
             BoxShadow(
-              color: gradient.colors.last.withValues(alpha:0.25),
+              color: gradient.colors.last.withValues(alpha: 0.25),
               blurRadius: 24,
               offset: const Offset(0, 16),
             ),
@@ -115,7 +116,7 @@ class _PartnerRoleCard extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
-                  color: Colors.white.withValues(alpha:0.18),
+                  color: Colors.white.withValues(alpha: 0.18),
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: Icon(icon, color: Colors.white, size: 28),
@@ -132,7 +133,7 @@ class _PartnerRoleCard extends StatelessWidget {
               Text(
                 subtitle,
                 style: AppTextStyle.bodyLarge.copyWith(
-                  color: Colors.white.withValues(alpha:0.85),
+                  color: Colors.white.withValues(alpha: 0.85),
                 ),
               ),
               const SizedBox(height: 28),

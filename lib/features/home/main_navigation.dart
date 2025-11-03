@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tripavail/features/drawer/drawer_definitions.dart';
 import 'package:tripavail/features/drawer/drawer_manager.dart';
+import 'package:tripavail/features/partner/partner_entry_screen.dart';
 import 'package:tripavail/features/profile/profile_screen.dart';
-import 'package:tripavail/modules/traveler/traveler_routes.dart';
 
 import 'screens/home_tab.dart';
 import 'screens/hotels_tab.dart';
-import 'screens/tours_tab.dart';
 import 'screens/messages_tab.dart';
+import 'screens/tours_tab.dart';
 
 class MainNavigation extends StatefulWidget {
   const MainNavigation({super.key});
@@ -140,7 +140,7 @@ class _MainNavigationState extends State<MainNavigation> {
           onItemClick: _onDrawerItemTap,
           onBecomePartner: () {
             _toggleDrawer(false);
-            Get.toNamed(TravelerRoutes.partnerEntry);
+            Get.to(() => const PartnerEntryScreen());
           },
           onSwitchToTraveler: () => _toggleDrawer(false),
         ),

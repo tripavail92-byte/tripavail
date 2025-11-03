@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:tripavail/utils/app_labels.dart';
 import 'package:tripavail/utils/app_text_styles.dart';
 import 'package:tripavail/utils/theme/constants/app_constants.dart';
-import 'package:tripavail/utils/theme/constants/app_spacing.dart';
-
 class AuthHeader extends StatelessWidget {
   final bool showSubtitle;
 
@@ -13,6 +11,7 @@ class AuthHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final double width = size.width;
+    final double height = size.height;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -39,9 +38,9 @@ class AuthHeader extends StatelessWidget {
             ),
           ),
         ),
-        AppSpacing.v16(),
+        SizedBox(height: height * 0.02),
         Text(AppLabels.appName, style: AppTextStyle.headlineSmall),
-        if (showSubtitle) AppSpacing.v12(),
+        if (showSubtitle) SizedBox(height: height * 0.015),
         if (showSubtitle)
           Text(
             AppLabels.appSubtitle,

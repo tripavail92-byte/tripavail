@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:tripavail/utils/app_text_styles.dart';
-import 'package:tripavail/utils/theme/constants/app_spacing.dart';
 import 'package:tripavail/features/profile/widgets/section_card.dart';
 
 class PaymentMethodsCard extends StatelessWidget {
@@ -103,7 +102,7 @@ class _NavRow extends StatelessWidget {
                       fontWeight: FontWeight.w600,
                     ),
                   ),
-                  AppSpacing.v8(),
+                  SizedBox(height: MediaQuery.of(context).size.height * 0.01),
                   Text(
                     subtitle,
                     style: AppTextStyle.bodySmall.copyWith(

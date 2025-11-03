@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:tripavail/utils/app_text_styles.dart';
 import 'package:tripavail/utils/theme/constants/app_constants.dart';
 import 'package:tripavail/utils/theme/extension/role_theme_extension.dart';
-import 'package:tripavail/utils/theme/constants/app_spacing.dart';
 import 'package:tripavail/features/profile/widgets/section_card.dart';
 
 class ProfileHeaderCard extends StatelessWidget {
@@ -113,7 +112,7 @@ class ProfileHeaderCard extends StatelessWidget {
               ),
             ],
           ),
-          AppSpacing.v12(),
+          SizedBox(height: MediaQuery.of(context).size.height * 0.015),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -128,7 +127,7 @@ class ProfileHeaderCard extends StatelessWidget {
               ],
             ],
           ),
-          AppSpacing.v8(),
+          SizedBox(height: MediaQuery.of(context).size.height * 0.01),
           Text(
             'Member since $joinDate',
             style: AppTextStyle.bodySmall.copyWith(
@@ -136,7 +135,7 @@ class ProfileHeaderCard extends StatelessWidget {
                   ?.withValues(alpha:0.6),
             ),
           ),
-          AppSpacing.v16(),
+          SizedBox(height: MediaQuery.of(context).size.height * 0.02),
           Text(
             bio,
             textAlign: TextAlign.center,
@@ -146,7 +145,7 @@ class ProfileHeaderCard extends StatelessWidget {
               height: 1.5,
             ),
           ),
-          AppSpacing.v16(),
+          SizedBox(height: MediaQuery.of(context).size.height * 0.02),
           Row(
             mainAxisAlignment:
                 MainAxisAlignment.spaceBetween,

@@ -3,8 +3,6 @@ import 'package:get/get.dart';
 import 'package:tripavail/features/profile/profile_screen.dart';
 import 'package:tripavail/utils/app_text_styles.dart';
 import 'package:tripavail/utils/theme/constants/app_constants.dart';
-import 'package:tripavail/utils/theme/constants/app_spacing.dart';
-
 class AppDrawer extends StatelessWidget {
   const AppDrawer({super.key});
 
@@ -12,6 +10,8 @@ class AppDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
+    final screenSize = MediaQuery.of(context).size;
+    final height = screenSize.height;
 
     return Drawer(
       backgroundColor: theme.scaffoldBackgroundColor,
@@ -51,7 +51,7 @@ class AppDrawer extends StatelessWidget {
                       ),
                     ),
                   ),
-                  AppSpacing.v16(),
+                  SizedBox(height: height * 0.02),
                   Text(
                     'Welcome, Traveler!',
                     style: AppTextStyle.headlineSmall

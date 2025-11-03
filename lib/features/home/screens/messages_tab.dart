@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:tripavail/utils/app_text_styles.dart';
-import 'package:tripavail/utils/theme/constants/app_spacing.dart';
-
 class MessagesTab extends StatelessWidget {
   const MessagesTab({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final screenSize = MediaQuery.of(context).size;
+    final width = screenSize.width;
+    final height = screenSize.height;
     return SingleChildScrollView(
-      padding: AppSpacing.horizontalPadding(context),
+      padding: EdgeInsets.symmetric(horizontal: (width * 0.08).clamp(16.0, 28.0)),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          AppSpacing.v24(),
+          SizedBox(height: height * 0.03),
 
           Text(
             'Messages',
@@ -21,7 +22,7 @@ class MessagesTab extends StatelessWidget {
             ),
           ),
 
-          AppSpacing.v16(),
+          SizedBox(height: height * 0.02),
 
           // Message List
           ListView.builder(

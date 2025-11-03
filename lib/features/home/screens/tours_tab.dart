@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:tripavail/utils/app_text_styles.dart';
-import 'package:tripavail/utils/theme/constants/app_spacing.dart';
-
 class ToursTab extends StatelessWidget {
   const ToursTab({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final screenSize = MediaQuery.of(context).size;
+    final width = screenSize.width;
+    final height = screenSize.height;
     return SingleChildScrollView(
-      padding: AppSpacing.horizontalPadding(context),
+      padding: EdgeInsets.symmetric(horizontal: (width * 0.08).clamp(16.0, 28.0)),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          AppSpacing.v24(),
+          SizedBox(height: height * 0.03),
 
           Text(
             'Explore Tours',
@@ -21,7 +22,7 @@ class ToursTab extends StatelessWidget {
             ),
           ),
 
-          AppSpacing.v16(),
+          SizedBox(height: height * 0.02),
 
           // Tour Cards
           ListView.builder(
@@ -47,6 +48,8 @@ class _TourCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
+    final screenSize = MediaQuery.of(context).size;
+    final height = screenSize.height;
 
     final tourTypes = [
       {'icon': Icons.hiking, 'name': 'Mountain Hiking'},
@@ -114,7 +117,7 @@ class _TourCard extends StatelessWidget {
                     color: Colors.grey[600],
                   ),
                 ),
-                AppSpacing.v8(),
+                SizedBox(height: height * 0.01),
                 Row(
                   mainAxisAlignment:
                       MainAxisAlignment.spaceBetween,

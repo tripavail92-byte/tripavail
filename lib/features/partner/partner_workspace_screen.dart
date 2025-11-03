@@ -9,9 +9,16 @@ import 'package:tripavail/features/partner/domain/entities/partner_quick_action.
 import 'package:tripavail/features/partner/models/partner_role.dart';
 import 'package:tripavail/features/partner/presentation/controllers/partner_dashboard_controller.dart';
 import 'package:tripavail/features/partner/utils/partner_branding.dart';
-import 'package:tripavail/modules/traveler/traveler_routes.dart';
+import 'package:tripavail/features/home/main_navigation.dart';
+import 'package:tripavail/features/hotel_manager/presentation/screens/hotel_list_screen.dart';
+import 'package:tripavail/features/hotel_manager/presentation/screens/hotel_packages_screen.dart';
+import 'package:tripavail/features/hotel_manager/presentation/screens/hotel_verification_screen.dart';
+import 'package:tripavail/features/tour_operator/presentation/screens/tour_bookings_screen.dart';
+import 'package:tripavail/features/tour_operator/presentation/screens/tour_calendar_screen.dart';
+import 'package:tripavail/features/tour_operator/presentation/screens/tour_create_screen.dart';
+import 'package:tripavail/features/tour_operator/presentation/screens/tour_packages_screen.dart';
+import 'package:tripavail/features/tour_operator/presentation/screens/tour_verification_screen.dart';
 import 'package:tripavail/utils/app_text_styles.dart';
-import 'package:tripavail/utils/theme/constants/app_spacing.dart';
 
 class PartnerWorkspaceScreen extends StatefulWidget {
   final PartnerRole initialRole;
@@ -41,7 +48,7 @@ class _PartnerWorkspaceScreenState extends State<PartnerWorkspaceScreen> {
 
   void _switchToTraveler() {
     setState(() => _drawerOpen = false);
-    Get.offAllNamed(TravelerRoutes.main);
+    Get.offAll(() => const MainNavigation());
   }
 
   void _toggleDrawer(bool open) {
@@ -62,8 +69,57 @@ class _PartnerWorkspaceScreenState extends State<PartnerWorkspaceScreen> {
       _selectedItemId = id;
       _drawerOpen = false;
     });
-    if (screen.isNotEmpty) {
-      Get.toNamed(screen);
+    
+    // Handle navigation based on drawer item ID
+    if (_activeRole == PartnerRole.hotelManager) {
+      switch (id) {
+        case 'list_hotel':
+          Get.to(() => const HotelListScreen());
+          break;
+        case 'packages':
+          Get.to(() => const HotelPackagesScreen());
+          break;
+        case 'verification':
+          Get.to(() => const HotelVerificationScreen());
+          break;
+        case 'dashboard':
+        case 'hm_settings':
+        case 'hm_support':
+        case 'hm_legal':
+          // Coming soon screens
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('$id coming soon')),
+          );
+          break;
+      }
+    } else if (_activeRole == PartnerRole.tourOperator) {
+      switch (id) {
+        case 'create_tour':
+          Get.to(() => const TourCreateScreen());
+          break;
+        case 'post_packages':
+          Get.to(() => const TourPackagesScreen());
+          break;
+        case 'calendar':
+          Get.to(() => const TourCalendarScreen());
+          break;
+        case 'bookings':
+          Get.to(() => const TourBookingsScreen());
+          break;
+        case 'setup':
+        case 'tour_verification':
+          Get.to(() => const TourVerificationScreen());
+          break;
+        case 'tour_dashboard':
+        case 'to_settings':
+        case 'to_support':
+        case 'to_legal':
+          // Coming soon screens
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('$id coming soon')),
+          );
+          break;
+      }
     }
   }
 
@@ -146,27 +202,30 @@ class _PartnerWorkspaceScreenState extends State<PartnerWorkspaceScreen> {
                         );
                       }
 
+                      final screenSize = MediaQuery.of(context).size;
+                      final width = screenSize.width;
+                      final height = screenSize.height;
                       return SingleChildScrollView(
-                        padding: AppSpacing.horizontalPadding(
-                          context,
+                        padding: EdgeInsets.symmetric(
+                          horizontal: (width * 0.08).clamp(16.0, 28.0),
                         ).copyWith(bottom: 32),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             _HeroCard(role: _activeRole, summary: summary),
-                            AppSpacing.v24(),
+                            SizedBox(height: height * 0.03),
                             _MetricsRow(
                               metrics: summary.metrics,
                               accent: accent,
                             ),
-                            AppSpacing.v24(),
+                            SizedBox(height: height * 0.03),
                             Text(
                               'Quick links',
                               style: AppTextStyle.headlineSmall.copyWith(
                                 fontWeight: FontWeight.w600,
                               ),
                             ),
-                            AppSpacing.v16(),
+                            SizedBox(height: height * 0.02),
                             _QuickActionsGrid(actions: summary.quickActions),
                           ],
                         ),
@@ -327,7 +386,7 @@ class _MetricsRow extends StatelessWidget {
                   color: theme.textTheme.bodySmall?.color?.withValues(alpha:0.7),
                 ),
               ),
-              AppSpacing.v8(),
+              SizedBox(height: MediaQuery.of(context).size.height * 0.01),
               Text(
                 metric.value,
                 style: AppTextStyle.headlineSmall.copyWith(
@@ -335,7 +394,7 @@ class _MetricsRow extends StatelessWidget {
                 ),
               ),
               if (metric.trendLabel != null) ...[
-                AppSpacing.v8(),
+                SizedBox(height: MediaQuery.of(context).size.height * 0.01),
                 Text(
                   metric.trendLabel!,
                   style: AppTextStyle.bodySmall.copyWith(

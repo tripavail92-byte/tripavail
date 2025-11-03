@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:tripavail/utils/app_text_styles.dart';
-import 'package:tripavail/utils/theme/constants/app_spacing.dart';
 import 'package:tripavail/features/profile/widgets/section_card.dart';
 
 class ContactInfoCard extends StatelessWidget {
@@ -153,7 +152,7 @@ class _ContactRow extends StatelessWidget {
                           ?.withValues(alpha:0.6),
                     ),
                   ),
-                  AppSpacing.v8(),
+                  SizedBox(height: MediaQuery.of(context).size.height * 0.01),
                   Text(
                     value,
                     style: AppTextStyle.bodyMedium.copyWith(

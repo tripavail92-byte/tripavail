@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:tripavail/utils/theme/constants/app_spacing.dart';
-import 'package:tripavail/widgets/app_scaffold.dart';
 import 'package:tripavail/widgets/primary_appbar.dart';
 
 class TourCalendarScreen extends StatelessWidget {
@@ -8,14 +6,20 @@ class TourCalendarScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AppScaffold(
+    final screenSize = MediaQuery.of(context).size;
+    final width = screenSize.width;
+    return Scaffold(
       appBar: const PrimaryAppBar(
         title: 'Calendar & Availability',
         showBackArrowIcon: true,
       ),
-      child: Padding(
-        padding: AppSpacing.horizontalPadding(context),
+      body: SafeArea(
+        child: Padding(
+        padding: EdgeInsets.symmetric(
+          horizontal: (width * 0.08).clamp(16.0, 28.0),
+        ),
         child: const Center(child: Text('Calendar coming soon')),
+        ),
       ),
     );
   }

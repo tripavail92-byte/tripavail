@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:tripavail/features/splash_screen/splash_screen.dart';
 import 'package:tripavail/modules/auth/auth_module.dart';
 import 'package:tripavail/modules/core/core_module.dart';
 import 'package:tripavail/modules/hotel_manager/hotel_manager_module.dart';
 import 'package:tripavail/modules/module_registry.dart';
 import 'package:tripavail/modules/tour_operator/tour_operator_module.dart';
 import 'package:tripavail/modules/traveler/traveler_module.dart';
-import 'package:tripavail/modules/traveler/traveler_routes.dart';
 import 'package:tripavail/utils/app_labels.dart';
 import 'package:tripavail/utils/preference_labels.dart';
 import 'package:tripavail/utils/theme/app_dark_theme.dart';
@@ -79,7 +79,7 @@ class _MyAppState extends State<MyApp> {
       theme: lightTheme,
       darkTheme: darkTheme,
       themeMode: themeMode,
-      initialRoute: TravelerRoutes.splash,
+      home: const SplashScreen(),
       getPages: ModuleRegistry.pages,
       builder: (context, child) {
         return MediaQuery(

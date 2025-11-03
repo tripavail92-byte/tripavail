@@ -1,18 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:tripavail/features/profile/widgets/profile_header_card.dart';
+import 'package:get/get.dart';
 import 'package:tripavail/features/profile/widgets/contact_info_card.dart';
 import 'package:tripavail/features/profile/widgets/payment_methods_card.dart';
-import 'package:get/get.dart';
+import 'package:tripavail/features/profile/widgets/profile_header_card.dart';
 import 'package:tripavail/utils/app_text_styles.dart';
-import 'package:tripavail/utils/theme/constants/app_constants.dart';
-import 'package:tripavail/utils/theme/constants/app_spacing.dart';
-import 'package:tripavail/utils/theme/extension/role_theme_extension.dart';
-import 'package:tripavail/widgets/app_scaffold.dart';
-import 'package:tripavail/widgets/primary_appbar.dart';
-import 'package:tripavail/widgets/primary_button.dart';
 import 'package:tripavail/utils/choose_photo_bottom_sheet.dart';
 import 'package:tripavail/utils/profile_storage.dart';
+import 'package:tripavail/utils/theme/constants/app_constants.dart';
+import 'package:tripavail/utils/theme/extension/role_theme_extension.dart';
 import 'package:tripavail/widgets/otp_input.dart';
+import 'package:tripavail/widgets/primary_appbar.dart';
+import 'package:tripavail/widgets/primary_button.dart';
 
 class ProfileData {
   String name;
@@ -71,8 +69,7 @@ class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
 
   @override
-  State<ProfileScreen> createState() =>
-      _ProfileScreenState();
+  State<ProfileScreen> createState() => _ProfileScreenState();
 }
 
 class _ProfileScreenState extends State<ProfileScreen>
@@ -92,8 +89,7 @@ class _ProfileScreenState extends State<ProfileScreen>
       email: 'maria.rodriguez@gmail.com',
       phone: '+92 300 1234567',
       location: 'Lahore, Pakistan',
-      address:
-          'House 45, Block B, DHA Phase 5, Lahore, Punjab 54792',
+      address: 'House 45, Block B, DHA Phase 5, Lahore, Punjab 54792',
       city: 'Lahore',
       bio: 'Travelling the world one step at a time.',
       emailVerified: true,
@@ -135,9 +131,9 @@ class _ProfileScreenState extends State<ProfileScreen>
         isEditing = false;
       });
       // Integrate backend update here
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Profile updated')),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(const SnackBar(content: Text('Profile updated')));
     }
   }
 
@@ -191,8 +187,7 @@ class _ProfileScreenState extends State<ProfileScreen>
     if (p.bio.isNotEmpty && p.bio.length >= 20) total += 10;
     if (p.dateOfBirth != null) total += 10;
     final hasAvatar =
-        (p.profileImage != null &&
-            p.profileImage!.isNotEmpty) ||
+        (p.profileImage != null && p.profileImage!.isNotEmpty) ||
         (p.avatarUrl != null && p.avatarUrl!.isNotEmpty);
     if (hasAvatar) {
       total += 10;
@@ -221,9 +216,7 @@ class _ProfileScreenState extends State<ProfileScreen>
   Widget _buildEditMode() {
     final inputBorder = OutlineInputBorder(
       borderRadius: BorderRadius.circular(12),
-      borderSide: const BorderSide(
-        color: Color(0xFFDDDDDD),
-      ),
+      borderSide: const BorderSide(color: Color(0xFFDDDDDD)),
     );
     return Form(
       key: _formKey,
@@ -241,16 +234,14 @@ class _ProfileScreenState extends State<ProfileScreen>
                 border: inputBorder,
                 enabledBorder: inputBorder,
                 focusedBorder: inputBorder.copyWith(
-                  borderSide: BorderSide(
-                    color: Theme.of(context).primaryColor,
-                  ),
+                  borderSide: BorderSide(color: Theme.of(context).primaryColor),
                 ),
               ),
               onSaved: (val) => editData.name = val ?? '',
               validator: _validateName,
             ),
           ),
-          AppSpacing.v12(),
+          SizedBox(height: MediaQuery.of(context).size.height * 0.015),
           _labeledField(
             label: 'About Me',
             field: TextFormField(
@@ -264,9 +255,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                 border: inputBorder,
                 enabledBorder: inputBorder,
                 focusedBorder: inputBorder.copyWith(
-                  borderSide: BorderSide(
-                    color: Theme.of(context).primaryColor,
-                  ),
+                  borderSide: BorderSide(color: Theme.of(context).primaryColor),
                 ),
               ),
               onSaved: (val) => editData.bio = val ?? '',
@@ -292,17 +281,14 @@ class _ProfileScreenState extends State<ProfileScreen>
           label,
           style: AppTextStyle.bodySmall.copyWith(
             fontWeight: FontWeight.w600,
-            color: theme.textTheme.bodySmall?.color
-                ?.withValues(alpha:0.9),
+            color: theme.textTheme.bodySmall?.color?.withValues(alpha: 0.9),
           ),
         ),
         const SizedBox(height: 2),
         Container(
           height: 1,
           decoration: BoxDecoration(
-            gradient:
-                roleTheme?.primaryGradient ??
-                AppRoleGradients.traveller,
+            gradient: roleTheme?.primaryGradient ?? AppRoleGradients.traveller,
             borderRadius: BorderRadius.circular(999),
           ),
         ),
@@ -311,10 +297,7 @@ class _ProfileScreenState extends State<ProfileScreen>
     );
   }
 
-  Widget _labeledField({
-    required String label,
-    required Widget field,
-  }) {
+  Widget _labeledField({required String label, required Widget field}) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [_labelWithAccent(label), field],
@@ -326,8 +309,7 @@ class _ProfileScreenState extends State<ProfileScreen>
   Future<void> _pickDob() async {
     final picked = await showDatePicker(
       context: context,
-      initialDate:
-          profileData.dateOfBirth ?? DateTime(1992, 5, 15),
+      initialDate: profileData.dateOfBirth ?? DateTime(1992, 5, 15),
       firstDate: DateTime(1900),
       lastDate: DateTime.now(),
       builder: (context, child) {
@@ -347,8 +329,7 @@ class _ProfileScreenState extends State<ProfileScreen>
         if (isEditing) {
           editData = editData.copy()..dateOfBirth = picked;
         } else {
-          profileData = profileData.copy()
-            ..dateOfBirth = picked;
+          profileData = profileData.copy()..dateOfBirth = picked;
         }
       });
     }
@@ -363,7 +344,7 @@ class _ProfileScreenState extends State<ProfileScreen>
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return AppScaffold(
+    return Scaffold(
       appBar: PrimaryAppBar(
         title: 'My Profile',
         showBackArrowIcon: true,
@@ -393,46 +374,44 @@ class _ProfileScreenState extends State<ProfileScreen>
             ),
         ],
       ),
-      child: LayoutBuilder(
+      body: LayoutBuilder(
         builder: (context, constraints) {
           return Center(
             child: ConstrainedBox(
-              constraints: const BoxConstraints(
-                maxWidth: AppSpacing.contentMaxWidth,
-              ),
+              constraints: const BoxConstraints(maxWidth: 560),
               child: Padding(
-                padding: AppSpacing.horizontalPadding(
-                  context,
+                padding: EdgeInsets.symmetric(
+                  horizontal: (MediaQuery.of(context).size.width * 0.08).clamp(
+                    16.0,
+                    28.0,
+                  ),
                 ),
                 child: SingleChildScrollView(
                   child: Column(
-                    crossAxisAlignment:
-                        CrossAxisAlignment.stretch,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      AppSpacing.v24(),
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.03,
+                      ),
                       ProfileHeaderCard(
                         name: profileData.name,
                         bio: profileData.bio,
                         joinDate: profileData.joinDate,
-                        emailVerified:
-                            profileData.emailVerified,
+                        emailVerified: profileData.emailVerified,
                         avatarUrl: profileData.avatarUrl,
-                        completion: _calculateCompletion(
-                          profileData,
-                        ),
+                        completion: _calculateCompletion(profileData),
                         onChangePhoto: _openPhotoSheet,
                       ),
-                      AppSpacing.v16(),
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.02,
+                      ),
                       Card(
                         elevation: 2,
                         color: theme.colorScheme.surface,
                         shape: RoundedRectangleBorder(
-                          borderRadius:
-                              BorderRadius.circular(12),
+                          borderRadius: BorderRadius.circular(12),
                           side: BorderSide(
-                            color:
-                                theme.brightness ==
-                                    Brightness.dark
+                            color: theme.brightness == Brightness.dark
                                 ? const Color(0xFF444444)
                                 : const Color(0xFFE0E0E0),
                           ),
@@ -440,74 +419,67 @@ class _ProfileScreenState extends State<ProfileScreen>
                         child: Padding(
                           padding: const EdgeInsets.all(16),
                           child: Column(
-                            crossAxisAlignment:
-                                CrossAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
                                 'About Me',
-                                style: AppTextStyle
-                                    .headlineSmall,
+                                style: AppTextStyle.headlineSmall,
                               ),
-                              AppSpacing.v8(),
-                              isEditing
-                                  ? _buildEditMode()
-                                  : _buildViewMode(),
-                              AppSpacing.v8(),
+                              SizedBox(
+                                height:
+                                    MediaQuery.of(context).size.height * 0.01,
+                              ),
+                              isEditing ? _buildEditMode() : _buildViewMode(),
+                              SizedBox(
+                                height:
+                                    MediaQuery.of(context).size.height * 0.01,
+                              ),
                             ],
                           ),
                         ),
                       ),
-                      AppSpacing.v16(),
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.02,
+                      ),
                       ContactInfoCard(
                         email: profileData.email,
-                        emailVerified:
-                            profileData.emailVerified,
+                        emailVerified: profileData.emailVerified,
                         phone: profileData.phone,
-                        phoneVerified:
-                            profileData.phoneVerified,
+                        phoneVerified: profileData.phoneVerified,
                         address: profileData.address,
                         city: profileData.city,
-                        locationVerified:
-                            profileData.locationVerified,
-                        dateOfBirth:
-                            profileData.dateOfBirth,
+                        locationVerified: profileData.locationVerified,
+                        dateOfBirth: profileData.dateOfBirth,
                         onPickDob: _pickDob,
                         onVerifyPhone: () => Get.to(
                           () => _PhoneVerificationScreen(
                             phoneNumber: profileData.phone,
                             onVerified: () {
                               setState(() {
-                                profileData =
-                                    profileData.copy()
-                                      ..phoneVerified =
-                                          true;
+                                profileData = profileData.copy()
+                                  ..phoneVerified = true;
                               });
                               Get.back();
-                              ScaffoldMessenger.of(
-                                context,
-                              ).showSnackBar(
-                                const SnackBar(
-                                  content: Text(
-                                    'Phone verified',
-                                  ),
-                                ),
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(content: Text('Phone verified')),
                               );
                             },
                           ),
                         ),
                       ),
-                      AppSpacing.v16(),
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.02,
+                      ),
                       PaymentMethodsCard(
-                        onWalletsTap: () => Get.to(
-                          () =>
-                              const _MobileWalletsScreen(),
-                        ),
-                        onCardsTap: () => Get.to(
-                          () => const _PaymentCardsScreen(),
-                        ),
+                        onWalletsTap: () =>
+                            Get.to(() => const _MobileWalletsScreen()),
+                        onCardsTap: () =>
+                            Get.to(() => const _PaymentCardsScreen()),
                       ),
                       // Account Security removed (OTP login; no password)
-                      AppSpacing.v24(),
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.03,
+                      ),
                     ],
                   ),
                 ),
@@ -525,15 +497,14 @@ class _MobileWalletsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AppScaffold(
+    return Scaffold(
       appBar: const PrimaryAppBar(
         title: 'Mobile Wallets',
         showBackArrowIcon: true,
       ),
-      child: Center(
-        child: Text(
-          'Coming soon',
-          style: AppTextStyle.bodyLarge,
+      body: SafeArea(
+        child: Center(
+          child: Text('Coming soon', style: AppTextStyle.bodyLarge),
         ),
       ),
     );
@@ -545,15 +516,11 @@ class _PaymentCardsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AppScaffold(
-      appBar: const PrimaryAppBar(
-        title: 'Cards',
-        showBackArrowIcon: true,
-      ),
-      child: Center(
-        child: Text(
-          'Coming soon',
-          style: AppTextStyle.bodyLarge,
+    return Scaffold(
+      appBar: const PrimaryAppBar(title: 'Cards', showBackArrowIcon: true),
+      body: SafeArea(
+        child: Center(
+          child: Text('Coming soon', style: AppTextStyle.bodyLarge),
         ),
       ),
     );
@@ -574,84 +541,76 @@ class _PhoneVerificationScreen extends StatefulWidget {
       _PhoneVerificationScreenState();
 }
 
-class _PhoneVerificationScreenState
-    extends State<_PhoneVerificationScreen> {
+class _PhoneVerificationScreenState extends State<_PhoneVerificationScreen> {
   String code = '';
-  bool codeSent =
-      true; // assume sent; integrate API to toggle
+  bool codeSent = true; // assume sent; integrate API to toggle
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return AppScaffold(
+    return Scaffold(
       appBar: const PrimaryAppBar(
         title: 'Verify Phone',
         showBackArrowIcon: true,
       ),
-      child: Padding(
-        padding: AppSpacing.horizontalPadding(context),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            AppSpacing.v24(),
-            Text(
-              'We sent a 6-digit code to:',
-              style: AppTextStyle.bodySmall.copyWith(
-                color: theme.textTheme.bodySmall?.color
-                    ?.withValues(alpha:0.7),
+      body: SafeArea(
+        child: Padding(
+          padding: EdgeInsets.symmetric(
+            horizontal: (MediaQuery.of(context).size.width * 0.08).clamp(
+              16.0,
+              28.0,
+            ),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              SizedBox(height: MediaQuery.of(context).size.height * 0.03),
+              Text(
+                'We sent a 6-digit code to:',
+                style: AppTextStyle.bodySmall.copyWith(
+                  color: theme.textTheme.bodySmall?.color?.withValues(
+                    alpha: 0.7,
+                  ),
+                ),
               ),
-            ),
-            AppSpacing.v8(),
-            Text(
-              widget.phoneNumber,
-              style: AppTextStyle.headlineSmall,
-            ),
-            AppSpacing.v24(),
-            Center(
-              child: OtpInput(
-                length: 6,
-                onChanged: (v) => setState(() => code = v),
-                onCompleted: (v) =>
-                    setState(() => code = v),
+              SizedBox(height: MediaQuery.of(context).size.height * 0.01),
+              Text(widget.phoneNumber, style: AppTextStyle.headlineSmall),
+              SizedBox(height: MediaQuery.of(context).size.height * 0.03),
+              Center(
+                child: OtpInput(
+                  length: 6,
+                  onChanged: (v) => setState(() => code = v),
+                  onCompleted: (v) => setState(() => code = v),
+                ),
               ),
-            ),
-            AppSpacing.v24(),
-            PrimaryButton(
-              onPressed: () {
-                if (code.length != 6) {
-                  ScaffoldMessenger.of(
-                    context,
-                  ).showSnackBar(
-                    const SnackBar(
-                      content: Text(
-                        'Enter the 6-digit code',
-                      ),
-                    ),
-                  );
-                  return;
-                }
-                widget.onVerified();
-              },
-              title: 'Verify',
-              height: 48,
-            ),
-            AppSpacing.v12(),
-            TextButton(
-              onPressed: codeSent
-                  ? null
-                  : () {
-                      setState(() => codeSent = true);
-                      ScaffoldMessenger.of(
-                        context,
-                      ).showSnackBar(
-                        const SnackBar(
-                          content: Text('Code resent'),
-                        ),
-                      );
-                    },
-              child: const Text('Resend Code'),
-            ),
-          ],
+              SizedBox(height: MediaQuery.of(context).size.height * 0.03),
+              PrimaryButton(
+                onPressed: () {
+                  if (code.length != 6) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('Enter the 6-digit code')),
+                    );
+                    return;
+                  }
+                  widget.onVerified();
+                },
+                title: 'Verify',
+                height: 48,
+              ),
+              SizedBox(height: MediaQuery.of(context).size.height * 0.015),
+              TextButton(
+                onPressed: codeSent
+                    ? null
+                    : () {
+                        setState(() => codeSent = true);
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: Text('Code resent')),
+                        );
+                      },
+                child: const Text('Resend Code'),
+              ),
+            ],
+          ),
         ),
       ),
     );

@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:tripavail/utils/theme/constants/app_spacing.dart';
-import 'package:tripavail/widgets/app_scaffold.dart';
 import 'package:tripavail/widgets/primary_appbar.dart';
 import 'package:tripavail/utils/app_text_styles.dart';
 
@@ -9,13 +7,18 @@ class TourBookingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AppScaffold(
+    final screenSize = MediaQuery.of(context).size;
+    final width = screenSize.width;
+    return Scaffold(
       appBar: const PrimaryAppBar(
         title: 'Bookings (Trips)',
         showBackArrowIcon: true,
       ),
-      child: Padding(
-        padding: AppSpacing.horizontalPadding(context),
+      body: SafeArea(
+        child: Padding(
+        padding: EdgeInsets.symmetric(
+          horizontal: (width * 0.08).clamp(16.0, 28.0),
+        ),
         child: ListView.separated(
           itemCount: 8,
           separatorBuilder: (_, __) => const Divider(),
@@ -27,6 +30,7 @@ class TourBookingsScreen extends StatelessWidget {
             subtitle: const Text('Traveler: Jane Doe • 2 guests'),
             trailing: const Icon(Icons.chevron_right),
           ),
+        ),
         ),
       ),
     );

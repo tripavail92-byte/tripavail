@@ -1,20 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:tripavail/utils/app_text_styles.dart';
-import 'package:tripavail/utils/theme/constants/app_spacing.dart';
-
 class HomeTab extends StatelessWidget {
   const HomeTab({super.key});
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final screenSize = MediaQuery.of(context).size;
+    final width = screenSize.width;
+    final height = screenSize.height;
 
     return SingleChildScrollView(
-      padding: AppSpacing.horizontalPadding(context),
+      padding: EdgeInsets.symmetric(
+        horizontal: (width * 0.08).clamp(16.0, 28.0),
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          AppSpacing.v24(),
+          SizedBox(height: height * 0.03),
 
           // Welcome Banner
           Container(
@@ -47,7 +50,7 @@ class HomeTab extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                AppSpacing.v12(),
+                SizedBox(height: height * 0.015),
                 Text(
                   'AI-powered recommendations just for you',
                   style: AppTextStyle.bodyMedium.copyWith(
@@ -58,7 +61,7 @@ class HomeTab extends StatelessWidget {
             ),
           ),
 
-          AppSpacing.v32(),
+          SizedBox(height: height * 0.04),
 
           // Quick Actions
           Text(
@@ -67,7 +70,7 @@ class HomeTab extends StatelessWidget {
               fontWeight: FontWeight.w600,
             ),
           ),
-          AppSpacing.v16(),
+          SizedBox(height: height * 0.02),
           Row(
             children: [
               Expanded(
@@ -87,7 +90,7 @@ class HomeTab extends StatelessWidget {
               ),
             ],
           ),
-          AppSpacing.v12(),
+          SizedBox(height: height * 0.015),
           Row(
             children: [
               Expanded(
@@ -108,7 +111,7 @@ class HomeTab extends StatelessWidget {
             ],
           ),
 
-          AppSpacing.v32(),
+          SizedBox(height: height * 0.04),
 
           // Popular Destinations
           Text(
@@ -117,7 +120,7 @@ class HomeTab extends StatelessWidget {
               fontWeight: FontWeight.w600,
             ),
           ),
-          AppSpacing.v16(),
+          SizedBox(height: height * 0.02),
           SizedBox(
             height: 200,
             child: ListView.builder(
@@ -129,7 +132,7 @@ class HomeTab extends StatelessWidget {
             ),
           ),
 
-          AppSpacing.v24(),
+          SizedBox(height: height * 0.03),
         ],
       ),
     );
@@ -151,6 +154,8 @@ class _QuickActionCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
+    final screenSize = MediaQuery.of(context).size;
+    final height = screenSize.height;
 
     return Container(
       padding: const EdgeInsets.all(16),
@@ -171,7 +176,7 @@ class _QuickActionCard extends StatelessWidget {
             ),
             child: Icon(icon, color: color, size: 28),
           ),
-          AppSpacing.v8(),
+          SizedBox(height: height * 0.01),
           Text(
             title,
             style: AppTextStyle.bodyMedium.copyWith(
