@@ -82,9 +82,11 @@ class _MyAppState extends State<MyApp> {
       home: const SplashScreen(),
       builder: (context, child) {
         return MediaQuery(
-          data: MediaQuery.of(
-            context,
-          ).copyWith(textScaler: TextScaler.noScaling),
+          data: MediaQuery.of(context).copyWith(
+            textScaler: TextScaler.linear(
+              MediaQuery.of(context).textScaler.scale(0.9).clamp(1.0, 1.2),
+            ),
+          ),
           child: child!,
         );
       },
