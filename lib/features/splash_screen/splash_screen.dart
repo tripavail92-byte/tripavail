@@ -200,7 +200,7 @@ class _SplashScreenState extends State<SplashScreen>
   }
 
   Future<void> _routeNext() async {
-    await Future.delayed(const Duration(milliseconds: 6000000));
+    await Future.delayed(const Duration(milliseconds: 4000));
     if (mounted) {
       Get.offAll(() => const OnboardingScreen());
     }

@@ -6,18 +6,16 @@ class HomeTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final screenSize = MediaQuery.of(context).size;
-    final width = screenSize.width;
-    final height = screenSize.height;
+    final size = MediaQuery.of(context).size;
 
     return SingleChildScrollView(
       padding: EdgeInsets.symmetric(
-        horizontal: (width * 0.08).clamp(16.0, 28.0),
+        horizontal: (size.width * 0.08).clamp(16.0, 28.0),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(height: height * 0.03),
+          SizedBox(height: size.height * 0.03),
 
           // Welcome Banner
           Container(
@@ -50,7 +48,7 @@ class HomeTab extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(height: height * 0.015),
+                SizedBox(height: size.height * 0.015),
                 Text(
                   'AI-powered recommendations just for you',
                   style: AppTextStyle.bodyMedium.copyWith(
@@ -61,7 +59,7 @@ class HomeTab extends StatelessWidget {
             ),
           ),
 
-          SizedBox(height: height * 0.04),
+          SizedBox(height: size.height * 0.04),
 
           // Quick Actions
           Text(
@@ -70,7 +68,7 @@ class HomeTab extends StatelessWidget {
               fontWeight: FontWeight.w600,
             ),
           ),
-          SizedBox(height: height * 0.02),
+          SizedBox(height: size.height * 0.02),
           Row(
             children: [
               Expanded(
@@ -90,7 +88,7 @@ class HomeTab extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(height: height * 0.015),
+          SizedBox(height: size.height * 0.015),
           Row(
             children: [
               Expanded(
@@ -111,7 +109,7 @@ class HomeTab extends StatelessWidget {
             ],
           ),
 
-          SizedBox(height: height * 0.04),
+          SizedBox(height: size.height * 0.04),
 
           // Popular Destinations
           Text(
@@ -120,7 +118,7 @@ class HomeTab extends StatelessWidget {
               fontWeight: FontWeight.w600,
             ),
           ),
-          SizedBox(height: height * 0.02),
+          SizedBox(height: size.height * 0.02),
           SizedBox(
             height: 200,
             child: ListView.builder(
@@ -132,7 +130,7 @@ class HomeTab extends StatelessWidget {
             ),
           ),
 
-          SizedBox(height: height * 0.03),
+          SizedBox(height: size.height * 0.03),
         ],
       ),
     );
@@ -154,8 +152,7 @@ class _QuickActionCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
-    final screenSize = MediaQuery.of(context).size;
-    final height = screenSize.height;
+    final size = MediaQuery.of(context).size;
 
     return Container(
       padding: const EdgeInsets.all(16),
@@ -176,7 +173,7 @@ class _QuickActionCard extends StatelessWidget {
             ),
             child: Icon(icon, color: color, size: 28),
           ),
-          SizedBox(height: height * 0.01),
+          SizedBox(height: size.height * 0.01),
           Text(
             title,
             style: AppTextStyle.bodyMedium.copyWith(

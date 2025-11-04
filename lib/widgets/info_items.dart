@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tripavail/utils/app_text_styles.dart';
 
-///
-///
 class InfoItem extends StatelessWidget {
   const InfoItem({
     super.key,
@@ -13,7 +11,6 @@ class InfoItem extends StatelessWidget {
     required this.subTitle,
     this.thirdLineText,
     this.trailingWidget,
-    this.leadingIconSize = 24.0,
     this.isLeadingPading = true,
   });
 
@@ -24,15 +21,12 @@ class InfoItem extends StatelessWidget {
   final String subTitle;
   final String? thirdLineText;
   final Widget? trailingWidget;
-  final double leadingIconSize;
   final bool? isLeadingPading;
 
   @override
   Widget build(BuildContext context) {
-    final appTheme = Theme.of(context);
-    var screenSize = MediaQuery.of(context).size;
-    double width = screenSize.width;
-    double height = screenSize.height;
+    final theme = Theme.of(context);
+    final size = MediaQuery.of(context).size;
 
     return InkWell(
       onTap: onPressed,
@@ -41,12 +35,12 @@ class InfoItem extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Container(
-            height: height * 0.07,
-            width: height * 0.07,
+            height: size.height * 0.07,
+            width: size.height * 0.07,
             alignment: Alignment.center,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: appTheme.colorScheme.secondaryContainer,
+              color: theme.colorScheme.secondaryContainer,
             ),
             clipBehavior: Clip.hardEdge,
             child: Padding(
@@ -54,7 +48,7 @@ class InfoItem extends StatelessWidget {
               child: leading,
             ),
           ),
-          SizedBox(width: width * 0.04),
+          SizedBox(width: size.width * 0.04),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -65,21 +59,18 @@ class InfoItem extends StatelessWidget {
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                 ),
-                SizedBox(height: height * 0.01),
+                SizedBox(height: size.height * 0.01),
                 Text(subTitle, style: AppTextStyle.bodySmall),
-                if (thirdLineText != null)
-                  Column(
-                    children: [
-                      SizedBox(height: height * 0.01),
-                      Text(thirdLineText!, style: AppTextStyle.bodySmall),
-                    ],
-                  ),
+                if (thirdLineText != null) ...[
+                  SizedBox(height: size.height * 0.01),
+                  Text(thirdLineText!, style: AppTextStyle.bodySmall),
+                ],
               ],
             ),
           ),
           if (trailingWidget != null)
             Padding(
-              padding: EdgeInsets.only(left: height * 0.02),
+              padding: EdgeInsets.only(left: size.height * 0.02),
               child: trailingWidget!,
             ),
         ],

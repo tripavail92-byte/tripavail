@@ -2,12 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:tripavail/features/splash_screen/splash_screen.dart';
-import 'package:tripavail/modules/auth/auth_module.dart';
-import 'package:tripavail/modules/core/core_module.dart';
-import 'package:tripavail/modules/hotel_manager/hotel_manager_module.dart';
-import 'package:tripavail/modules/module_registry.dart';
-import 'package:tripavail/modules/tour_operator/tour_operator_module.dart';
-import 'package:tripavail/modules/traveler/traveler_module.dart';
 import 'package:tripavail/utils/app_labels.dart';
 import 'package:tripavail/utils/preference_labels.dart';
 import 'package:tripavail/utils/theme/app_dark_theme.dart';
@@ -24,14 +18,6 @@ void main() async {
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
-  ]);
-
-  ModuleRegistry.registerDefaults([
-    CoreModule(),
-    AuthModule(),
-    TravelerModule(),
-    HotelManagerModule(),
-    TourOperatorModule(),
   ]);
 
   runApp(const MyApp());

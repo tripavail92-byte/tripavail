@@ -3,10 +3,8 @@ import 'package:get/get.dart';
 import 'package:tripavail/features/drawer/drawer_definitions.dart';
 import 'package:tripavail/features/drawer/drawer_item.dart';
 import 'package:tripavail/features/drawer/drawer_manager.dart';
-import 'package:tripavail/features/partner/domain/entities/partner_dashboard_summary.dart';
-import 'package:tripavail/features/partner/domain/entities/partner_metric.dart';
-import 'package:tripavail/features/partner/domain/entities/partner_quick_action.dart';
 import 'package:tripavail/features/partner/models/partner_role.dart';
+import 'package:tripavail/features/partner/models/partner_dashboard_data.dart';
 import 'package:tripavail/features/partner/presentation/controllers/partner_dashboard_controller.dart';
 import 'package:tripavail/features/partner/utils/partner_branding.dart';
 import 'package:tripavail/features/home/main_navigation.dart';
@@ -41,6 +39,12 @@ class _PartnerWorkspaceScreenState extends State<PartnerWorkspaceScreen> {
     _selectedItemId = _activeRole == PartnerRole.hotelManager
         ? DrawerDefinitions.hotelManagerItems.first.id
         : DrawerDefinitions.tourOperatorItems.first.id;
+    
+    // Initialize controller with role
+    if (!Get.isRegistered<PartnerDashboardController>(tag: _activeRole.name)) {
+      Get.put(PartnerDashboardController(_activeRole), tag: _activeRole.name);
+    }
+    
     WidgetsBinding.instance.addPostFrameCallback((_) {
       setState(() => _drawerOpen = true);
     });
@@ -64,7 +68,7 @@ class _PartnerWorkspaceScreenState extends State<PartnerWorkspaceScreen> {
       ? DrawerDefinitions.hotelManagerMeta
       : DrawerDefinitions.tourOperatorMeta;
 
-  void _handleDrawerItem(String id, String screen) {
+  void _handleDrawerItem(String id) {
     setState(() {
       _selectedItemId = id;
       _drawerOpen = false;
@@ -192,13 +196,10 @@ class _PartnerWorkspaceScreenState extends State<PartnerWorkspaceScreen> {
                         return const Center(child: CircularProgressIndicator());
                       }
 
-                      final summary = controller.summary.value;
-                      if (summary == null) {
-                        return Center(
-                          child: Text(
-                            controller.error.value ?? 'Unable to load data',
-                            style: AppTextStyle.bodyMedium,
-                          ),
+                      final data = controller.data.value;
+                      if (data == null) {
+                        return const Center(
+                          child: Text('Unable to load data'),
                         );
                       }
 
@@ -212,10 +213,10 @@ class _PartnerWorkspaceScreenState extends State<PartnerWorkspaceScreen> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            _HeroCard(role: _activeRole, summary: summary),
+                            _HeroCard(role: _activeRole, data: data),
                             SizedBox(height: height * 0.03),
                             _MetricsRow(
-                              metrics: summary.metrics,
+                              metrics: data.metrics,
                               accent: accent,
                             ),
                             SizedBox(height: height * 0.03),
@@ -226,7 +227,7 @@ class _PartnerWorkspaceScreenState extends State<PartnerWorkspaceScreen> {
                               ),
                             ),
                             SizedBox(height: height * 0.02),
-                            _QuickActionsGrid(actions: summary.quickActions),
+                            _QuickActionsGrid(actions: data.quickActions),
                           ],
                         ),
                       );
@@ -246,7 +247,7 @@ class _PartnerWorkspaceScreenState extends State<PartnerWorkspaceScreen> {
           selectedItemId: _selectedItemId,
           items: _currentDrawerItems,
           meta: _currentMeta,
-          onItemClick: _handleDrawerItem,
+          onItemClick: (id, _) => _handleDrawerItem(id),
           onBecomePartner: () {},
           onSwitchToTraveler: _switchToTraveler,
         ),
@@ -264,13 +265,11 @@ class _PartnerWorkspaceScreenState extends State<PartnerWorkspaceScreen> {
   }
 }
 
-// Role toggle removed by design: workspaces are strictly single‑role.
-
 class _HeroCard extends StatelessWidget {
   final PartnerRole role;
-  final PartnerDashboardSummary summary;
+  final PartnerDashboardData data;
 
-  const _HeroCard({required this.role, required this.summary});
+  const _HeroCard({required this.role, required this.data});
 
   @override
   Widget build(BuildContext context) {
@@ -294,7 +293,7 @@ class _HeroCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            summary.heroTitle,
+            data.heroTitle,
             style: AppTextStyle.headlineMedium.copyWith(
               color: Colors.white,
               fontWeight: FontWeight.w800,
@@ -302,7 +301,7 @@ class _HeroCard extends StatelessWidget {
           ),
           const SizedBox(height: 12),
           Text(
-            summary.heroSubtitle,
+            data.heroSubtitle,
             style: AppTextStyle.bodyLarge.copyWith(
               color: Colors.white.withValues(alpha:0.85),
             ),
@@ -311,7 +310,7 @@ class _HeroCard extends StatelessWidget {
           Wrap(
             spacing: 12,
             runSpacing: 12,
-            children: summary.heroHighlights
+            children: data.heroHighlights
                 .map((text) => _HeroBadge(text: text))
                 .toList(),
           ),

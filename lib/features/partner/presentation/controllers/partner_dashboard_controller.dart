@@ -1,16 +1,14 @@
 import 'package:get/get.dart';
-
-import '../../domain/entities/partner_dashboard_summary.dart';
-import '../../domain/usecases/get_partner_dashboard_summary.dart';
+import '../../models/partner_dashboard_data.dart';
+import '../../models/partner_role.dart';
 
 class PartnerDashboardController extends GetxController {
-  final GetPartnerDashboardSummary _getSummary;
+  final PartnerRole role;
 
-  PartnerDashboardController(this._getSummary);
+  PartnerDashboardController(this.role);
 
-  final RxBool isLoading = true.obs;
-  final Rxn<PartnerDashboardSummary> summary = Rxn();
-  final RxnString error = RxnString();
+  final RxBool isLoading = false.obs;
+  final Rxn<PartnerDashboardData> data = Rxn();
 
   @override
   void onInit() {
@@ -19,15 +17,10 @@ class PartnerDashboardController extends GetxController {
   }
 
   Future<void> load() async {
-    try {
-      isLoading.value = true;
-      error.value = null;
-      final result = await _getSummary();
-      summary.value = result;
-    } catch (e) {
-      error.value = e.toString();
-    } finally {
-      isLoading.value = false;
-    }
+    isLoading.value = true;
+    // Simulate loading delay
+    await Future.delayed(const Duration(milliseconds: 500));
+    data.value = PartnerDashboardData.mockData(role);
+    isLoading.value = false;
   }
 }
