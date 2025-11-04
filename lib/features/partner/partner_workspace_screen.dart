@@ -3,14 +3,14 @@ import 'package:get/get.dart';
 import 'package:tripavail/features/drawer/drawer_definitions.dart';
 import 'package:tripavail/features/drawer/drawer_item.dart';
 import 'package:tripavail/features/drawer/drawer_manager.dart';
-import 'package:tripavail/features/partner/models/partner_role.dart';
-import 'package:tripavail/features/partner/models/partner_dashboard_data.dart';
-import 'package:tripavail/features/partner/presentation/controllers/partner_dashboard_controller.dart';
-import 'package:tripavail/features/partner/utils/partner_branding.dart';
-import 'package:tripavail/features/home/main_navigation.dart';
+import 'package:tripavail/features/home/bottom_nav_bar.dart';
 import 'package:tripavail/features/hotel_manager/presentation/screens/hotel_list_screen.dart';
 import 'package:tripavail/features/hotel_manager/presentation/screens/hotel_packages_screen.dart';
 import 'package:tripavail/features/hotel_manager/presentation/screens/hotel_verification_screen.dart';
+import 'package:tripavail/features/partner/models/partner_dashboard_data.dart';
+import 'package:tripavail/features/partner/models/partner_role.dart';
+import 'package:tripavail/features/partner/presentation/controllers/partner_dashboard_controller.dart';
+import 'package:tripavail/features/partner/utils/partner_branding.dart';
 import 'package:tripavail/features/tour_operator/tour_bookings_screen.dart';
 import 'package:tripavail/features/tour_operator/tour_calendar_screen.dart';
 import 'package:tripavail/features/tour_operator/tour_create_screen.dart';
@@ -39,12 +39,12 @@ class _PartnerWorkspaceScreenState extends State<PartnerWorkspaceScreen> {
     _selectedItemId = _activeRole == PartnerRole.hotelManager
         ? DrawerDefinitions.hotelManagerItems.first.id
         : DrawerDefinitions.tourOperatorItems.first.id;
-    
+
     // Initialize controller with role
     if (!Get.isRegistered<PartnerDashboardController>(tag: _activeRole.name)) {
       Get.put(PartnerDashboardController(_activeRole), tag: _activeRole.name);
     }
-    
+
     WidgetsBinding.instance.addPostFrameCallback((_) {
       setState(() => _drawerOpen = true);
     });
@@ -52,7 +52,7 @@ class _PartnerWorkspaceScreenState extends State<PartnerWorkspaceScreen> {
 
   void _switchToTraveler() {
     setState(() => _drawerOpen = false);
-    Get.offAll(() => const MainNavigation());
+    Get.offAll(() => const BottomNavBar());
   }
 
   void _toggleDrawer(bool open) {
@@ -73,7 +73,7 @@ class _PartnerWorkspaceScreenState extends State<PartnerWorkspaceScreen> {
       _selectedItemId = id;
       _drawerOpen = false;
     });
-    
+
     // Handle navigation based on drawer item ID
     if (_activeRole == PartnerRole.hotelManager) {
       switch (id) {
@@ -91,9 +91,9 @@ class _PartnerWorkspaceScreenState extends State<PartnerWorkspaceScreen> {
         case 'hm_support':
         case 'hm_legal':
           // Coming soon screens
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('$id coming soon')),
-          );
+          ScaffoldMessenger.of(
+            context,
+          ).showSnackBar(SnackBar(content: Text('$id coming soon')));
           break;
       }
     } else if (_activeRole == PartnerRole.tourOperator) {
@@ -119,9 +119,9 @@ class _PartnerWorkspaceScreenState extends State<PartnerWorkspaceScreen> {
         case 'to_support':
         case 'to_legal':
           // Coming soon screens
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('$id coming soon')),
-          );
+          ScaffoldMessenger.of(
+            context,
+          ).showSnackBar(SnackBar(content: Text('$id coming soon')));
           break;
       }
     }
@@ -161,7 +161,7 @@ class _PartnerWorkspaceScreenState extends State<PartnerWorkspaceScreen> {
                           vertical: 8,
                         ),
                         decoration: BoxDecoration(
-                          color: accent.withValues(alpha:0.12),
+                          color: accent.withValues(alpha: 0.12),
                           borderRadius: BorderRadius.circular(20),
                         ),
                         child: Row(
@@ -198,27 +198,22 @@ class _PartnerWorkspaceScreenState extends State<PartnerWorkspaceScreen> {
 
                       final data = controller.data.value;
                       if (data == null) {
-                        return const Center(
-                          child: Text('Unable to load data'),
-                        );
+                        return const Center(child: Text('Unable to load data'));
                       }
 
-                      final screenSize = MediaQuery.of(context).size;
-                      final width = screenSize.width;
-                      final height = screenSize.height;
+                      final size = MediaQuery.of(context).size;
+                      final double width = size.width;
+                      final double height = size.height;
                       return SingleChildScrollView(
                         padding: EdgeInsets.symmetric(
-                          horizontal: (width * 0.08).clamp(16.0, 28.0),
+                          horizontal: width * 0.08,
                         ).copyWith(bottom: 32),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             _HeroCard(role: _activeRole, data: data),
                             SizedBox(height: height * 0.03),
-                            _MetricsRow(
-                              metrics: data.metrics,
-                              accent: accent,
-                            ),
+                            _MetricsRow(metrics: data.metrics, accent: accent),
                             SizedBox(height: height * 0.03),
                             Text(
                               'Quick links',
@@ -283,7 +278,7 @@ class _HeroCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(28),
         boxShadow: [
           BoxShadow(
-            color: gradient.colors.last.withValues(alpha:0.25),
+            color: gradient.colors.last.withValues(alpha: 0.25),
             blurRadius: 30,
             offset: const Offset(0, 18),
           ),
@@ -303,7 +298,7 @@ class _HeroCard extends StatelessWidget {
           Text(
             data.heroSubtitle,
             style: AppTextStyle.bodyLarge.copyWith(
-              color: Colors.white.withValues(alpha:0.85),
+              color: Colors.white.withValues(alpha: 0.85),
             ),
           ),
           const SizedBox(height: 24),
@@ -330,9 +325,9 @@ class _HeroBadge extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
       decoration: BoxDecoration(
-        color: Colors.white.withValues(alpha:0.16),
+        color: Colors.white.withValues(alpha: 0.16),
         borderRadius: BorderRadius.circular(999),
-        border: Border.all(color: Colors.white.withValues(alpha:0.25)),
+        border: Border.all(color: Colors.white.withValues(alpha: 0.25)),
       ),
       child: Text(
         text,
@@ -367,10 +362,10 @@ class _MetricsRow extends StatelessWidget {
           decoration: BoxDecoration(
             color: theme.cardColor,
             borderRadius: BorderRadius.circular(18),
-            border: Border.all(color: accent.withValues(alpha:0.15)),
+            border: Border.all(color: accent.withValues(alpha: 0.15)),
             boxShadow: [
               BoxShadow(
-                color: accent.withValues(alpha:0.08),
+                color: accent.withValues(alpha: 0.08),
                 blurRadius: 12,
                 offset: const Offset(0, 6),
               ),
@@ -382,7 +377,9 @@ class _MetricsRow extends StatelessWidget {
               Text(
                 metric.label,
                 style: AppTextStyle.bodySmall.copyWith(
-                  color: theme.textTheme.bodySmall?.color?.withValues(alpha:0.7),
+                  color: theme.textTheme.bodySmall?.color?.withValues(
+                    alpha: 0.7,
+                  ),
                 ),
               ),
               SizedBox(height: MediaQuery.of(context).size.height * 0.01),
@@ -444,7 +441,7 @@ class _QuickActionsGrid extends StatelessWidget {
             decoration: BoxDecoration(
               color: theme.cardColor,
               borderRadius: BorderRadius.circular(20),
-              border: Border.all(color: accent.withValues(alpha:0.18)),
+              border: Border.all(color: accent.withValues(alpha: 0.18)),
             ),
             padding: const EdgeInsets.all(20),
             child: Column(
@@ -453,7 +450,7 @@ class _QuickActionsGrid extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.all(12),
                   decoration: BoxDecoration(
-                    color: accent.withValues(alpha:0.16),
+                    color: accent.withValues(alpha: 0.16),
                     borderRadius: BorderRadius.circular(16),
                   ),
                   child: Icon(action.icon, color: accent),
@@ -469,7 +466,9 @@ class _QuickActionsGrid extends StatelessWidget {
                 Text(
                   action.subtitle,
                   style: AppTextStyle.bodySmall.copyWith(
-                    color: theme.textTheme.bodySmall?.color?.withValues(alpha:0.7),
+                    color: theme.textTheme.bodySmall?.color?.withValues(
+                      alpha: 0.7,
+                    ),
                   ),
                 ),
               ],

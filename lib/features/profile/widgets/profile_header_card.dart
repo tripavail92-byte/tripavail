@@ -1,9 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:tripavail/features/profile/widgets/section_card.dart';
 import 'package:tripavail/utils/app_text_styles.dart';
 import 'package:tripavail/utils/theme/constants/app_constants.dart';
 import 'package:tripavail/utils/theme/extension/role_theme_extension.dart';
-import 'package:tripavail/features/profile/widgets/section_card.dart';
 
 class ProfileHeaderCard extends StatelessWidget {
   final String name;
@@ -45,8 +45,7 @@ class ProfileHeaderCard extends StatelessWidget {
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   gradient:
-                      roleTheme?.primaryGradient ??
-                      AppRoleGradients.traveller,
+                      roleTheme?.primaryGradient ?? AppRoleGradients.traveller,
                 ),
                 child: Container(
                   margin: const EdgeInsets.all(3),
@@ -60,24 +59,15 @@ class ProfileHeaderCard extends StatelessWidget {
                     radius: avatarRadius,
                     backgroundColor: Colors.transparent,
                     backgroundImage:
-                        (avatarUrl != null &&
-                            avatarUrl!.isNotEmpty)
-                        ? CachedNetworkImageProvider(
-                            avatarUrl!,
-                          )
+                        (avatarUrl != null && avatarUrl!.isNotEmpty)
+                        ? CachedNetworkImageProvider(avatarUrl!)
                         : null,
-                    child:
-                        (avatarUrl == null ||
-                            avatarUrl!.isEmpty)
+                    child: (avatarUrl == null || avatarUrl!.isEmpty)
                         ? Text(
-                            name.isNotEmpty
-                                ? name[0].toUpperCase()
-                                : '',
-                            style: AppTextStyle
-                                .headlineMedium
-                                .copyWith(
-                                  color: theme.primaryColor,
-                                ),
+                            name.isNotEmpty ? name[0].toUpperCase() : '',
+                            style: AppTextStyle.headlineMedium.copyWith(
+                              color: theme.primaryColor,
+                            ),
                           )
                         : null,
                   ),
@@ -131,8 +121,7 @@ class ProfileHeaderCard extends StatelessWidget {
           Text(
             'Member since $joinDate',
             style: AppTextStyle.bodySmall.copyWith(
-              color: theme.textTheme.bodySmall?.color
-                  ?.withValues(alpha:0.6),
+              color: theme.textTheme.bodySmall?.color?.withValues(alpha: 0.6),
             ),
           ),
           SizedBox(height: MediaQuery.of(context).size.height * 0.02),
@@ -140,15 +129,13 @@ class ProfileHeaderCard extends StatelessWidget {
             bio,
             textAlign: TextAlign.center,
             style: AppTextStyle.bodyMedium.copyWith(
-              color: theme.textTheme.bodyMedium?.color
-                  ?.withValues(alpha:0.85),
+              color: theme.textTheme.bodyMedium?.color?.withValues(alpha: 0.85),
               height: 1.5,
             ),
           ),
           SizedBox(height: MediaQuery.of(context).size.height * 0.02),
           Row(
-            mainAxisAlignment:
-                MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
                 'Profile completion',
@@ -168,9 +155,7 @@ class ProfileHeaderCard extends StatelessWidget {
           Container(
             height: 8,
             decoration: BoxDecoration(
-              color: isDark
-                  ? const Color(0xFF374151)
-                  : const Color(0xFFE5E7EB),
+              color: isDark ? const Color(0xFF374151) : const Color(0xFFE5E7EB),
               borderRadius: BorderRadius.circular(999),
             ),
             child: LayoutBuilder(
@@ -179,14 +164,10 @@ class ProfileHeaderCard extends StatelessWidget {
                 return Align(
                   alignment: Alignment.centerLeft,
                   child: AnimatedContainer(
-                    duration: const Duration(
-                      milliseconds: 500,
-                    ),
+                    duration: const Duration(milliseconds: 500),
                     width: w,
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(
-                        999,
-                      ),
+                      borderRadius: BorderRadius.circular(999),
                       gradient:
                           roleTheme?.primaryGradient ??
                           AppRoleGradients.traveller,

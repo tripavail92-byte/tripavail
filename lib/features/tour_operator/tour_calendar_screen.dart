@@ -6,8 +6,8 @@ class TourCalendarScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final screenSize = MediaQuery.of(context).size;
-    final width = screenSize.width;
+    final size = MediaQuery.of(context).size;
+    final double width = size.width;
     return Scaffold(
       appBar: const PrimaryAppBar(
         title: 'Calendar & Availability',
@@ -15,9 +15,7 @@ class TourCalendarScreen extends StatelessWidget {
       ),
       body: SafeArea(
         child: Padding(
-        padding: EdgeInsets.symmetric(
-          horizontal: (width * 0.08).clamp(16.0, 28.0),
-        ),
+        padding: EdgeInsets.symmetric(horizontal: width * 0.08),
         child: const Center(child: Text('Calendar coming soon')),
         ),
       ),

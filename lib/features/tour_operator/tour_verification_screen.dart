@@ -7,8 +7,8 @@ class TourVerificationScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final screenSize = MediaQuery.of(context).size;
-    final width = screenSize.width;
+    final size = MediaQuery.of(context).size;
+    final double width = size.width;
     return Scaffold(
       appBar: const PrimaryAppBar(
         title: 'Verification',
@@ -16,9 +16,7 @@ class TourVerificationScreen extends StatelessWidget {
       ),
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.symmetric(
-            horizontal: (width * 0.08).clamp(16.0, 28.0),
-          ),
+          padding: EdgeInsets.symmetric(horizontal: width * 0.08),
           child: ListView(
             children: const [
               _StepTile(title: 'Business Registration', status: 'Uploaded'),

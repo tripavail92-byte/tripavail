@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tripavail/utils/app_labels.dart';
 import 'package:tripavail/utils/app_text_styles.dart';
 import 'package:tripavail/utils/theme/constants/app_constants.dart';
+
 class AuthHeader extends StatelessWidget {
   final bool showSubtitle;
 
@@ -24,9 +25,7 @@ class AuthHeader extends StatelessWidget {
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               gradient: AppRoleGradients.traveller,
-              boxShadow: [
-                AppTextStyle.boxShadow,
-              ],
+              boxShadow: [AppTextStyle.boxShadow],
             ),
             child: Center(
               child: Text(
@@ -51,5 +50,3 @@ class AuthHeader extends StatelessWidget {
     );
   }
 }
-
-

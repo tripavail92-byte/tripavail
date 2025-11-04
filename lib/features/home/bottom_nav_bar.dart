@@ -10,14 +10,14 @@ import 'screens/hotels_tab.dart';
 import 'screens/messages_tab.dart';
 import 'screens/tours_tab.dart';
 
-class MainNavigation extends StatefulWidget {
-  const MainNavigation({super.key});
+class BottomNavBar extends StatefulWidget {
+  const BottomNavBar({super.key});
 
   @override
-  State<MainNavigation> createState() => _MainNavigationState();
+  State<BottomNavBar> createState() => _BottomNavBarState();
 }
 
-class _MainNavigationState extends State<MainNavigation> {
+class _BottomNavBarState extends State<BottomNavBar> {
   int _currentIndex = 0;
   bool _drawerOpen = false;
   String _selectedDrawerItem = DrawerDefinitions.travelerItems.first.id;

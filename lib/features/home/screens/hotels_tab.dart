@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:tripavail/utils/app_text_styles.dart';
+
 class HotelsTab extends StatelessWidget {
   const HotelsTab({super.key});
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final screenSize = MediaQuery.of(context).size;
-    final width = screenSize.width;
-    final height = screenSize.height;
+    final size = MediaQuery.of(context).size;
+    final double width = size.width;
+    final double height = size.height;
     return SingleChildScrollView(
-      padding: EdgeInsets.symmetric(horizontal: (width * 0.08).clamp(16.0, 28.0)),
+      padding: EdgeInsets.symmetric(horizontal: width * 0.08),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -18,10 +19,7 @@ class HotelsTab extends StatelessWidget {
 
           // Search Bar
           Container(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 16,
-              vertical: 12,
-            ),
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
             decoration: BoxDecoration(
               color: theme.brightness == Brightness.dark
                   ? const Color(0xFF2E2E2E)
@@ -35,9 +33,7 @@ class HotelsTab extends StatelessWidget {
                 Expanded(
                   child: Text(
                     'Search hotels...',
-                    style: TextStyle(
-                      color: Colors.grey[600],
-                    ),
+                    style: TextStyle(color: Colors.grey[600]),
                   ),
                 ),
               ],
@@ -83,14 +79,10 @@ class _HotelCard extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.only(bottom: 16),
       decoration: BoxDecoration(
-        color: isDark
-            ? const Color(0xFF2E2E2E)
-            : Colors.white,
+        color: isDark ? const Color(0xFF2E2E2E) : Colors.white,
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
-          color: isDark
-              ? const Color(0xFF444444)
-              : const Color(0xFFE0E0E0),
+          color: isDark ? const Color(0xFF444444) : const Color(0xFFE0E0E0),
         ),
       ),
       child: Column(
@@ -101,8 +93,8 @@ class _HotelCard extends StatelessWidget {
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 colors: [
-                  theme.primaryColor.withValues(alpha:0.4),
-                  theme.primaryColor.withValues(alpha:0.2),
+                  theme.primaryColor.withValues(alpha: 0.4),
+                  theme.primaryColor.withValues(alpha: 0.2),
                 ],
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
@@ -115,7 +107,7 @@ class _HotelCard extends StatelessWidget {
               child: Icon(
                 Icons.hotel,
                 size: 64,
-                color: Colors.white.withValues(alpha:0.7),
+                color: Colors.white.withValues(alpha: 0.7),
               ),
             ),
           ),
@@ -133,18 +125,13 @@ class _HotelCard extends StatelessWidget {
                 const SizedBox(height: 4),
                 Row(
                   children: [
-                    Icon(
-                      Icons.location_on,
-                      size: 16,
-                      color: Colors.grey[600],
-                    ),
+                    Icon(Icons.location_on, size: 16, color: Colors.grey[600]),
                     const SizedBox(width: 4),
                     Text(
                       'Downtown Area',
-                      style: AppTextStyle.bodySmall
-                          .copyWith(
-                            color: Colors.grey[600],
-                          ),
+                      style: AppTextStyle.bodySmall.copyWith(
+                        color: Colors.grey[600],
+                      ),
                     ),
                   ],
                 ),
@@ -156,41 +143,35 @@ class _HotelCard extends StatelessWidget {
                       (i) => Icon(
                         Icons.star,
                         size: 16,
-                        color: i < 4
-                            ? Colors.amber
-                            : Colors.grey[400],
+                        color: i < 4 ? Colors.amber : Colors.grey[400],
                       ),
                     ),
                     const SizedBox(width: 8),
                     Text(
                       '4.${8 - index}',
-                      style: AppTextStyle.bodySmall
-                          .copyWith(
-                            fontWeight: FontWeight.w600,
-                          ),
+                      style: AppTextStyle.bodySmall.copyWith(
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
                   ],
                 ),
                 SizedBox(height: MediaQuery.of(context).size.height * 0.015),
                 Row(
-                  mainAxisAlignment:
-                      MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
                       '\$${150 + (index * 50)}/night',
-                      style: AppTextStyle.bodyLarge
-                          .copyWith(
-                            color: theme.primaryColor,
-                            fontWeight: FontWeight.bold,
-                          ),
+                      style: AppTextStyle.bodyLarge.copyWith(
+                        color: theme.primaryColor,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                     Text(
                       'View Details',
-                      style: AppTextStyle.bodySmall
-                          .copyWith(
-                            color: theme.primaryColor,
-                            fontWeight: FontWeight.w600,
-                          ),
+                      style: AppTextStyle.bodySmall.copyWith(
+                        color: theme.primaryColor,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
                   ],
                 ),

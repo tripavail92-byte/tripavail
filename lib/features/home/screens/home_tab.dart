@@ -7,15 +7,15 @@ class HomeTab extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final size = MediaQuery.of(context).size;
+    final double width = size.width;
+    final double height = size.height;
 
     return SingleChildScrollView(
-      padding: EdgeInsets.symmetric(
-        horizontal: (size.width * 0.08).clamp(16.0, 28.0),
-      ),
+      padding: EdgeInsets.symmetric(horizontal: width * 0.08),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(height: size.height * 0.03),
+          SizedBox(height: height * 0.03),
 
           // Welcome Banner
           Container(
@@ -48,7 +48,7 @@ class HomeTab extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(height: size.height * 0.015),
+                SizedBox(height: height * 0.015),
                 Text(
                   'AI-powered recommendations just for you',
                   style: AppTextStyle.bodyMedium.copyWith(
@@ -59,7 +59,7 @@ class HomeTab extends StatelessWidget {
             ),
           ),
 
-          SizedBox(height: size.height * 0.04),
+          SizedBox(height: height * 0.04),
 
           // Quick Actions
           Text(
@@ -68,7 +68,7 @@ class HomeTab extends StatelessWidget {
               fontWeight: FontWeight.w600,
             ),
           ),
-          SizedBox(height: size.height * 0.02),
+          SizedBox(height: height * 0.02),
           Row(
             children: [
               Expanded(
@@ -88,7 +88,7 @@ class HomeTab extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(height: size.height * 0.015),
+          SizedBox(height: height * 0.015),
           Row(
             children: [
               Expanded(
@@ -109,7 +109,7 @@ class HomeTab extends StatelessWidget {
             ],
           ),
 
-          SizedBox(height: size.height * 0.04),
+          SizedBox(height: height * 0.04),
 
           // Popular Destinations
           Text(
@@ -118,7 +118,7 @@ class HomeTab extends StatelessWidget {
               fontWeight: FontWeight.w600,
             ),
           ),
-          SizedBox(height: size.height * 0.02),
+          SizedBox(height: height * 0.02),
           SizedBox(
             height: 200,
             child: ListView.builder(
@@ -130,7 +130,7 @@ class HomeTab extends StatelessWidget {
             ),
           ),
 
-          SizedBox(height: size.height * 0.03),
+          SizedBox(height: height * 0.03),
         ],
       ),
     );

@@ -150,6 +150,7 @@ App Launch
 ```
 ┌─────────────────────────────────────────────────────────────┐
 │ TRAVELER DRAWER                                             │
+│ Widget: DrawerManager                                       │
 │ Items from DrawerDefinitions.travelerItems:                 │
 │                                                             │
 │ 📱 Profile        → ProfileScreen                           │
@@ -162,7 +163,7 @@ App Launch
 │                                                             │
 │ ────────────────────────────────────────────────────────   │
 │                                                             │
-│ 🏢 BECOME A PARTNER → Partner Entry Screen                  │
+│ 🏢 BECOME A PARTNER → PartnerEntryScreen                   │
 └─────────────────────────────────────────────────────────────┘
 ```
 
@@ -243,6 +244,8 @@ TRAVELER DASHBOARD
     │
     │   Hotel Manager Drawer Menu:
     │   ┌───────────────────────────────────────────────────┐
+    │   │ Widget: DrawerManager (role: 'hotel_manager')      │
+    │   │                                                    │
     │   │ 🏠 Dashboard      → PartnerWorkspaceScreen        │
     │   │ 📝 List Your Hotel → HotelListScreen              │
     │   │ 📦 Packages        → HotelPackagesScreen          │
@@ -271,31 +274,33 @@ TRAVELER DASHBOARD
                     │
                     ├─→ CREATE TOUR
                     │   Class: TourCreateScreen
-                    │   File: lib/features/tour_operator/presentation/screens/tour_create_screen.dart
+                    │   File: lib/features/tour_operator/tour_create_screen.dart
                     │   Status: Placeholder
                     │
                     ├─→ TOUR PACKAGES
                     │   Class: TourPackagesScreen
-                    │   File: lib/features/tour_operator/presentation/screens/tour_packages_screen.dart
+                    │   File: lib/features/tour_operator/tour_packages_screen.dart
                     │   Status: Placeholder
                     │
                     ├─→ TOUR CALENDAR
                     │   Class: TourCalendarScreen
-                    │   File: lib/features/tour_operator/presentation/screens/tour_calendar_screen.dart
+                    │   File: lib/features/tour_operator/tour_calendar_screen.dart
                     │   Status: Placeholder
                     │
                     ├─→ TOUR BOOKINGS
                     │   Class: TourBookingsScreen
-                    │   File: lib/features/tour_operator/presentation/screens/tour_bookings_screen.dart
+                    │   File: lib/features/tour_operator/tour_bookings_screen.dart
                     │   Status: Placeholder
                     │
                     └─→ TOUR VERIFICATION
                         Class: TourVerificationScreen
-                        File: lib/features/tour_operator/presentation/screens/tour_verification_screen.dart
+                        File: lib/features/tour_operator/tour_verification_screen.dart
                         Status: Placeholder
         
         Tour Operator Drawer Menu:
         ┌───────────────────────────────────────────────────┐
+        │ Widget: DrawerManager (role: 'tour_operator')      │
+        │                                                    │
         │ 🏠 Dashboard       → PartnerWorkspaceScreen       │
         │ ➕ Create Tour      → TourCreateScreen             │
         │ 📦 Packages         → TourPackagesScreen           │
@@ -342,8 +347,17 @@ TRAVELER DASHBOARD
 
 ### Controller Management
 - Controllers initialized in `initState()` or `onInit()` methods
-- PartnerDashboardController uses mock data for UI development
+- **PartnerDashboardController** - Manages partner workspace data (uses mock data)
+- **AppPreferencesController** - Manages app preferences and settings
+- **ThemeController** - Manages theme switching
+- **InternetConnectionController** - Monitors internet connectivity
 - Controllers tagged by role for separate state management
+
+### Model Classes
+- **PartnerRole** (enum) - Defines hotelManager and tourOperator roles
+- **PartnerDashboardData** - Mock data structure for partner workspace
+- **PartnerMetric** - Metric display data
+- **PartnerQuickAction** - Quick action card data
 
 ### Drawer System
 - `DrawerManager` widget handles all drawer rendering
@@ -386,12 +400,20 @@ lib/
 │   ├── onboarding/        # OnboardingScreen + animated suitcases
 │   ├── authentication/    # Auth flow screens
 │   │   └── flow/          # AuthWelcomeScreen, EmailEntryScreen, OtpVerificationScreen, SetupNameScreen, SetupLocationScreen
+│   │       └── widgets/    # AuthHeader widget
 │   ├── home/              # MainNavigation + 4 tabs (HomeTab, HotelsTab, ToursTab, MessagesTab)
+│   │   ├── screens/        # Tab screens
+│   │   └── widgets/        # AppDrawer widget
 │   ├── profile/           # ProfileScreen + widgets
-│   ├── partner/           # PartnerEntryScreen, PartnerWorkspaceScreen + models
-│   ├── hotel_manager/     # HotelListScreen, Step1PropertyTypeScreen, HotelPackagesScreen, HotelVerificationScreen
+│   │   └── widgets/        # ProfileHeaderCard, ContactInfoCard, PaymentMethodsCard, SectionCard
+│   ├── partner/           # PartnerEntryScreen, PartnerWorkspaceScreen
+│   │   ├── models/        # PartnerRole, PartnerDashboardData
+│   │   ├── presentation/  # PartnerDashboardController
+│   │   └── utils/         # PartnerBranding utilities
+│   ├── hotel_manager/     # Hotel manager screens
+│   │   └── presentation/  # Screens, widgets, theme, constants
 │   ├── tour_operator/     # TourCreateScreen, TourPackagesScreen, TourCalendarScreen, TourBookingsScreen, TourVerificationScreen
-│   └── drawer/            # DrawerManager, DrawerDefinitions
+│   └── drawer/            # DrawerManager, DrawerDefinitions, DrawerItem, DrawerHeader, DrawerMenu, DrawerTheme
 │
 ├── widgets/               # Shared UI components
 │   ├── animations/        # LoopingIcon base
@@ -501,6 +523,66 @@ lib/
                    │
                    └─── Drawer → [Become Partner] ──(cycle)──────────────────────────────┘
 ```
+
+---
+
+## 📋 Complete Screen Class Reference
+
+### Authentication Flow
+- `SplashScreen` - Initial splash screen with animations (4 seconds)
+- `OnboardingScreen` - Onboarding with animated suitcases
+- `AuthWelcomeScreen` - Welcome screen with social login options
+- `EmailEntryScreen` - Email input screen
+- `OtpVerificationScreen` - OTP verification screen (6-digit)
+- `SetupNameScreen` - Name setup screen
+- `SetupLocationScreen` - Location setup screen
+
+### Main Navigation & Tabs
+- `MainNavigation` - Main navigation with bottom tabs and drawer
+- `HomeTab` - Home tab with quick actions and destinations
+- `HotelsTab` - Hotels listing tab
+- `ToursTab` - Tours listing tab
+- `MessagesTab` - Messages/conversations tab
+
+### Profile & Settings
+- `ProfileScreen` - User profile screen with edit mode
+
+### Partner Flow
+- `PartnerEntryScreen` - Partner role selection screen
+- `PartnerWorkspaceScreen` - Partner workspace dashboard (shared for both roles)
+
+### Hotel Manager Screens
+- `HotelListScreen` - Hotel listing overview with step cards
+- `Step1PropertyTypeScreen` - Property type selection step
+- `HotelPackagesScreen` - Hotel packages management (placeholder)
+- `HotelVerificationScreen` - Hotel verification (placeholder)
+
+### Tour Operator Screens
+- `TourCreateScreen` - Create new tour screen (placeholder)
+- `TourPackagesScreen` - Tour packages management (placeholder)
+- `TourCalendarScreen` - Tour calendar (placeholder)
+- `TourBookingsScreen` - Tour bookings management (placeholder)
+- `TourVerificationScreen` - Tour verification (placeholder)
+
+### Drawer Components
+- `DrawerManager` - Main drawer widget that handles all drawer types
+- `DrawerDefinitions` - Drawer menu definitions and items
+- `DrawerItem` - Drawer menu item model
+- `DrawerHeader` - Drawer header widget
+- `DrawerMenu` - Drawer menu rendering
+
+### Controllers
+- `PartnerDashboardController` - Manages partner workspace data (uses mock data)
+- `AppPreferencesController` - Manages app preferences and settings
+- `ThemeController` - Manages theme switching
+- `InternetConnectionController` - Monitors internet connectivity
+
+### Models
+- `PartnerRole` (enum) - Defines hotelManager and tourOperator roles
+- `PartnerDashboardData` - Mock data structure for partner workspace
+- `PartnerMetric` - Metric display data
+- `PartnerQuickAction` - Quick action card data
+- `ProfileData` - Profile data structure
 
 ---
 

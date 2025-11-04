@@ -376,16 +376,13 @@ class _ProfileScreenState extends State<ProfileScreen>
       ),
       body: LayoutBuilder(
         builder: (context, constraints) {
+          final size = MediaQuery.of(context).size;
+          final double width = size.width;
           return Center(
             child: ConstrainedBox(
               constraints: const BoxConstraints(maxWidth: 560),
               child: Padding(
-                padding: EdgeInsets.symmetric(
-                  horizontal: (MediaQuery.of(context).size.width * 0.08).clamp(
-                    16.0,
-                    28.0,
-                  ),
-                ),
+                padding: EdgeInsets.symmetric(horizontal: width * 0.08),
                 child: SingleChildScrollView(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -616,10 +613,3 @@ class _PhoneVerificationScreenState extends State<_PhoneVerificationScreen> {
     );
   }
 }
-
-// Security settings removed (OTP login only).
-
-// Widgets extracted to separate files under lib/features/profile/widgets/
-// - ProfileHeaderCard
-// - ContactInfoCard
-// - PaymentMethodsCard

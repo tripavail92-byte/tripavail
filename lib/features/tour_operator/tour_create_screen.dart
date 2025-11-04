@@ -10,9 +10,9 @@ class TourCreateScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final name = TextEditingController();
     final days = TextEditingController();
-    final screenSize = MediaQuery.of(context).size;
-    final width = screenSize.width;
-    final height = screenSize.height;
+    final size = MediaQuery.of(context).size;
+    final double width = size.width;
+    final double height = size.height;
     return Scaffold(
       appBar: const PrimaryAppBar(
         title: 'Create New Tour',
@@ -20,9 +20,7 @@ class TourCreateScreen extends StatelessWidget {
       ),
       body: SafeArea(
         child: Padding(
-        padding: EdgeInsets.symmetric(
-          horizontal: (width * 0.08).clamp(16.0, 28.0),
-        ),
+        padding: EdgeInsets.symmetric(horizontal: width * 0.08),
         child: Column(
           children: [
             PrimaryTextField(controller: name, label: 'Tour Name'),

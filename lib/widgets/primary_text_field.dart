@@ -174,7 +174,7 @@ class PasswordTextField extends StatefulWidget {
     this.maxLines = 1,
     this.focusNode,
     this.mandatory = false,
-    this.readOnly = true,
+    this.readOnly = false,
     this.onChanged,
     this.maxLength,
     this.onTap,

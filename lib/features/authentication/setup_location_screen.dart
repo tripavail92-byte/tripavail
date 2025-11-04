@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:tripavail/features/home/main_navigation.dart';
+import 'package:tripavail/features/home/bottom_nav_bar.dart';
 import 'package:tripavail/utils/app_labels.dart';
 import 'package:tripavail/utils/app_text_styles.dart';
 import 'package:tripavail/utils/location_service.dart';
 import 'package:tripavail/utils/profile_storage.dart';
 import 'package:tripavail/widgets/primary_button.dart';
-
 
 class SetupLocationScreen extends StatefulWidget {
   const SetupLocationScreen({super.key});
@@ -40,28 +39,24 @@ class _SetupLocationScreenState extends State<SetupLocationScreen> {
       label: result.formatted,
     );
     if (!mounted) return;
-    Get.offAll(() => const MainNavigation());
+    Get.offAll(() => const BottomNavBar());
   }
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final screenSize = MediaQuery.of(context).size;
-    final width = screenSize.width;
-    final height = screenSize.height;
+    final size = MediaQuery.of(context).size;
+    final double width = size.width;
+    final double height = size.height;
     return Scaffold(
       body: SafeArea(
         child: LayoutBuilder(
           builder: (context, constraints) {
             return Center(
               child: ConstrainedBox(
-                constraints: const BoxConstraints(
-                  maxWidth: 560,
-                ),
+                constraints: const BoxConstraints(maxWidth: 560),
                 child: Padding(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: (width * 0.08).clamp(16.0, 28.0),
-                  ),
+                  padding: EdgeInsets.symmetric(horizontal: width * 0.08),
                   child: SingleChildScrollView(
                     child: ConstrainedBox(
                       constraints: BoxConstraints(
@@ -109,7 +104,7 @@ class _SetupLocationScreenState extends State<SetupLocationScreen> {
                             SizedBox(height: height * 0.015),
                             TextButton(
                               onPressed: () =>
-                                  Get.offAll(() => const MainNavigation()),
+                                  Get.offAll(() => const BottomNavBar()),
                               child: Text(AppLabels.skipForNow),
                             ),
                             SizedBox(height: height * 0.01),
