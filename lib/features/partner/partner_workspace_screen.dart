@@ -11,11 +11,11 @@ import 'package:tripavail/features/home/main_navigation.dart';
 import 'package:tripavail/features/hotel_manager/presentation/screens/hotel_list_screen.dart';
 import 'package:tripavail/features/hotel_manager/presentation/screens/hotel_packages_screen.dart';
 import 'package:tripavail/features/hotel_manager/presentation/screens/hotel_verification_screen.dart';
-import 'package:tripavail/features/tour_operator/presentation/screens/tour_bookings_screen.dart';
-import 'package:tripavail/features/tour_operator/presentation/screens/tour_calendar_screen.dart';
-import 'package:tripavail/features/tour_operator/presentation/screens/tour_create_screen.dart';
-import 'package:tripavail/features/tour_operator/presentation/screens/tour_packages_screen.dart';
-import 'package:tripavail/features/tour_operator/presentation/screens/tour_verification_screen.dart';
+import 'package:tripavail/features/tour_operator/tour_bookings_screen.dart';
+import 'package:tripavail/features/tour_operator/tour_calendar_screen.dart';
+import 'package:tripavail/features/tour_operator/tour_create_screen.dart';
+import 'package:tripavail/features/tour_operator/tour_packages_screen.dart';
+import 'package:tripavail/features/tour_operator/tour_verification_screen.dart';
 import 'package:tripavail/utils/app_text_styles.dart';
 
 class PartnerWorkspaceScreen extends StatefulWidget {

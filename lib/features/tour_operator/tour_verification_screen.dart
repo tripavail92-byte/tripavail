@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:tripavail/widgets/primary_appbar.dart';
 import 'package:tripavail/utils/app_text_styles.dart';
+import 'package:tripavail/widgets/primary_appbar.dart';
 
 class TourVerificationScreen extends StatelessWidget {
   const TourVerificationScreen({super.key});
@@ -16,17 +16,17 @@ class TourVerificationScreen extends StatelessWidget {
       ),
       body: SafeArea(
         child: Padding(
-        padding: EdgeInsets.symmetric(
-          horizontal: (width * 0.08).clamp(16.0, 28.0),
-        ),
-        child: ListView(
-          children: const [
-            _StepTile(title: 'Business Registration', status: 'Uploaded'),
-            _StepTile(title: 'Insurance Proof', status: 'Pending'),
-            _StepTile(title: 'Guide Licenses', status: 'Verified'),
-            _StepTile(title: 'Bank Info', status: 'Pending'),
-          ],
-        ),
+          padding: EdgeInsets.symmetric(
+            horizontal: (width * 0.08).clamp(16.0, 28.0),
+          ),
+          child: ListView(
+            children: const [
+              _StepTile(title: 'Business Registration', status: 'Uploaded'),
+              _StepTile(title: 'Insurance Proof', status: 'Pending'),
+              _StepTile(title: 'Guide Licenses', status: 'Verified'),
+              _StepTile(title: 'Bank Info', status: 'Pending'),
+            ],
+          ),
         ),
       ),
     );

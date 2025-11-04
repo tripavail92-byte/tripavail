@@ -8,9 +8,9 @@ App Launch
     ▼
 ┌─────────────────────────────────────────────────────────────┐
 │ 1. SPLASH SCREEN                                            │
-│    Route: /splash                                            │
-│    File: lib/features/splash_screen/splash_screen.dart       │
-│    Duration: ~4 seconds                                      │
+│    Class: SplashScreen                                       │
+│    File: lib/features/splash_screen/splash_screen.dart      │
+│    Duration: 4 seconds                                       │
 │                                                              │
 │    Features:                                                 │
 │    • Animated logo with elastic bounce                       │
@@ -18,13 +18,13 @@ App Launch
 │    • Particle effects and glow animations                    │
 │    • Brand name "TripAvail"                                  │
 │                                                              │
-│    Navigation: → /onboarding                                 │
+│    Navigation: → OnboardingScreen                            │
 └─────────────────────────────────────────────────────────────┘
     │
     ▼
 ┌─────────────────────────────────────────────────────────────┐
 │ 2. ONBOARDING SCREEN                                        │
-│    Route: /onboarding                                        │
+│    Class: OnboardingScreen                                   │
 │    File: lib/features/onboarding/onboarding_screen.dart      │
 │                                                              │
 │    Features:                                                 │
@@ -33,76 +33,76 @@ App Launch
 │    • "Get Started" / "Next" button                          │
 │                                                              │
 │    Actions:                                                  │
-│    • Skip → Saves `hasOnboarded: true` → /auth/welcome      │
-│    • Next → Saves `hasOnboarded: true` → /auth/welcome      │
+│    • Skip → Saves `hasOnboarded: true` → AuthWelcomeScreen │
+│    • Next → Saves `hasOnboarded: true` → AuthWelcomeScreen │
 └─────────────────────────────────────────────────────────────┘
     │
     ▼
 ┌─────────────────────────────────────────────────────────────┐
 │ 3. AUTH WELCOME SCREEN                                      │
-│    Route: /auth/welcome                                      │
-│    File: lib/features/authentication/auth_welcome_screen.dart│
+│    Class: AuthWelcomeScreen                                  │
+│    File: lib/features/authentication/flow/auth_welcome_screen.dart│
 │                                                              │
 │    Features:                                                 │
 │    • Welcome message                                         │
-│    • "Sign In" button → /auth/email                          │
-│    • "Create Account" button → /auth/email                   │
+│    • Social login buttons (Google, Apple, Email)            │
 │                                                              │
-│    Navigation: → /auth/email                                 │
+│    Navigation: → EmailEntryScreen                            │
 └─────────────────────────────────────────────────────────────┘
     │
     ▼
 ┌─────────────────────────────────────────────────────────────┐
 │ 4. EMAIL ENTRY SCREEN                                       │
-│    Route: /auth/email                                        │
-│    File: lib/features/authentication/email_entry_screen.dart │
+│    Class: EmailEntryScreen                                   │
+│    File: lib/features/authentication/flow/email_entry_screen.dart │
 │                                                              │
 │    Features:                                                 │
 │    • Email input field                                       │
 │    • Continue button                                         │
 │                                                              │
-│    Navigation: → /auth/otp (with email argument)            │
+│    Navigation: → OtpVerificationScreen (with email argument)│
 └─────────────────────────────────────────────────────────────┘
     │
     ▼
 ┌─────────────────────────────────────────────────────────────┐
 │ 5. OTP VERIFICATION SCREEN                                  │
-│    Route: /auth/otp                                          │
-│    File: lib/features/authentication/otp_screen.dart         │
+│    Class: OtpVerificationScreen                              │
+│    File: lib/features/authentication/flow/otp_screen.dart    │
 │                                                              │
 │    Features:                                                 │
 │    • 6-digit OTP input                                       │
 │    • Resend code button                                      │
 │    • Verify button                                           │
 │                                                              │
-│    Navigation: → /auth/setup/name                           │
+│    Navigation: → SetupNameScreen                            │
 └─────────────────────────────────────────────────────────────┘
     │
     ▼
 ┌─────────────────────────────────────────────────────────────┐
 │ 6. SETUP NAME SCREEN                                        │
-│    Route: /auth/setup/name                                   │
-│    File: lib/features/authentication/setup_name_screen.dart  │
+│    Class: SetupNameScreen                                    │
+│    File: lib/features/authentication/flow/setup_name_screen.dart │
 │                                                              │
 │    Features:                                                 │
 │    • Full name input                                         │
 │    • Continue button                                         │
+│    • Skip button                                             │
 │                                                              │
-│    Navigation: → /auth/setup/location                       │
+│    Navigation: → SetupLocationScreen                        │
 └─────────────────────────────────────────────────────────────┘
     │
     ▼
 ┌─────────────────────────────────────────────────────────────┐
 │ 7. SETUP LOCATION SCREEN                                    │
-│    Route: /auth/setup/location                               │
-│    File: lib/features/authentication/setup_location_screen   │
+│    Class: SetupLocationScreen                                │
+│    File: lib/features/authentication/flow/setup_location_screen.dart │
 │                                                              │
 │    Features:                                                 │
 │    • Location picker (Geolocator + Geocoding)                │
 │    • Current location button                                 │
-│    • Continue button                                         │
+│    • Skip button                                             │
 │                                                              │
-│    Navigation: → /main (Traveler Dashboard)                 │
+│    Navigation: → MainNavigation (Traveler Dashboard)        │
 └─────────────────────────────────────────────────────────────┘
 ```
 
@@ -113,7 +113,7 @@ App Launch
 ```
 ┌─────────────────────────────────────────────────────────────┐
 │ MAIN NAVIGATION                                             │
-│ Route: /main                                                │
+│ Class: MainNavigation                                       │
 │ File: lib/features/home/main_navigation.dart                │
 │                                                             │
 │ Features:                                                   │
@@ -123,21 +123,25 @@ App Launch
 └─────────────────────────────────────────────────────────────┘
     │
     ├─→ HOME TAB
-    │   └─> File: lib/features/home/screens/home_tab.dart
+    │   └─> Class: HomeTab
+    │       File: lib/features/home/screens/home_tab.dart
     │       • Welcome banner with gradient
     │       • Quick action cards (Explore, Flights, Car Rental, Restaurants)
     │       • Popular destinations horizontal scroll
     │
     ├─→ HOTELS TAB
-    │   └─> File: lib/features/home/screens/hotels_tab.dart
+    │   └─> Class: HotelsTab
+    │       File: lib/features/home/screens/hotels_tab.dart
     │       • Hotel listings grid
     │
     ├─→ TOURS TAB
-    │   └─> File: lib/features/home/screens/tours_tab.dart
+    │   └─> Class: ToursTab
+    │       File: lib/features/home/screens/tours_tab.dart
     │       • Tour packages grid
     │
     └─→ MESSAGES TAB
-        └─> File: lib/features/home/screens/messages_tab.dart
+        └─> Class: MessagesTab
+            File: lib/features/home/screens/messages_tab.dart
             • Conversations list
 ```
 
@@ -174,7 +178,7 @@ TRAVELER DASHBOARD
     ▼
 ┌─────────────────────────────────────────────────────────────┐
 │ PARTNER ENTRY SCREEN                                        │
-│ Route: /partner/entry                                       │
+│ Class: PartnerEntryScreen                                   │
 │ File: lib/features/partner/partner_entry_screen.dart        │
 │                                                             │
 │ Features:                                                   │
@@ -183,8 +187,8 @@ TRAVELER DASHBOARD
 │   2. Tour Operator (coral gradient)                         │
 │                                                             │
 │ Navigation:                                                 │
-│ • Hotel Manager → /partner/hotel                            │
-│ • Tour Operator → /partner/tour                             │
+│ • Hotel Manager → PartnerWorkspaceScreen(role: hotelManager)│
+│ • Tour Operator → PartnerWorkspaceScreen(role: tourOperator)│
 └─────────────────────────────────────────────────────────────┘
     │
     ├─→ HOTEL MANAGER WORKSPACE
@@ -192,8 +196,8 @@ TRAVELER DASHBOARD
     │   ▼
     │   ┌───────────────────────────────────────────────────┐
     │   │ HOTEL MANAGER WORKSPACE                           │
-    │   │ Route: /partner/hotel                             │
-    │   │ File: lib/features/partner/partner_workspace_scr..│
+    │   │ Class: PartnerWorkspaceScreen                      │
+    │   │ File: lib/features/partner/partner_workspace_screen.dart│
     │   │                                                    │
     │   │ Features:                                          │
     │   │ • Hero card with metrics (gradient)                │
@@ -203,9 +207,8 @@ TRAVELER DASHBOARD
     │   └───────────────────────────────────────────────────┘
     │               │
     │               ├─→ LIST YOUR HOTEL (Overview)
-    │               │   Route: /partner/hotel/list
-    │               │   File: lib/features/hotel_manager/...
-    │               │         .../hotel_list_screen.dart
+    │               │   Class: HotelListScreen
+    │               │   File: lib/features/hotel_manager/presentation/screens/hotel_list_screen.dart
     │               │   
     │               │   Features:
     │               │   • Animated hotel hero icon (colorful)
@@ -217,40 +220,37 @@ TRAVELER DASHBOARD
     │               │     5. Pricing ($→€→coupon)
     │               │   • "List Your Hotel" CTA button
     │               │
-    │               │   Navigation: → /partner/hotel/listing/step1
+    │               │   Navigation: → Step1PropertyTypeScreen
     │               │
     │               ├─→ STEP 1: PROPERTY TYPE
-    │               │   Route: /partner/hotel/listing/step1
-    │               │   File: lib/features/hotel_manager/...
-    │               │         .../step1_property_type_screen.dart
+    │               │   Class: Step1PropertyTypeScreen
+    │               │   File: lib/features/hotel_manager/presentation/screens/hotel_listing_flow/step1_property_type_screen.dart
     │               │   
     │               │   Features:
     │               │   • Animated property type icon
     │               │   • Grid of property type cards
-    │               │   • Continue button (placeholder)
+    │               │   • Continue button
     │               │
     │               ├─→ HOTEL PACKAGES
-    │               │   Route: /partner/hotel/packages
-    │               │   File: lib/features/hotel_manager/...
-    │               │         .../hotel_packages_screen.dart
+    │               │   Class: HotelPackagesScreen
+    │               │   File: lib/features/hotel_manager/presentation/screens/hotel_packages_screen.dart
     │               │   Status: Placeholder
     │               │
     │               └─→ HOTEL VERIFICATION
-    │                   Route: /partner/hotel/verification
-    │                   File: lib/features/hotel_manager/...
-    │                         .../hotel_verification_screen.dart
+    │                   Class: HotelVerificationScreen
+    │                   File: lib/features/hotel_manager/presentation/screens/hotel_verification_screen.dart
     │                   Status: Placeholder
     │
     │   Hotel Manager Drawer Menu:
     │   ┌───────────────────────────────────────────────────┐
-    │   │ 🏠 Dashboard      → /partner/hotel                │
-    │   │ 📝 List Your Hotel → /partner/hotel/list          │
-    │   │ 📦 Packages        → /partner/hotel/packages      │
-    │   │ ✅ Verification    → /partner/hotel/verification  │
+    │   │ 🏠 Dashboard      → PartnerWorkspaceScreen        │
+    │   │ 📝 List Your Hotel → HotelListScreen              │
+    │   │ 📦 Packages        → HotelPackagesScreen          │
+    │   │ ✅ Verification    → HotelVerificationScreen      │
     │   │                                                    │
     │   │ ────────────────────────────────────────────────   │
     │   │                                                    │
-    │   │ 🧳 SWITCH TO TRAVELER → /main                     │
+    │   │ 🧳 SWITCH TO TRAVELER → MainNavigation            │
     │   └───────────────────────────────────────────────────┘
     │
     │
@@ -259,8 +259,8 @@ TRAVELER DASHBOARD
         ▼
         ┌───────────────────────────────────────────────────┐
         │ TOUR OPERATOR WORKSPACE                           │
-        │ Route: /partner/tour                              │
-        │ File: lib/features/partner/partner_workspace_scr..│
+        │ Class: PartnerWorkspaceScreen                      │
+        │ File: lib/features/partner/partner_workspace_screen.dart│
         │                                                    │
         │ Features:                                          │
         │ • Hero card with metrics (coral gradient)          │
@@ -270,47 +270,42 @@ TRAVELER DASHBOARD
         └───────────────────────────────────────────────────┘
                     │
                     ├─→ CREATE TOUR
-                    │   Route: /partner/tour/create
-                    │   File: lib/features/tour_operator/...
-                    │         .../tour_create_screen.dart
+                    │   Class: TourCreateScreen
+                    │   File: lib/features/tour_operator/presentation/screens/tour_create_screen.dart
                     │   Status: Placeholder
                     │
                     ├─→ TOUR PACKAGES
-                    │   Route: /partner/tour/packages
-                    │   File: lib/features/tour_operator/...
-                    │         .../tour_packages_screen.dart
+                    │   Class: TourPackagesScreen
+                    │   File: lib/features/tour_operator/presentation/screens/tour_packages_screen.dart
                     │   Status: Placeholder
                     │
                     ├─→ TOUR CALENDAR
-                    │   Route: /partner/tour/calendar
-                    │   File: lib/features/tour_operator/...
-                    │         .../tour_calendar_screen.dart
+                    │   Class: TourCalendarScreen
+                    │   File: lib/features/tour_operator/presentation/screens/tour_calendar_screen.dart
                     │   Status: Placeholder
                     │
                     ├─→ TOUR BOOKINGS
-                    │   Route: /partner/tour/bookings
-                    │   File: lib/features/tour_operator/...
-                    │         .../tour_bookings_screen.dart
+                    │   Class: TourBookingsScreen
+                    │   File: lib/features/tour_operator/presentation/screens/tour_bookings_screen.dart
                     │   Status: Placeholder
                     │
                     └─→ TOUR VERIFICATION
-                        Route: /partner/tour/verification
-                        File: lib/features/tour_operator/...
-                              .../tour_verification_screen.dart
+                        Class: TourVerificationScreen
+                        File: lib/features/tour_operator/presentation/screens/tour_verification_screen.dart
                         Status: Placeholder
         
         Tour Operator Drawer Menu:
         ┌───────────────────────────────────────────────────┐
-        │ 🏠 Dashboard       → /partner/tour                │
-        │ ➕ Create Tour      → /partner/tour/create         │
-        │ 📦 Packages         → /partner/tour/packages       │
-        │ 📅 Calendar         → /partner/tour/calendar       │
-        │ 📋 Bookings         → /partner/tour/bookings       │
-        │ ✅ Verification     → /partner/tour/verification   │
+        │ 🏠 Dashboard       → PartnerWorkspaceScreen       │
+        │ ➕ Create Tour      → TourCreateScreen             │
+        │ 📦 Packages         → TourPackagesScreen           │
+        │ 📅 Calendar         → TourCalendarScreen           │
+        │ 📋 Bookings         → TourBookingsScreen           │
+        │ ✅ Verification     → TourVerificationScreen       │
         │                                                    │
         │ ────────────────────────────────────────────────   │
         │                                                    │
-        │ 🧳 SWITCH TO TRAVELER → /main                     │
+        │ 🧳 SWITCH TO TRAVELER → MainNavigation            │
         │ └───────────────────────────────────────────────────┘
 ```
 
@@ -321,7 +316,7 @@ TRAVELER DASHBOARD
 ```
 ┌─────────────────────────────────────────────────────────────┐
 │ PROFILE SCREEN                                              │
-│ Route: (via drawer navigation)                              │
+│ Class: ProfileScreen                                        │
 │ File: lib/features/profile/profile_screen.dart              │
 │                                                             │
 │ Features:                                                   │
@@ -338,63 +333,17 @@ TRAVELER DASHBOARD
 
 ---
 
-## 🎨 Navigation Patterns
-
-### Route Constants
-
-**Traveler Routes** (`lib/modules/traveler/traveler_routes.dart`):
-- `/splash` - Splash screen
-- `/onboarding` - Onboarding
-- `/main` - Main navigation (traveler dashboard)
-- `/partner/entry` - Partner entry selection
-
-**Auth Routes** (`lib/modules/auth/auth_routes.dart`):
-- `/auth/welcome` - Welcome screen
-- `/auth/email` - Email entry
-- `/auth/otp` - OTP verification
-- `/auth/setup/name` - Name setup
-- `/auth/setup/location` - Location setup
-
-**Partner Routes** (`lib/modules/partner/partner_routes.dart`):
-- `/partner/hotel` - Hotel manager workspace
-- `/partner/tour` - Tour operator workspace
-
-**Hotel Manager Routes** (`lib/modules/hotel_manager/hotel_manager_routes.dart`):
-- `/partner/hotel/list` - List overview
-- `/partner/hotel/packages` - Packages
-- `/partner/hotel/verification` - Verification
-- `/partner/hotel/listing/step1` - Property type
-- `/partner/hotel/listing/step2` - Location (coming)
-- `/partner/hotel/listing/step3` - Amenities (coming)
-- `/partner/hotel/listing/step4` - Photos (coming)
-- `/partner/hotel/listing/step5` - Pricing (coming)
-
-**Tour Operator Routes** (`lib/modules/tour_operator/tour_operator_routes.dart`):
-- `/partner/tour/create` - Create tour
-- `/partner/tour/packages` - Packages
-- `/partner/tour/calendar` - Calendar
-- `/partner/tour/bookings` - Bookings
-- `/partner/tour/verification` - Verification
-
----
-
 ## 🔄 State Management & Navigation
 
 ### GetX Navigation
-- All navigation via `Get.toNamed()` or `Get.offAllNamed()`
-- Named routes registered through `ModuleRegistry`
-- Controllers registered via `Get.lazyPut()` with tags per role
+- All navigation via direct widget instantiation (`Get.to()`, `Get.offAll()`)
+- Controllers registered via `Get.put()` with tags per role
+- No named routes - direct widget navigation for simplicity
 
-### Module System
-```
-main.dart → ModuleRegistry.registerDefaults([
-  CoreModule(),      // Network, storage, logger
-  AuthModule(),      // Authentication routes
-  TravelerModule(),  // Traveler routes & main dashboard
-  HotelManagerModule(), // Hotel manager routes & DI
-  TourOperatorModule(), // Tour operator routes & DI
-])
-```
+### Controller Management
+- Controllers initialized in `initState()` or `onInit()` methods
+- PartnerDashboardController uses mock data for UI development
+- Controllers tagged by role for separate state management
 
 ### Drawer System
 - `DrawerManager` widget handles all drawer rendering
@@ -428,44 +377,36 @@ main.dart → ModuleRegistry.registerDefaults([
 
 ---
 
-## 📂 File Structure by Module
+## 📂 File Structure
 
 ```
 lib/
-├── modules/
-│   ├── core/              # Core dependencies
-│   │   ├── network/       # API client, Dio setup
-│   │   ├── storage/       # SharedPreferences wrapper
-│   │   └── logger/        # App logger
-│   ├── auth/              # Authentication module
-│   │   ├── auth_module.dart
-│   │   └── auth_routes.dart
-│   ├── traveler/          # Traveler module
-│   │   ├── traveler_module.dart
-│   │   └── traveler_routes.dart
-│   ├── partner/           # Partner routes
-│   │   └── partner_routes.dart
-│   ├── hotel_manager/     # Hotel manager module
-│   │   ├── hotel_manager_module.dart
-│   │   └── hotel_manager_routes.dart
-│   └── tour_operator/     # Tour operator module
-│       ├── tour_operator_module.dart
-│       └── tour_operator_routes.dart
-│
 ├── features/
-│   ├── splash_screen/     # Splash + animations
-│   ├── onboarding/        # Onboarding + animated suitcases
+│   ├── splash_screen/     # SplashScreen + animations
+│   ├── onboarding/        # OnboardingScreen + animated suitcases
 │   ├── authentication/    # Auth flow screens
-│   ├── home/              # Main navigation + 4 tabs
-│   ├── profile/           # Profile screen + cards
-│   ├── partner/           # Partner entry + workspace
-│   ├── hotel_manager/     # Hotel listing flow
-│   ├── tour_operator/     # Tour management screens
-│   └── drawer/            # Drawer system components
+│   │   └── flow/          # AuthWelcomeScreen, EmailEntryScreen, OtpVerificationScreen, SetupNameScreen, SetupLocationScreen
+│   ├── home/              # MainNavigation + 4 tabs (HomeTab, HotelsTab, ToursTab, MessagesTab)
+│   ├── profile/           # ProfileScreen + widgets
+│   ├── partner/           # PartnerEntryScreen, PartnerWorkspaceScreen + models
+│   ├── hotel_manager/     # HotelListScreen, Step1PropertyTypeScreen, HotelPackagesScreen, HotelVerificationScreen
+│   ├── tour_operator/     # TourCreateScreen, TourPackagesScreen, TourCalendarScreen, TourBookingsScreen, TourVerificationScreen
+│   └── drawer/            # DrawerManager, DrawerDefinitions
 │
-└── widgets/
-    ├── animations/        # LoopingIcon base
-    └── [shared widgets]   # Buttons, text fields, etc.
+├── widgets/               # Shared UI components
+│   ├── animations/        # LoopingIcon base
+│   ├── primary_button.dart
+│   ├── primary_text_field.dart
+│   └── [other widgets]
+│
+├── utils/                 # Utilities and helpers
+│   ├── theme/             # Theme configuration
+│   ├── app_labels.dart
+│   ├── app_text_styles.dart
+│   └── [other utilities]
+│
+└── common/                # Common controllers
+    └── controllers/        # AppPreferencesController, etc.
 ```
 
 ---
@@ -473,9 +414,10 @@ lib/
 ## 🚀 Quick Reference
 
 ### Navigation Commands
-- `Get.toNamed(route)` - Push new route
-- `Get.offAllNamed(route)` - Replace all routes
-- `Get.back()` - Pop current route
+- `Get.to(() => const Widget())` - Push new screen
+- `Get.offAll(() => const Widget())` - Replace all screens
+- `Get.back()` - Pop current screen
+- `Get.put(Controller())` - Register controller
 - `Get.find<T>(tag: name)` - Find controller by tag
 
 ### Key Screen Features
@@ -566,11 +508,12 @@ lib/
 
 1. **Strict role separation**: No role toggle within workspaces; dedicated workspaces per role
 2. **Reactive state**: GetX Obx + Rx for efficient updates
-3. **Modular routing**: Named routes via ModuleRegistry
-4. **Lazy loading**: Controllers registered with `Get.lazyPut` per role
-5. **Monochrome icons**: Step icons adapt to theme (light/dark)
-6. **Gradient branding**: Role-specific gradients (HM: purple→cyan, TO: coral)
-7. **Animated polish**: Custom painters for smooth looping animations
+3. **Direct widget navigation**: All navigation uses direct widget instantiation (no named routes)
+4. **UI-focused architecture**: Removed domain/data/repository layers; using mock data for UI development
+5. **Simple state management**: Controllers registered with `Get.put()` per role
+6. **Monochrome icons**: Step icons adapt to theme (light/dark)
+7. **Gradient branding**: Role-specific gradients (HM: purple→cyan, TO: coral)
+8. **Animated polish**: Custom painters for smooth looping animations
 
 ---
 
@@ -585,8 +528,8 @@ lib/
 ---
 
 **Last Updated:** January 2025  
-**Architecture:** Modular (Domain-Driven Design)  
+**Architecture:** UI-Focused (Cleaned & Simplified)  
 **State Management:** GetX  
-**Navigation:** Named routes via ModuleRegistry
+**Navigation:** Direct Widget Navigation (Get.to, Get.offAll)
 
 
