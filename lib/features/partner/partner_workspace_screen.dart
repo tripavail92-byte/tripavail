@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:tripavail/features/drawer/drawer_definitions.dart';
-import 'package:tripavail/features/drawer/drawer_item.dart';
-import 'package:tripavail/features/drawer/drawer_manager.dart';
+import 'package:tripavail/features/drawer/app_drawer.dart';
 import 'package:tripavail/features/home/bottom_nav_bar.dart';
 import 'package:tripavail/features/hotel_manager/presentation/screens/hotel_list_screen.dart';
 import 'package:tripavail/features/hotel_manager/presentation/screens/hotel_packages_screen.dart';
@@ -30,15 +28,11 @@ class PartnerWorkspaceScreen extends StatefulWidget {
 class _PartnerWorkspaceScreenState extends State<PartnerWorkspaceScreen> {
   late PartnerRole _activeRole;
   bool _drawerOpen = false;
-  String _selectedItemId = DrawerDefinitions.hotelManagerItems.first.id;
 
   @override
   void initState() {
     super.initState();
     _activeRole = widget.initialRole;
-    _selectedItemId = _activeRole == PartnerRole.hotelManager
-        ? DrawerDefinitions.hotelManagerItems.first.id
-        : DrawerDefinitions.tourOperatorItems.first.id;
 
     // Initialize controller with role
     if (!Get.isRegistered<PartnerDashboardController>(tag: _activeRole.name)) {
@@ -61,16 +55,15 @@ class _PartnerWorkspaceScreenState extends State<PartnerWorkspaceScreen> {
 
   List<DrawerItem> get _currentDrawerItems =>
       _activeRole == PartnerRole.hotelManager
-      ? DrawerDefinitions.hotelManagerItems
-      : DrawerDefinitions.tourOperatorItems;
+          ? DrawerData.hotelManagerItems
+          : DrawerData.tourOperatorItems;
 
   DrawerMeta get _currentMeta => _activeRole == PartnerRole.hotelManager
-      ? DrawerDefinitions.hotelManagerMeta
-      : DrawerDefinitions.tourOperatorMeta;
+      ? DrawerData.hotelManagerMeta
+      : DrawerData.tourOperatorMeta;
 
-  void _handleDrawerItem(String id) {
+  void _handleDrawerItem(String id, String screen) {
     setState(() {
-      _selectedItemId = id;
       _drawerOpen = false;
     });
 
@@ -233,18 +226,14 @@ class _PartnerWorkspaceScreenState extends State<PartnerWorkspaceScreen> {
             ),
           ),
         ),
-        DrawerManager(
+        AppDrawer(
           isOpen: _drawerOpen,
           onClose: () => _toggleDrawer(false),
-          role: _activeRole == PartnerRole.hotelManager
-              ? 'hotel_manager'
-              : 'tour_operator',
-          selectedItemId: _selectedItemId,
-          items: _currentDrawerItems,
           meta: _currentMeta,
-          onItemClick: (id, _) => _handleDrawerItem(id),
-          onBecomePartner: () {},
+          items: _currentDrawerItems,
+          onItemTap: _handleDrawerItem,
           onSwitchToTraveler: _switchToTraveler,
+          showPartnerButton: false,
         ),
       ],
     );

@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:tripavail/features/drawer/drawer_definitions.dart';
-import 'package:tripavail/features/drawer/drawer_manager.dart';
-import 'package:tripavail/features/partner/partner_entry_screen.dart';
-import 'package:tripavail/features/profile/profile_screen.dart';
+import 'package:tripavail/features/drawer/app_drawer.dart';
 
 import 'screens/home_tab.dart';
 import 'screens/hotels_tab.dart';
@@ -20,7 +16,6 @@ class BottomNavBar extends StatefulWidget {
 class _BottomNavBarState extends State<BottomNavBar> {
   int _currentIndex = 0;
   bool _drawerOpen = false;
-  String _selectedDrawerItem = DrawerDefinitions.travelerItems.first.id;
 
   final List<Widget> _screens = [
     const HomeTab(),
@@ -33,29 +28,6 @@ class _BottomNavBarState extends State<BottomNavBar> {
     setState(() {
       _drawerOpen = open;
     });
-  }
-
-  void _onDrawerItemTap(String itemId, String screen) {
-    setState(() {
-      _selectedDrawerItem = itemId;
-      _drawerOpen = false;
-    });
-
-    switch (itemId) {
-      case 'profile':
-        Get.to(() => const ProfileScreen());
-        break;
-      case 'bookings':
-      case 'favorites':
-      case 'wallet':
-      case 'settings':
-      case 'support':
-      case 'about':
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Navigate to $screen (coming soon)')),
-        );
-        break;
-    }
   }
 
   @override
@@ -130,20 +102,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
             ),
           ),
         ),
-        DrawerManager(
-          isOpen: _drawerOpen,
-          onClose: () => _toggleDrawer(false),
-          role: 'traveler',
-          selectedItemId: _selectedDrawerItem,
-          items: DrawerDefinitions.travelerItems,
-          meta: DrawerDefinitions.travelerMeta,
-          onItemClick: _onDrawerItemTap,
-          onBecomePartner: () {
-            _toggleDrawer(false);
-            Get.to(() => const PartnerEntryScreen());
-          },
-          onSwitchToTraveler: () => _toggleDrawer(false),
-        ),
+        AppDrawer(isOpen: _drawerOpen, onClose: () => _toggleDrawer(false)),
       ],
     );
   }
