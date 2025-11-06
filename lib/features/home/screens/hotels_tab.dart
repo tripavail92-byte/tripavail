@@ -6,7 +6,6 @@ class HotelsTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
     final size = MediaQuery.of(context).size;
     final double width = size.width;
     final double height = size.height;
@@ -20,12 +19,7 @@ class HotelsTab extends StatelessWidget {
           // Search Bar
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-            decoration: BoxDecoration(
-              color: theme.brightness == Brightness.dark
-                  ? const Color(0xFF2E2E2E)
-                  : Colors.grey[100],
-              borderRadius: BorderRadius.circular(12),
-            ),
+            decoration: BoxDecoration(borderRadius: BorderRadius.circular(12)),
             child: Row(
               children: [
                 Icon(Icons.search, color: Colors.grey[600]),

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tripavail/utils/app_text_styles.dart';
+import 'package:tripavail/utils/theme/constants/app_constants.dart';
+
 class MessagesTab extends StatelessWidget {
   const MessagesTab({super.key});
 
@@ -46,9 +48,6 @@ class _MessageCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final isDark = theme.brightness == Brightness.dark;
-
     final contacts = [
       'Hotel Manager',
       'Tour Guide',
@@ -75,15 +74,8 @@ class _MessageCard extends StatelessWidget {
       margin: const EdgeInsets.only(bottom: 12),
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: isDark
-            ? const Color(0xFF2E2E2E)
-            : Colors.white,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(
-          color: isDark
-              ? const Color(0xFF444444)
-              : const Color(0xFFE0E0E0),
-        ),
+        border: Border.all(color: AppColors.greyColor.withValues(alpha: 0.3)),
       ),
       child: Row(
         children: [
@@ -93,8 +85,8 @@ class _MessageCard extends StatelessWidget {
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 colors: [
-                  theme.primaryColor.withValues(alpha:0.3),
-                  theme.primaryColor.withValues(alpha:0.1),
+                  AppColors.primaryColor.withValues(alpha: 0.3),
+                  AppColors.primaryColor.withValues(alpha: 0.1),
                 ],
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
@@ -106,7 +98,7 @@ class _MessageCard extends StatelessWidget {
                 contacts[index][0],
                 style: AppTextStyle.bodyLarge.copyWith(
                   fontWeight: FontWeight.bold,
-                  color: theme.primaryColor,
+                  color: AppColors.primaryColor,
                 ),
               ),
             ),
@@ -117,22 +109,19 @@ class _MessageCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
-                  mainAxisAlignment:
-                      MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
                       contacts[index],
-                      style: AppTextStyle.bodyMedium
-                          .copyWith(
-                            fontWeight: FontWeight.w600,
-                          ),
+                      style: AppTextStyle.bodyMedium.copyWith(
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
                     Text(
                       '${index + 1}h ago',
-                      style: AppTextStyle.bodySmall
-                          .copyWith(
-                            color: Colors.grey[600],
-                          ),
+                      style: AppTextStyle.bodySmall.copyWith(
+                        color: AppColors.greyColor,
+                      ),
                     ),
                   ],
                 ),
@@ -154,7 +143,7 @@ class _MessageCard extends StatelessWidget {
               width: 8,
               height: 8,
               decoration: BoxDecoration(
-                color: theme.primaryColor,
+                color: AppColors.primaryColor,
                 shape: BoxShape.circle,
               ),
             ),

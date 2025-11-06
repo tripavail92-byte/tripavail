@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tripavail/utils/app_text_styles.dart';
+import 'package:tripavail/utils/theme/constants/app_constants.dart';
+
 class ToursTab extends StatelessWidget {
   const ToursTab({super.key});
 
@@ -46,17 +48,12 @@ class _TourCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final isDark = theme.brightness == Brightness.dark;
     final size = MediaQuery.of(context).size;
     final double height = size.height;
 
     final tourTypes = [
       {'icon': Icons.hiking, 'name': 'Mountain Hiking'},
-      {
-        'icon': Icons.beach_access,
-        'name': 'Beach Adventure',
-      },
+      {'icon': Icons.beach_access, 'name': 'Beach Adventure'},
       {'icon': Icons.museum, 'name': 'City Culture'},
       {'icon': Icons.landscape, 'name': 'Scenic Views'},
       {'icon': Icons.water, 'name': 'Water Sports'},
@@ -67,15 +64,8 @@ class _TourCard extends StatelessWidget {
       margin: const EdgeInsets.only(bottom: 16),
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: isDark
-            ? const Color(0xFF2E2E2E)
-            : Colors.white,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(
-          color: isDark
-              ? const Color(0xFF444444)
-              : const Color(0xFFE0E0E0),
-        ),
+        border: Border.all(color: AppColors.greyColor.withValues(alpha: 0.3)),
       ),
       child: Row(
         children: [
@@ -85,8 +75,8 @@ class _TourCard extends StatelessWidget {
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 colors: [
-                  theme.primaryColor.withValues(alpha:0.3),
-                  theme.primaryColor.withValues(alpha:0.1),
+                  AppColors.primaryColor.withValues(alpha: 0.3),
+                  AppColors.primaryColor.withValues(alpha: 0.1),
                 ],
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
@@ -96,7 +86,7 @@ class _TourCard extends StatelessWidget {
             child: Icon(
               tourTypes[index]['icon'] as IconData,
               size: 36,
-              color: theme.primaryColor,
+              color: AppColors.primaryColor,
             ),
           ),
           const SizedBox(width: 16),
@@ -119,21 +109,19 @@ class _TourCard extends StatelessWidget {
                 ),
                 SizedBox(height: height * 0.01),
                 Row(
-                  mainAxisAlignment:
-                      MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
                       '\$${(index + 2) * 100}',
-                      style: AppTextStyle.bodyLarge
-                          .copyWith(
-                            color: theme.primaryColor,
-                            fontWeight: FontWeight.bold,
-                          ),
+                      style: AppTextStyle.bodyLarge.copyWith(
+                        color: AppColors.primaryColor,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                     Icon(
                       Icons.arrow_forward_ios,
                       size: 16,
-                      color: Colors.grey[600],
+                      color: AppColors.greyColor,
                     ),
                   ],
                 ),

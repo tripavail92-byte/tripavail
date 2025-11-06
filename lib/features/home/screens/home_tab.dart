@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:tripavail/utils/app_text_styles.dart';
+import 'package:tripavail/utils/theme/constants/app_constants.dart';
+
 class HomeTab extends StatelessWidget {
   const HomeTab({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
     final size = MediaQuery.of(context).size;
     final double width = size.width;
     final double height = size.height;
@@ -24,8 +25,8 @@ class HomeTab extends StatelessWidget {
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 colors: [
-                  theme.primaryColor,
-                  theme.primaryColor.withValues(alpha: 0.8),
+                  AppColors.primaryColor,
+                  AppColors.primaryColor.withValues(alpha: 0.8),
                 ],
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
@@ -75,7 +76,7 @@ class HomeTab extends StatelessWidget {
                 child: _QuickActionCard(
                   icon: Icons.explore,
                   title: 'Explore',
-                  color: theme.primaryColor,
+                  color: AppColors.primaryColor,
                 ),
               ),
               const SizedBox(width: 12),
@@ -120,7 +121,7 @@ class HomeTab extends StatelessWidget {
           ),
           SizedBox(height: height * 0.02),
           SizedBox(
-            height: 200,
+            height: height * 0.2,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
               itemCount: 5,
