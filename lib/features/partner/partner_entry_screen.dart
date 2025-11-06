@@ -15,18 +15,13 @@ class PartnerEntryScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
     final size = MediaQuery.of(context).size;
     final double width = size.width;
     final double height = size.height;
     return Scaffold(
-      backgroundColor: theme.scaffoldBackgroundColor,
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: EdgeInsets.symmetric(
-            horizontal: width * 0.08,
-            vertical: 32,
-          ),
+          padding: EdgeInsets.symmetric(horizontal: width * 0.08, vertical: 32),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
@@ -40,9 +35,7 @@ class PartnerEntryScreen extends StatelessWidget {
               Text(
                 'Choose the workspace tailored to how you collaborate with TripAvail.',
                 style: AppTextStyle.bodyMedium.copyWith(
-                  color: theme.textTheme.bodyMedium?.color?.withValues(
-                    alpha: 0.75,
-                  ),
+                  color: AppColors.greyColor.withValues(alpha: 0.75),
                 ),
               ),
               SizedBox(height: height * 0.03),

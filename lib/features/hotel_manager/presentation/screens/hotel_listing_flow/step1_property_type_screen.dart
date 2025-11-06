@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:tripavail/features/hotel_manager/presentation/theme/hotel_manager_theme.dart';
 import 'package:tripavail/features/hotel_manager/presentation/widgets/property_type_icon.dart';
 import 'package:tripavail/utils/app_text_styles.dart';
+import 'package:tripavail/utils/theme/constants/app_constants.dart';
 import 'package:tripavail/widgets/primary_button.dart';
 
 class Step1PropertyTypeScreen extends StatefulWidget {
@@ -29,13 +30,7 @@ class _Step1PropertyTypeScreenState extends State<Step1PropertyTypeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-    final bgColor = isDark
-        ? HotelManagerTheme.backgroundDark
-        : HotelManagerTheme.backgroundLight;
-
     return Scaffold(
-      backgroundColor: bgColor,
       body: SafeArea(
         child: Column(
           children: [
@@ -55,20 +50,13 @@ class _Step1PropertyTypeScreenState extends State<Step1PropertyTypeScreen> {
                       children: [
                         Text(
                           'Step 1 of 5',
-                          style: AppTextStyle.bodySmall.copyWith(
-                            color: isDark
-                                ? HotelManagerTheme.textSecondaryDark
-                                : HotelManagerTheme.textSecondaryLight,
-                          ),
+                          style: AppTextStyle.bodySmall.copyWith(),
                         ),
                         const SizedBox(height: 4),
                         Text(
                           'Property Type',
                           style: AppTextStyle.titleLarge.copyWith(
                             fontWeight: FontWeight.bold,
-                            color: isDark
-                                ? Colors.white
-                                : HotelManagerTheme.textPrimaryLight,
                           ),
                         ),
                       ],
@@ -83,9 +71,7 @@ class _Step1PropertyTypeScreenState extends State<Step1PropertyTypeScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 24),
               child: LinearProgressIndicator(
                 value: 0.2,
-                backgroundColor: isDark
-                    ? Colors.white.withValues(alpha:0.1)
-                    : Colors.grey.shade200,
+                backgroundColor: AppColors.greyColor,
                 valueColor: const AlwaysStoppedAnimation<Color>(
                   Color(0xFF9D4EDD),
                 ),
@@ -105,9 +91,7 @@ class _Step1PropertyTypeScreenState extends State<Step1PropertyTypeScreen> {
                     Text(
                       'Select your property category',
                       style: AppTextStyle.bodyLarge.copyWith(
-                        color: isDark
-                            ? HotelManagerTheme.textSecondaryDark
-                            : HotelManagerTheme.textSecondaryLight,
+                        color: HotelManagerTheme.textSecondaryLight,
                       ),
                       textAlign: TextAlign.center,
                     ),
@@ -151,7 +135,6 @@ class _Step1PropertyTypeScreenState extends State<Step1PropertyTypeScreen> {
               child: PrimaryButton(
                 onPressed: selectedType != null
                     ? () {
-                        // TODO: Navigate to Step 2
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(content: Text('Selected: $selectedType')),
                         );
@@ -198,14 +181,14 @@ class _PropertyTypeCard extends StatelessWidget {
             color: isSelected
                 ? const Color(0xFF9D4EDD)
                 : (isDark
-                      ? Colors.white.withValues(alpha:0.1)
+                      ? Colors.white.withValues(alpha: 0.1)
                       : Colors.grey.shade200),
           ),
           gradient: isSelected ? HotelManagerTheme.brandGradient : null,
           boxShadow: isSelected
               ? [
                   BoxShadow(
-                    color: const Color(0xFF9D4EDD).withValues(alpha:0.3),
+                    color: const Color(0xFF9D4EDD).withValues(alpha: 0.3),
                     blurRadius: 20,
                     offset: const Offset(0, 8),
                   ),
