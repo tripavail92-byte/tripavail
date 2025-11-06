@@ -72,14 +72,21 @@ class ProfileScreen extends StatefulWidget {
   State<ProfileScreen> createState() => _ProfileScreenState();
 }
 
-class _ProfileScreenState extends State<ProfileScreen>
-    with SingleTickerProviderStateMixin {
+class _ProfileScreenState extends State<ProfileScreen> {
   bool isEditing = false;
 
   late ProfileData profileData;
   late ProfileData editData;
 
   final _formKey = GlobalKey<FormState>();
+
+  // Spacing multipliers
+  static const double _spacingSmall = 0.01;
+  static const double _spacingMedium = 0.015;
+  static const double _spacingLarge = 0.02;
+  static const double _spacingXLarge = 0.03;
+  static const double _horizontalPadding = 0.08;
+  static const double _maxContentWidth = 560.0;
 
   @override
   void initState() {
@@ -117,7 +124,6 @@ class _ProfileScreenState extends State<ProfileScreen>
 
   void _toggleEdit() {
     setState(() {
-      // Always refresh the edit buffer when toggling modes
       editData = profileData.copy();
       isEditing = !isEditing;
     });
@@ -130,7 +136,6 @@ class _ProfileScreenState extends State<ProfileScreen>
         profileData = editData.copy();
         isEditing = false;
       });
-      // Integrate backend update here
       ScaffoldMessenger.of(
         context,
       ).showSnackBar(const SnackBar(content: Text('Profile updated')));
@@ -144,18 +149,12 @@ class _ProfileScreenState extends State<ProfileScreen>
     return null;
   }
 
-  // Removed unused email validator; email edit moved out of About Me
-
   String? _validateBio(String? val) {
     if (val != null && val.length > 200) {
       return 'Bio must be under 200 characters';
     }
     return null;
   }
-
-  // Removed inline password change validation; handled in dedicated form
-
-  // Removed unused _updatePassword; password updates handled in _SecuritySettingsForm
 
   void _openPhotoSheet() {
     showModalBottomSheet(
@@ -164,14 +163,8 @@ class _ProfileScreenState extends State<ProfileScreen>
       isScrollControlled: false,
       builder: (context) {
         return ChoosePhotoBottomSheet(
-          onChooseFromLibraryPressed: () {
-            Navigator.pop(context);
-            // Handle gallery
-          },
-          onTakePhotoPressed: () {
-            Navigator.pop(context);
-            // Handle camera
-          },
+          onChooseFromLibraryPressed: () => Navigator.pop(context),
+          onTakePhotoPressed: () => Navigator.pop(context),
         );
       },
     );
@@ -189,19 +182,9 @@ class _ProfileScreenState extends State<ProfileScreen>
     final hasAvatar =
         (p.profileImage != null && p.profileImage!.isNotEmpty) ||
         (p.avatarUrl != null && p.avatarUrl!.isNotEmpty);
-    if (hasAvatar) {
-      total += 10;
-    }
+    if (hasAvatar) total += 10;
     return total.clamp(0, 100);
   }
-
-  // Removed old solid-color progress mapping in favor of app role gradient
-
-  // Avatar UI moved to ProfileHeaderCard for narrower rebuild scope
-
-  // Removed unused verification badge; verification shown in Contact Info card
-
-  // Removed inline contact method row; contact info lives in its own card
 
   Widget _buildViewMode() {
     final theme = Theme.of(context);
@@ -214,10 +197,13 @@ class _ProfileScreenState extends State<ProfileScreen>
   }
 
   Widget _buildEditMode() {
+    final theme = Theme.of(context);
     final inputBorder = OutlineInputBorder(
       borderRadius: BorderRadius.circular(12),
       borderSide: const BorderSide(color: Color(0xFFDDDDDD)),
     );
+    final screenHeight = MediaQuery.of(context).size.height;
+
     return Form(
       key: _formKey,
       child: Column(
@@ -234,14 +220,14 @@ class _ProfileScreenState extends State<ProfileScreen>
                 border: inputBorder,
                 enabledBorder: inputBorder,
                 focusedBorder: inputBorder.copyWith(
-                  borderSide: BorderSide(color: Theme.of(context).primaryColor),
+                  borderSide: BorderSide(color: theme.primaryColor),
                 ),
               ),
               onSaved: (val) => editData.name = val ?? '',
               validator: _validateName,
             ),
           ),
-          SizedBox(height: MediaQuery.of(context).size.height * 0.015),
+          SizedBox(height: screenHeight * _spacingMedium),
           _labeledField(
             label: 'About Me',
             field: TextFormField(
@@ -255,7 +241,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                 border: inputBorder,
                 enabledBorder: inputBorder,
                 focusedBorder: inputBorder.copyWith(
-                  borderSide: BorderSide(color: Theme.of(context).primaryColor),
+                  borderSide: BorderSide(color: theme.primaryColor),
                 ),
               ),
               onSaved: (val) => editData.bio = val ?? '',
@@ -266,10 +252,6 @@ class _ProfileScreenState extends State<ProfileScreen>
       ),
     );
   }
-
-  // Removed unused inline security section; a dedicated screen is used instead
-
-  // Header card moved into ProfileHeaderCard
 
   Widget _labelWithAccent(String label) {
     final theme = Theme.of(context);
@@ -304,8 +286,6 @@ class _ProfileScreenState extends State<ProfileScreen>
     );
   }
 
-  // Contact rows moved into ContactInfoCard
-
   Future<void> _pickDob() async {
     final picked = await showDatePicker(
       context: context,
@@ -334,12 +314,6 @@ class _ProfileScreenState extends State<ProfileScreen>
       });
     }
   }
-
-  // Contact card moved into ContactInfoCard
-
-  // Navigation row moved into PaymentMethodsCard
-
-  // Payment card moved into PaymentMethodsCard
 
   @override
   Widget build(BuildContext context) {
@@ -377,19 +351,21 @@ class _ProfileScreenState extends State<ProfileScreen>
       body: LayoutBuilder(
         builder: (context, constraints) {
           final size = MediaQuery.of(context).size;
-          final double width = size.width;
+          final screenHeight = size.height;
+          final screenWidth = size.width;
+
           return Center(
             child: ConstrainedBox(
-              constraints: const BoxConstraints(maxWidth: 560),
+              constraints: const BoxConstraints(maxWidth: _maxContentWidth),
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: width * 0.08),
+                padding: EdgeInsets.symmetric(
+                  horizontal: screenWidth * _horizontalPadding,
+                ),
                 child: SingleChildScrollView(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      SizedBox(
-                        height: MediaQuery.of(context).size.height * 0.03,
-                      ),
+                      SizedBox(height: screenHeight * _spacingXLarge),
                       ProfileHeaderCard(
                         name: profileData.name,
                         bio: profileData.bio,
@@ -399,9 +375,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                         completion: _calculateCompletion(profileData),
                         onChangePhoto: _openPhotoSheet,
                       ),
-                      SizedBox(
-                        height: MediaQuery.of(context).size.height * 0.02,
-                      ),
+                      SizedBox(height: screenHeight * _spacingLarge),
                       Card(
                         elevation: 2,
                         color: theme.colorScheme.surface,
@@ -422,22 +396,13 @@ class _ProfileScreenState extends State<ProfileScreen>
                                 'About Me',
                                 style: AppTextStyle.headlineSmall,
                               ),
-                              SizedBox(
-                                height:
-                                    MediaQuery.of(context).size.height * 0.01,
-                              ),
+                              SizedBox(height: screenHeight * _spacingSmall),
                               isEditing ? _buildEditMode() : _buildViewMode(),
-                              SizedBox(
-                                height:
-                                    MediaQuery.of(context).size.height * 0.01,
-                              ),
                             ],
                           ),
                         ),
                       ),
-                      SizedBox(
-                        height: MediaQuery.of(context).size.height * 0.02,
-                      ),
+                      SizedBox(height: screenHeight * _spacingLarge),
                       ContactInfoCard(
                         email: profileData.email,
                         emailVerified: profileData.emailVerified,
@@ -464,19 +429,14 @@ class _ProfileScreenState extends State<ProfileScreen>
                           ),
                         ),
                       ),
-                      SizedBox(
-                        height: MediaQuery.of(context).size.height * 0.02,
-                      ),
+                      SizedBox(height: screenHeight * _spacingLarge),
                       PaymentMethodsCard(
                         onWalletsTap: () =>
                             Get.to(() => const _MobileWalletsScreen()),
                         onCardsTap: () =>
                             Get.to(() => const _PaymentCardsScreen()),
                       ),
-                      // Account Security removed (OTP login; no password)
-                      SizedBox(
-                        height: MediaQuery.of(context).size.height * 0.03,
-                      ),
+                      SizedBox(height: screenHeight * _spacingXLarge),
                     ],
                   ),
                 ),
@@ -540,11 +500,20 @@ class _PhoneVerificationScreen extends StatefulWidget {
 
 class _PhoneVerificationScreenState extends State<_PhoneVerificationScreen> {
   String code = '';
-  bool codeSent = true; // assume sent; integrate API to toggle
+  bool codeSent = true;
+
+  // Spacing multipliers
+  static const double _spacingSmall = 0.01;
+  static const double _spacingMedium = 0.015;
+  static const double _spacingXLarge = 0.03;
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final size = MediaQuery.of(context).size;
+    final screenHeight = size.height;
+    final horizontalPadding = (size.width * 0.08).clamp(16.0, 28.0);
+
     return Scaffold(
       appBar: const PrimaryAppBar(
         title: 'Verify Phone',
@@ -552,16 +521,11 @@ class _PhoneVerificationScreenState extends State<_PhoneVerificationScreen> {
       ),
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.symmetric(
-            horizontal: (MediaQuery.of(context).size.width * 0.08).clamp(
-              16.0,
-              28.0,
-            ),
-          ),
+          padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              SizedBox(height: MediaQuery.of(context).size.height * 0.03),
+              SizedBox(height: screenHeight * _spacingXLarge),
               Text(
                 'We sent a 6-digit code to:',
                 style: AppTextStyle.bodySmall.copyWith(
@@ -570,9 +534,9 @@ class _PhoneVerificationScreenState extends State<_PhoneVerificationScreen> {
                   ),
                 ),
               ),
-              SizedBox(height: MediaQuery.of(context).size.height * 0.01),
+              SizedBox(height: screenHeight * _spacingSmall),
               Text(widget.phoneNumber, style: AppTextStyle.headlineSmall),
-              SizedBox(height: MediaQuery.of(context).size.height * 0.03),
+              SizedBox(height: screenHeight * _spacingXLarge),
               Center(
                 child: OtpInput(
                   length: 6,
@@ -580,7 +544,7 @@ class _PhoneVerificationScreenState extends State<_PhoneVerificationScreen> {
                   onCompleted: (v) => setState(() => code = v),
                 ),
               ),
-              SizedBox(height: MediaQuery.of(context).size.height * 0.03),
+              SizedBox(height: screenHeight * _spacingXLarge),
               PrimaryButton(
                 onPressed: () {
                   if (code.length != 6) {
@@ -594,7 +558,7 @@ class _PhoneVerificationScreenState extends State<_PhoneVerificationScreen> {
                 title: 'Verify',
                 height: 48,
               ),
-              SizedBox(height: MediaQuery.of(context).size.height * 0.015),
+              SizedBox(height: screenHeight * _spacingMedium),
               TextButton(
                 onPressed: codeSent
                     ? null
