@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tripavail/utils/app_text_styles.dart';
-import 'package:tripavail/utils/theme/constants/app_constants.dart';
 import 'package:tripavail/utils/theme/constants/app_radii.dart';
-import 'package:tripavail/utils/theme/extension/role_theme_extension.dart';
 
 class PrimaryButton extends StatelessWidget {
   final EdgeInsetsGeometry? margin;
@@ -38,21 +36,13 @@ class PrimaryButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final appTheme = Theme.of(context);
-    final roleTheme = Theme.of(
-      context,
-    ).extension<RoleThemeExtension>();
-    final Gradient? resolvedGradient = enabled
-        ? (backgroundColor != null
-              ? null
-              : (backgroundGradient ??
-                    roleTheme?.primaryGradient ??
-                    AppRoleGradients.traveller))
-        : null;
+  final theme = Theme.of(context);
+  // Default to solid primary fill from ThemeData; gradients are only used if explicitly passed in.
+  final Gradient? resolvedGradient = enabled ? backgroundGradient : null;
 
-    final Color resolvedColor = enabled
-        ? (backgroundColor ?? appTheme.primaryColor)
-        : appTheme.colorScheme.primaryContainer;
+  final Color resolvedColor = enabled
+    ? (backgroundColor ?? theme.colorScheme.primary)
+    : theme.colorScheme.primaryContainer;
 
     return Container(
       margin: margin,
@@ -62,9 +52,7 @@ class PrimaryButton extends StatelessWidget {
           color: Colors.transparent,
           child: Ink(
             decoration: BoxDecoration(
-              color: resolvedGradient == null
-                  ? resolvedColor
-                  : null,
+              color: resolvedGradient == null ? resolvedColor : null,
               gradient: resolvedGradient,
               borderRadius: AppRadii.m,
               border: borderColor != null
@@ -93,27 +81,26 @@ class PrimaryButton extends StatelessWidget {
                           Text(
                             title,
                             textAlign: TextAlign.center,
-                            style: AppTextStyle.bodyMedium
-                                .copyWith(
-                                  color:
-                                      titleColor ??
-                                      AppColors.white,
-                                  fontWeight:
-                                      FontWeight.w600,
-                                ),
+                            style: AppTextStyle.bodyMedium.copyWith(
+                              color: titleColor ??
+                                  (enabled
+                                      ? theme.colorScheme.onPrimary
+                                      : theme.colorScheme.onPrimaryContainer),
+                              fontWeight: FontWeight.w600,
+                            ),
                           ),
                         ],
                       )
                     : Text(
                         title,
                         textAlign: TextAlign.center,
-                        style: AppTextStyle.bodyMedium
-                            .copyWith(
-                              color:
-                                  titleColor ??
-                                  AppColors.white,
-                              fontWeight: FontWeight.w600,
-                            ),
+                        style: AppTextStyle.bodyMedium.copyWith(
+                          color: titleColor ??
+                              (enabled
+                                  ? theme.colorScheme.onPrimary
+                                  : theme.colorScheme.onPrimaryContainer),
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
               ),
             ),

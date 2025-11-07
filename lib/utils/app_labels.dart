@@ -46,6 +46,10 @@ class AppLabels {
   static const alreadyHaveAccount =
       "Already have an account?";
   static const signIn = "Sign in";
+  static const welcomeBack = "Welcome back! Please login to continue.";
+  static const forgotPassword = "Forgot Password?";
+  static const createAccountToGetStarted = "Create your account to get started.";
+  static const alreadyHaveAccountQuestion = "Already have an account? ";
 
   // Passwordless copy
   static const continueAction = "Continue";
@@ -83,4 +87,36 @@ class AppLabels {
       "THE AI THAT TRAVELS WITH YOU";
   static const onboardingAiSubtitle =
       "Smarter routes. Hidden luxuries. Tailored just for you.";
+
+    /* -------------------------------------------------------------------------- */
+    /*                             hotel manager labels                           */
+    /* -------------------------------------------------------------------------- */
+    static const propertyTypeStep1Of5 = "Step 1 of 5";
+    static const propertyTypeTitle = "Property Type";
+    static const propertyTypeSubtitle = "Select your property category";
+
+    // Property type names
+    static const propertyHotel = "Hotel";
+    static const propertyBoutiqueHotel = "Boutique Hotel";
+    static const propertyResort = "Resort";
+    static const propertyMotel = "Motel";
+    static const propertyLodge = "Lodge";
+    static const propertyInn = "Inn";
+    static const propertyGuesthouse = "Guesthouse";
+    static const propertyHostel = "Hostel";
+
+    // Property type descriptions
+    static const propertyHotelDesc = "Traditional hotel with\nmultiple rooms";
+    static const propertyBoutiqueHotelDesc = "Unique, stylish\naccommodation";
+    static const propertyResortDesc = "Full-service vacation\ndestination";
+    static const propertyMotelDesc = "Motor hotel for travelers";
+    static const propertyLodgeDesc = "Rustic or countryside\naccommodation";
+    static const propertyInnDesc = "Small, cozy\naccommodation";
+    static const propertyGuesthouseDesc = "Home-style lodging";
+    static const propertyHostelDesc = "Budget shared accommodation";
+
+    // Navigation labels
+    static const saveAndExit = "Save & Exit";
+    static const back = "Back";
+    static const next = "Next";
 }

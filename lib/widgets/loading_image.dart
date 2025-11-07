@@ -1,7 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:tripavail/utils/theme/constants/app_constants.dart';
 
 class LoadingImage extends StatelessWidget {
   final BoxFit? fit;
@@ -29,12 +28,16 @@ class LoadingImage extends StatelessWidget {
         fadeInDuration: const Duration(milliseconds: 0),
         fadeOutCurve: Curves.linear,
         fadeInCurve: Curves.linear,
-        errorWidget: (context, url, error) =>
-            const Center(child: Icon(Icons.error_outline, color: Colors.red)),
+        errorWidget: (context, url, error) => Center(
+          child: Icon(
+            Icons.error_outline,
+            color: Theme.of(context).colorScheme.error,
+          ),
+        ),
         progressIndicatorBuilder: (context, child, loadingProgress) {
           return Center(
             child: SpinKitSpinningLines(
-              color: AppColors.primaryColor,
+              color: Theme.of(context).colorScheme.primary,
               size: 20.0,
             ),
           );

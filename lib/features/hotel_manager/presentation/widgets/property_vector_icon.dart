@@ -31,7 +31,8 @@ class PropertyVectorIcon extends StatelessWidget {
         child: Icon(
           _iconForType(propertyType),
           size: size * 0.5,
-          color: Colors.white,
+          // Use onPrimary to ensure contrast against gradient across light/dark themes.
+          color: Theme.of(context).colorScheme.onPrimary,
         ),
       ),
     );

@@ -1,5 +1,4 @@
-import 'dart:io';
-
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tripavail/features/authentication/widgets/social_buttons.dart';
@@ -86,7 +85,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 Text(AppLabels.login, style: AppTextStyle.headlineMedium),
                 SizedBox(height: height * 0.01),
                 Text(
-                  'Welcome back! Please login to continue.',
+                  AppLabels.welcomeBack,
                   style: AppTextStyle.bodyMedium.copyWith(
                     color: Theme.of(
                       context,
@@ -118,7 +117,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       // Handle forgot password
                     },
                     child: Text(
-                      'Forgot Password?',
+                      AppLabels.forgotPassword,
                       style: AppTextStyle.bodyMedium.copyWith(
                         color: Theme.of(context).primaryColor,
                       ),
@@ -162,17 +161,19 @@ class _LoginScreenState extends State<LoginScreen> {
                 SizedBox(height: height * 0.02),
 
                 ///
+                /// Apple Sign In - Only show on iOS (not web)
                 ///
-                if (Platform.isIOS)
+                if (!kIsWeb && defaultTargetPlatform == TargetPlatform.iOS)
                   SocialButtons(
                     title: "Sign in with Apple",
                     image:
                         "https://pngimg.com/uploads/apple_logo/apple_logo_PNG19666.png",
                     onTap: () async {},
                   ),
-                if (Platform.isIOS) SizedBox(height: height * 0.02),
+                if (!kIsWeb && defaultTargetPlatform == TargetPlatform.iOS)
+                  SizedBox(height: height * 0.02),
 
-                ///
+                /// Google Sign In
                 SocialButtons(
                   title: "Sign in with Google",
                   image: "http://pngimg.com/uploads/google/google_PNG19635.png",

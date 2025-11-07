@@ -117,6 +117,7 @@ final darkTheme = ThemeData.dark().copyWith(
     selectionHandleColor: AppColors.primaryColor,
   ),
   buttonTheme: const ButtonThemeData(buttonColor: AppColors.primaryColor),
+  // Extensions trimmed: rely purely on ThemeData primitives under new theming rule.
   extensions: [
     const CustomThemeExtension(positiveColor: AppColors.positiveColor),
     RoleThemeExtension.traveller,

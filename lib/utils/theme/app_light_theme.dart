@@ -115,6 +115,8 @@ final lightTheme = ThemeData.light().copyWith(
     selectionHandleColor: AppColors.primaryColor,
   ),
   buttonTheme: const ButtonThemeData(buttonColor: AppColors.primaryColor),
+  // Extensions trimmed: We now rely purely on ThemeData primitives (colorScheme, textTheme, component themes)
+  // and avoid role-specific ThemeExtensions per updated theming rule.
   extensions: [
     const CustomThemeExtension(positiveColor: AppColors.positiveColor),
     RoleThemeExtension.traveller,

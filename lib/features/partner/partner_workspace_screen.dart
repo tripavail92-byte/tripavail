@@ -18,8 +18,6 @@ import 'package:tripavail/utils/app_text_styles.dart';
 
 // Constants
 class _PartnerWorkspaceConstants {
-  static const double horizontalPadding = 20.0;
-  static const double headerSpacing = 16.0;
   static const double contentHorizontalPadding = 0.08; // 8% of screen width
   static const double contentBottomPadding = 32.0;
   static const double sectionSpacing = 0.03; // 3% of screen height
@@ -184,6 +182,9 @@ class _PartnerWorkspaceScreenState extends State<PartnerWorkspaceScreen> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final accent = partnerAccent(_activeRole);
+    final size = MediaQuery.of(context).size;
+    final double width = size.width;
+    final double height = size.height;
 
     return Stack(
       children: [
@@ -194,8 +195,8 @@ class _PartnerWorkspaceScreenState extends State<PartnerWorkspaceScreen> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: _PartnerWorkspaceConstants.horizontalPadding,
+                  padding: EdgeInsets.symmetric(
+                    horizontal: width * 0.05,
                   ),
                   child: Row(
                     children: [
@@ -203,13 +204,16 @@ class _PartnerWorkspaceScreenState extends State<PartnerWorkspaceScreen> {
                         icon: const Icon(Icons.menu),
                         onPressed: () => _toggleDrawer(true),
                       ),
-                      Text(
-                        _PartnerWorkspaceConstants.workspaceTitle,
-                        style: AppTextStyle.titleLarge.copyWith(
-                          fontWeight: FontWeight.w700,
+                      Expanded(
+                        child: Text(
+                          _PartnerWorkspaceConstants.workspaceTitle,
+                          style: AppTextStyle.titleLarge.copyWith(
+                            fontWeight: FontWeight.w700,
+                          ),
+                          overflow: TextOverflow.ellipsis,
                         ),
                       ),
-                      const Spacer(),
+                      const SizedBox(width: 8),
                       Container(
                         padding: const EdgeInsets.symmetric(
                           horizontal: _PartnerWorkspaceConstants
@@ -224,6 +228,7 @@ class _PartnerWorkspaceScreenState extends State<PartnerWorkspaceScreen> {
                           ),
                         ),
                         child: Row(
+                          mainAxisSize: MainAxisSize.min,
                           children: [
                             Icon(
                               _activeRole == PartnerRole.hotelManager
@@ -249,8 +254,8 @@ class _PartnerWorkspaceScreenState extends State<PartnerWorkspaceScreen> {
                     ],
                   ),
                 ),
-                const SizedBox(
-                  height: _PartnerWorkspaceConstants.headerSpacing,
+                SizedBox(
+                  height: height * 0.02,
                 ),
                 Expanded(
                   child: GetX<PartnerDashboardController>(

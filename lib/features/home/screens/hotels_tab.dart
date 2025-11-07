@@ -19,15 +19,18 @@ class HotelsTab extends StatelessWidget {
           // Search Bar
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-            decoration: BoxDecoration(borderRadius: BorderRadius.circular(12)),
+            decoration: BoxDecoration(
+              color: Theme.of(context).cardColor,
+              borderRadius: BorderRadius.circular(12),
+            ),
             child: Row(
               children: [
-                Icon(Icons.search, color: Colors.grey[600]),
+                Icon(Icons.search, color: Theme.of(context).iconTheme.color?.withValues(alpha: 0.6)),
                 const SizedBox(width: 12),
                 Expanded(
                   child: Text(
                     'Search hotels...',
-                    style: TextStyle(color: Colors.grey[600]),
+                    style: TextStyle(color: Theme.of(context).textTheme.bodySmall?.color?.withValues(alpha: 0.7)),
                   ),
                 ),
               ],
@@ -67,17 +70,14 @@ class _HotelCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final isDark = theme.brightness == Brightness.dark;
+  final theme = Theme.of(context);
 
     return Container(
       margin: const EdgeInsets.only(bottom: 16),
       decoration: BoxDecoration(
-        color: isDark ? const Color(0xFF2E2E2E) : Colors.white,
+        color: theme.cardColor,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(
-          color: isDark ? const Color(0xFF444444) : const Color(0xFFE0E0E0),
-        ),
+        border: Border.all(color: theme.dividerColor.withValues(alpha: 0.6)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -101,7 +101,7 @@ class _HotelCard extends StatelessWidget {
               child: Icon(
                 Icons.hotel,
                 size: 64,
-                color: Colors.white.withValues(alpha: 0.7),
+                color: Theme.of(context).colorScheme.onPrimary.withValues(alpha: 0.85),
               ),
             ),
           ),
@@ -119,12 +119,12 @@ class _HotelCard extends StatelessWidget {
                 const SizedBox(height: 4),
                 Row(
                   children: [
-                    Icon(Icons.location_on, size: 16, color: Colors.grey[600]),
+                    Icon(Icons.location_on, size: 16, color: Theme.of(context).iconTheme.color?.withValues(alpha: 0.6)),
                     const SizedBox(width: 4),
                     Text(
                       'Downtown Area',
                       style: AppTextStyle.bodySmall.copyWith(
-                        color: Colors.grey[600],
+                        color: Theme.of(context).textTheme.bodySmall?.color?.withValues(alpha: 0.7),
                       ),
                     ),
                   ],
@@ -137,7 +137,9 @@ class _HotelCard extends StatelessWidget {
                       (i) => Icon(
                         Icons.star,
                         size: 16,
-                        color: i < 4 ? Colors.amber : Colors.grey[400],
+                        color: i < 4
+                            ? Colors.amber // keep star amber as semantic rating color
+                            : Theme.of(context).iconTheme.color?.withValues(alpha: 0.4),
                       ),
                     ),
                     const SizedBox(width: 8),
@@ -156,14 +158,14 @@ class _HotelCard extends StatelessWidget {
                     Text(
                       '\$${150 + (index * 50)}/night',
                       style: AppTextStyle.bodyLarge.copyWith(
-                        color: theme.primaryColor,
+                        color: theme.colorScheme.primary,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                     Text(
                       'View Details',
                       style: AppTextStyle.bodySmall.copyWith(
-                        color: theme.primaryColor,
+                        color: theme.colorScheme.primary,
                         fontWeight: FontWeight.w600,
                       ),
                     ),

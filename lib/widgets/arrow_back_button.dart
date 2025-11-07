@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:tripavail/utils/theme/constants/app_constants.dart';
 
 class ArrowBackButton extends StatelessWidget {
   const ArrowBackButton({super.key, this.onPressed});
@@ -19,12 +18,15 @@ class ArrowBackButton extends StatelessWidget {
               },
           child: Container(
             decoration: BoxDecoration(
-              color: AppColors.primaryColor,
+              color: Theme.of(context).colorScheme.primary,
               shape: BoxShape.circle,
             ),
             child: Padding(
               padding: const EdgeInsets.all(8.0),
-              child: const Icon(Icons.arrow_back, color: AppColors.white),
+              child: Icon(
+                Icons.arrow_back,
+                color: Theme.of(context).colorScheme.onPrimary,
+              ),
             ),
           ),
         ),

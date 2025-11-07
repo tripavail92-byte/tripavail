@@ -98,8 +98,7 @@ class _OtpInputState extends State<OtpInput> {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final isDark = theme.brightness == Brightness.dark;
+  final theme = Theme.of(context);
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -125,32 +124,26 @@ class _OtpInputState extends State<OtpInput> {
               border: OutlineInputBorder(
                 borderRadius: AppRadii.m,
                 borderSide: BorderSide(
-                  color: isDark
-                      ? const Color(0xFF555555)
-                      : const Color(0xFFDDDDDD),
+                  color: theme.dividerColor,
                   width: 1.5,
                 ),
               ),
               enabledBorder: OutlineInputBorder(
                 borderRadius: AppRadii.m,
                 borderSide: BorderSide(
-                  color: isDark
-                      ? const Color(0xFF555555)
-                      : const Color(0xFFDDDDDD),
+                  color: theme.dividerColor,
                   width: 1.5,
                 ),
               ),
               focusedBorder: OutlineInputBorder(
                 borderRadius: AppRadii.m,
                 borderSide: BorderSide(
-                  color: theme.primaryColor,
+                  color: theme.colorScheme.primary,
                   width: 2,
                 ),
               ),
               filled: true,
-              fillColor: isDark
-                  ? const Color(0xFF3C3C3C)
-                  : Colors.white,
+              fillColor: theme.cardColor,
             ),
             onChanged: (value) => _onChanged(value, index),
             onTap: () {

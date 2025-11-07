@@ -37,11 +37,9 @@ class PrimaryAppBar extends StatelessWidget
 
   @override
   Widget build(BuildContext context) {
-    final appTheme = Theme.of(context);
+  final theme = Theme.of(context);
     return AppBar(
-      backgroundColor:
-          backgroundColor ??
-          appTheme.appBarTheme.backgroundColor,
+    backgroundColor: backgroundColor ?? theme.appBarTheme.backgroundColor,
       elevation: elevation,
       title:
           titleWidget ??
@@ -49,7 +47,7 @@ class PrimaryAppBar extends StatelessWidget
             title ?? '',
             style: AppTextStyle.bodyMedium.copyWith(
               fontSize: 17.0,
-              color: appTheme.iconTheme.color,
+              color: theme.iconTheme.color,
             ),
           ),
       centerTitle: centerTitle,
@@ -65,7 +63,7 @@ class PrimaryAppBar extends StatelessWidget
                     padding: const EdgeInsets.all(8.0),
                     child: Icon(
                       Icons.keyboard_backspace,
-                      color: appTheme.iconTheme.color,
+                      color: theme.iconTheme.color,
                     ),
                   ),
                 )
@@ -74,7 +72,7 @@ class PrimaryAppBar extends StatelessWidget
                   builder: (context) => IconButton(
                     icon: Icon(
                       Icons.menu,
-                      color: appTheme.iconTheme.color,
+                      color: theme.iconTheme.color,
                     ),
                     onPressed: () =>
                         Scaffold.of(context).openDrawer(),
@@ -102,7 +100,7 @@ class PrimaryAppBar extends StatelessWidget
                         textAlign: TextAlign.right,
                         style: AppTextStyle.bodyMedium
                             .copyWith(
-                              color: appTheme.primaryColor,
+                              color: theme.colorScheme.primary,
                               fontSize: 15.0,
                             ),
                       ),

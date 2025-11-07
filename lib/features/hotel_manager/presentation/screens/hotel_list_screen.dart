@@ -35,7 +35,12 @@ class _HotelListScreenState extends State<HotelListScreen> {
     final bgColor = isDark
         ? HotelManagerTheme.backgroundDark
         : HotelManagerTheme.backgroundLight;
-    final iconColor = isDark ? Colors.white : const Color(0xFF111827);
+    final theme = Theme.of(context);
+    final iconColor = isDark ? theme.colorScheme.onSurface : const Color(0xFF111827);
+    final size = MediaQuery.of(context).size;
+    final double width = size.width;
+    final double height = size.height;
+    
     final List<StepData> hotelSteps = [
       StepData(
         id: 1,
@@ -80,12 +85,17 @@ class _HotelListScreenState extends State<HotelListScreen> {
         child: Stack(
           children: [
             SingleChildScrollView(
-              padding: const EdgeInsets.only(bottom: 120),
+              padding: EdgeInsets.only(bottom: height * 0.15),
               child: Column(
                 children: [
                   // Back Button
                   Padding(
-                    padding: const EdgeInsets.fromLTRB(24, 24, 24, 8),
+                    padding: EdgeInsets.fromLTRB(
+                      width * 0.06,
+                      height * 0.03,
+                      width * 0.06,
+                      height * 0.01,
+                    ),
                     child: GestureDetector(
                       onTap: () => Get.back(),
                       child: Row(
@@ -96,7 +106,7 @@ class _HotelListScreenState extends State<HotelListScreen> {
                             'Back to Dashboard',
                             style: AppTextStyle.bodyLarge.copyWith(
                               color: isDark
-                                  ? Colors.white
+                                  ? theme.colorScheme.onSurface
                                   : HotelManagerTheme.textPrimaryLight,
                             ),
                           ),
@@ -107,26 +117,26 @@ class _HotelListScreenState extends State<HotelListScreen> {
 
                   // Hero Section
                   Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 24,
-                      vertical: 16,
+                    padding: EdgeInsets.symmetric(
+                      horizontal: width * 0.06,
+                      vertical: height * 0.02,
                     ),
                     child: Column(
                       children: [
                         const HotelHeroAnimated(size: 120),
-                        const SizedBox(height: 24),
+                        SizedBox(height: height * 0.03),
                         Text(
                           'List Your Hotel',
                           style: AppTextStyle.headlineMedium.copyWith(
                             fontSize: 32,
                             fontWeight: FontWeight.bold,
                             color: isDark
-                                ? Colors.white
+                                ? theme.colorScheme.onSurface
                                 : HotelManagerTheme.textPrimaryLight,
                           ),
                           textAlign: TextAlign.center,
                         ),
-                        const SizedBox(height: 8),
+                        SizedBox(height: height * 0.01),
                         Text(
                           'Complete each step at your own pace',
                           style: AppTextStyle.bodyLarge.copyWith(
@@ -142,11 +152,11 @@ class _HotelListScreenState extends State<HotelListScreen> {
 
                   // Steps Section
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 24),
+                    padding: EdgeInsets.symmetric(horizontal: width * 0.06),
                     child: Column(
                       children: hotelSteps.map((step) {
                         return Padding(
-                          padding: const EdgeInsets.only(bottom: 16),
+                          padding: EdgeInsets.only(bottom: height * 0.02),
                           child: MouseRegion(
                             onEnter: (_) => _onStepHover(step.id),
                             onExit: (_) => _onStepHover(null),
@@ -167,17 +177,17 @@ class _HotelListScreenState extends State<HotelListScreen> {
 
             // Fixed CTA Button
             Positioned(
-              bottom: 20,
-              left: 24,
-              right: 24,
+              bottom: height * 0.025,
+              left: width * 0.06,
+              right: width * 0.06,
               child: Container(
                 decoration: BoxDecoration(
                   gradient: HotelManagerTheme.brandGradient,
                   borderRadius: BorderRadius.circular(24),
                   boxShadow: [
                     BoxShadow(
-                      color: const Color(0xFF9D4EDD).withValues(alpha: 0.4),
-                      blurRadius: 20,
+                      color: theme.shadowColor.withValues(alpha: isDark ? 0.25 : 0.4),
+                      blurRadius: isDark ? 14 : 20,
                       offset: const Offset(0, 10),
                     ),
                   ],
@@ -196,12 +206,12 @@ class _HotelListScreenState extends State<HotelListScreen> {
                           Text(
                             'List Your Hotel',
                             style: AppTextStyle.titleMedium.copyWith(
-                              color: Colors.white,
+                              color: theme.colorScheme.onPrimary,
                               fontWeight: FontWeight.w600,
                             ),
                           ),
                           const SizedBox(width: 8),
-                          const Icon(Icons.arrow_forward, color: Colors.white),
+                          Icon(Icons.arrow_forward, color: theme.colorScheme.onPrimary),
                         ],
                       ),
                     ),

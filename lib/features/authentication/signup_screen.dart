@@ -1,5 +1,4 @@
-import 'dart:io';
-
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tripavail/features/authentication/widgets/social_buttons.dart';
@@ -130,7 +129,7 @@ class _SignupScreenState extends State<SignupScreen> {
                 Text(AppLabels.signUp, style: AppTextStyle.headlineMedium),
                 SizedBox(height: height * 0.01),
                 Text(
-                  'Create your account to get started.',
+                  AppLabels.createAccountToGetStarted,
                   style: AppTextStyle.bodyMedium.copyWith(
                     color: Theme.of(
                       context,
@@ -190,7 +189,7 @@ class _SignupScreenState extends State<SignupScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      'Already have an account? ',
+                      AppLabels.alreadyHaveAccountQuestion,
                       style: AppTextStyle.bodyMedium,
                     ),
                     TextButton(
@@ -210,17 +209,19 @@ class _SignupScreenState extends State<SignupScreen> {
                 SizedBox(height: height * 0.02),
 
                 ///
+                /// Apple Sign In - Only show on iOS (not web)
                 ///
-                if (Platform.isIOS)
+                if (!kIsWeb && defaultTargetPlatform == TargetPlatform.iOS)
                   SocialButtons(
                     title: "Sign up with Apple",
                     image:
                         "https://pngimg.com/uploads/apple_logo/apple_logo_PNG19666.png",
                     onTap: () async {},
                   ),
-                if (Platform.isIOS) SizedBox(height: height * 0.02),
+                if (!kIsWeb && defaultTargetPlatform == TargetPlatform.iOS)
+                  SizedBox(height: height * 0.02),
 
-                ///
+                /// Google Sign In
                 SocialButtons(
                   title: "Sign up with Google",
                   image: "http://pngimg.com/uploads/google/google_PNG19635.png",
