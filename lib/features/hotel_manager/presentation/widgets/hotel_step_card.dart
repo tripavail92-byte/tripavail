@@ -40,9 +40,10 @@ class HotelStepCard extends StatelessWidget {
 
     final Widget contents = AnimatedContainer(
       duration: const Duration(milliseconds: 200),
-      transform: isHovered
-          ? (Matrix4.identity()..translate(0.0, -4.0, 0.0))
-          : Matrix4.identity(),
+      // Using translateByDouble to avoid deprecated Matrix4.translate API.
+    transform: isHovered
+      ? (Matrix4.identity()..translateByDouble(0.0, -4.0, 0.0, 1.0))
+      : Matrix4.identity(),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
         boxShadow: isHovered
