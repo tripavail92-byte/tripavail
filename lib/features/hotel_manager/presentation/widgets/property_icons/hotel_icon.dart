@@ -34,7 +34,7 @@ class _HotelIconPainter extends CustomPainter {
         ..shader =
             RadialGradient(
               colors: [
-                const Color(0xFF9D4EDD).withOpacity(glowOpacity * 0.3),
+                const Color(0xFF9D4EDD).withValues(alpha: glowOpacity * 0.3),
                 Colors.transparent,
               ],
             ).createShader(
@@ -85,7 +85,7 @@ class _HotelIconPainter extends CustomPainter {
 
     // Building outline for definition
     final outlinePaint = Paint()
-      ..color = const Color(0xFF7B2CBF).withOpacity(0.3)
+      ..color = const Color(0xFF7B2CBF).withValues(alpha: 0.3)
       ..style = PaintingStyle.stroke
       ..strokeWidth = 1.5;
     canvas.drawRRect(
@@ -168,7 +168,7 @@ class _HotelIconPainter extends CustomPainter {
         // Window glow for lit windows
         if (isLit) {
           final glowPaint = Paint()
-            ..color = const Color(0xFFFFD60A).withOpacity(0.3)
+            ..color = const Color(0xFFFFD60A).withValues(alpha: 0.3)
             ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 3);
           canvas.drawRRect(
             RRect.fromRectAndRadius(
@@ -187,7 +187,7 @@ class _HotelIconPainter extends CustomPainter {
         final windowBgPaint = Paint()
           ..color = isLit
               ? const Color(0xFFFFE66D)
-              : const Color(0xFF3F37C9).withOpacity(0.6)
+              : const Color(0xFF3F37C9).withValues(alpha: 0.6)
           ..style = PaintingStyle.fill;
 
         canvas.drawRRect(
@@ -204,7 +204,7 @@ class _HotelIconPainter extends CustomPainter {
 
         // Window frame/divider
         final framePaint = Paint()
-          ..color = const Color(0xFF7B2CBF).withOpacity(0.8)
+          ..color = const Color(0xFF7B2CBF).withValues(alpha: 0.8)
           ..strokeWidth = 1
           ..style = PaintingStyle.stroke;
         canvas.drawLine(
@@ -222,7 +222,7 @@ class _HotelIconPainter extends CustomPainter {
 
     // Entrance canopy
     final canopyPaint = Paint()
-      ..color = const Color(0xFF7B2CBF).withOpacity(0.4)
+      ..color = const Color(0xFF7B2CBF).withValues(alpha: 0.4)
       ..style = PaintingStyle.fill;
     canvas.drawRect(
       Rect.fromLTWH(
@@ -265,7 +265,7 @@ class _HotelIconPainter extends CustomPainter {
 
     // Door panels
     final panelPaint = Paint()
-      ..color = const Color(0xFF2D2654).withOpacity(0.3)
+      ..color = const Color(0xFF2D2654).withValues(alpha: 0.3)
       ..style = PaintingStyle.stroke
       ..strokeWidth = 1.5;
     canvas.drawRRect(
@@ -314,7 +314,7 @@ class _HotelIconPainter extends CustomPainter {
     // Steps leading to door
     for (var i = 0; i < 2; i++) {
       final stepPaint = Paint()
-        ..color = const Color(0xFF7B2CBF).withOpacity(0.2 + i * 0.1)
+        ..color = const Color(0xFF7B2CBF).withValues(alpha: 0.2 + i * 0.1)
         ..style = PaintingStyle.fill;
       canvas.drawRect(
         Rect.fromLTWH(
@@ -332,8 +332,8 @@ class _HotelIconPainter extends CustomPainter {
       ..shader =
           RadialGradient(
             colors: [
-              Colors.black.withOpacity(0.15),
-              Colors.black.withOpacity(0.05),
+              Colors.black.withValues(alpha: 0.15),
+              Colors.black.withValues(alpha: 0.05),
               Colors.transparent,
             ],
           ).createShader(
@@ -359,3 +359,4 @@ class _HotelIconPainter extends CustomPainter {
         oldDelegate.isSelected != isSelected;
   }
 }
+

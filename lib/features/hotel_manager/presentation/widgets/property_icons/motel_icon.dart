@@ -34,7 +34,7 @@ class _MotelIconPainter extends CustomPainter {
         ..shader =
             RadialGradient(
               colors: [
-                const Color(0xFF2B2D42).withOpacity(glowOpacity * 0.4),
+                const Color(0xFF2B2D42).withValues(alpha: glowOpacity * 0.4),
                 Colors.transparent,
               ],
             ).createShader(
@@ -51,7 +51,7 @@ class _MotelIconPainter extends CustomPainter {
     }
 
     // Night sky or background
-    final skyPaint = Paint()..color = const Color(0xFF1A1B26).withOpacity(0.3);
+    final skyPaint = Paint()..color = const Color(0xFF1A1B26).withValues(alpha: 0.3);
     canvas.drawRect(
       Rect.fromLTWH(0, 0, size.width, size.height * 0.35),
       skyPaint,
@@ -75,7 +75,7 @@ class _MotelIconPainter extends CustomPainter {
 
     // Neon glow effect on sign
     final neonGlow = Paint()
-      ..color = const Color(0xFFD00000).withOpacity(0.6)
+      ..color = const Color(0xFFD00000).withValues(alpha: 0.6)
       ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 4);
     canvas.drawRRect(
       RRect.fromRectAndRadius(
@@ -161,7 +161,7 @@ class _MotelIconPainter extends CustomPainter {
 
       // Door light glow above each door
       final lightGlow = Paint()
-        ..color = const Color(0xFFFFD60A).withOpacity(0.3)
+        ..color = const Color(0xFFFFD60A).withValues(alpha: 0.3)
         ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 3);
       canvas.drawCircle(
         Offset(doorX + size.width * 0.04, doorY - size.height * 0.06),
@@ -197,7 +197,7 @@ class _MotelIconPainter extends CustomPainter {
 
       // Door panel details
       final panelPaint = Paint()
-        ..color = const Color(0xFF8B0000).withOpacity(0.6)
+        ..color = const Color(0xFF8B0000).withValues(alpha: 0.6)
         ..style = PaintingStyle.stroke
         ..strokeWidth = 1;
       canvas.drawRRect(
@@ -234,7 +234,7 @@ class _MotelIconPainter extends CustomPainter {
 
       // Room number above door
       final numberPaint = Paint()
-        ..color = const Color(0xFFFFFFFF).withOpacity(0.9)
+        ..color = const Color(0xFFFFFFFF).withValues(alpha: 0.9)
         ..style = PaintingStyle.fill;
       canvas.drawRRect(
         RRect.fromRectAndRadius(
@@ -254,7 +254,7 @@ class _MotelIconPainter extends CustomPainter {
 
     // Parking lot at bottom
     final parkingPaint = Paint()
-      ..color = const Color(0xFF3A3D52).withOpacity(0.5);
+      ..color = const Color(0xFF3A3D52).withValues(alpha: 0.5);
     canvas.drawRect(
       Rect.fromLTWH(
         size.width * 0.1,
@@ -267,7 +267,7 @@ class _MotelIconPainter extends CustomPainter {
 
     // Parking lines (5 spaces)
     final linePaint = Paint()
-      ..color = const Color(0xFFFFFFFF).withOpacity(0.4)
+      ..color = const Color(0xFFFFFFFF).withValues(alpha: 0.4)
       ..strokeWidth = 1.5;
     for (var i = 0; i <= 5; i++) {
       canvas.drawLine(
@@ -282,8 +282,8 @@ class _MotelIconPainter extends CustomPainter {
       ..shader =
           RadialGradient(
             colors: [
-              Colors.black.withOpacity(0.2),
-              Colors.black.withOpacity(0.08),
+              Colors.black.withValues(alpha: 0.2),
+              Colors.black.withValues(alpha: 0.08),
               Colors.transparent,
             ],
           ).createShader(
@@ -307,3 +307,4 @@ class _MotelIconPainter extends CustomPainter {
   bool shouldRepaint(_MotelIconPainter old) =>
       old.glowOpacity != glowOpacity || old.isSelected != isSelected;
 }
+

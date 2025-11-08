@@ -36,7 +36,7 @@ class _ResortIconPainter extends CustomPainter {
         ..shader =
             RadialGradient(
               colors: [
-                const Color(0xFFFF8500).withOpacity(glowOpacity * 0.3),
+                const Color(0xFFFF8500).withValues(alpha: glowOpacity * 0.3),
                 Colors.transparent,
               ],
             ).createShader(
@@ -75,7 +75,7 @@ class _ResortIconPainter extends CustomPainter {
 
     // Sun rays
     final rayPaint = Paint()
-      ..color = const Color(0xFFFFD60A).withOpacity(0.6)
+      ..color = const Color(0xFFFFD60A).withValues(alpha: 0.6)
       ..strokeWidth = 2
       ..strokeCap = StrokeCap.round;
     for (var i = 0; i < 8; i++) {
@@ -133,8 +133,8 @@ class _ResortIconPainter extends CustomPainter {
       for (var col = 0; col < 3; col++) {
         final windowPaint = Paint()
           ..color = (row + col) % 2 == 0
-              ? const Color(0xFF90E0EF).withOpacity(0.8)
-              : const Color(0xFF4CC9F0).withOpacity(0.7);
+              ? const Color(0xFF90E0EF).withValues(alpha: 0.8)
+              : const Color(0xFF4CC9F0).withValues(alpha: 0.7);
         canvas.drawRRect(
           RRect.fromRectAndRadius(
             Rect.fromCenter(
@@ -216,7 +216,7 @@ class _ResortIconPainter extends CustomPainter {
 
     // Pool ripples
     final ripplePaint = Paint()
-      ..color = const Color(0xFF90E0EF).withOpacity(0.5)
+      ..color = const Color(0xFF90E0EF).withValues(alpha: 0.5)
       ..style = PaintingStyle.stroke
       ..strokeWidth = 1.5;
     canvas.drawOval(
@@ -273,7 +273,7 @@ class _ResortIconPainter extends CustomPainter {
 
     // Umbrella segments
     final segmentPaint = Paint()
-      ..color = const Color(0xFFCC0000).withOpacity(0.4)
+      ..color = const Color(0xFFCC0000).withValues(alpha: 0.4)
       ..strokeWidth = 1;
     for (var i = 0; i < 3; i++) {
       canvas.drawLine(
@@ -285,7 +285,7 @@ class _ResortIconPainter extends CustomPainter {
 
     // Lounge chair
     final chairPaint = Paint()
-      ..color = const Color(0xFFFFFFFF).withOpacity(0.9)
+      ..color = const Color(0xFFFFFFFF).withValues(alpha: 0.9)
       ..strokeWidth = 2
       ..style = PaintingStyle.stroke;
     canvas.drawRRect(
@@ -306,8 +306,8 @@ class _ResortIconPainter extends CustomPainter {
       ..shader =
           RadialGradient(
             colors: [
-              Colors.black.withOpacity(0.15),
-              Colors.black.withOpacity(0.05),
+              Colors.black.withValues(alpha: 0.15),
+              Colors.black.withValues(alpha: 0.05),
               Colors.transparent,
             ],
           ).createShader(
@@ -331,3 +331,4 @@ class _ResortIconPainter extends CustomPainter {
   bool shouldRepaint(_ResortIconPainter old) =>
       old.glowOpacity != glowOpacity || old.isSelected != isSelected;
 }
+

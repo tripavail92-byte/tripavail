@@ -34,7 +34,7 @@ class _BoutiqueIconPainter extends CustomPainter {
         ..shader =
             RadialGradient(
               colors: [
-                const Color(0xFFFF006E).withOpacity(glowOpacity * 0.35),
+                const Color(0xFFFF006E).withValues(alpha: glowOpacity * 0.35),
                 Colors.transparent,
               ],
             ).createShader(
@@ -85,7 +85,7 @@ class _BoutiqueIconPainter extends CustomPainter {
 
     // Building outline for depth
     final outlinePaint = Paint()
-      ..color = const Color(0xFFD90368).withOpacity(0.4)
+      ..color = const Color(0xFFD90368).withValues(alpha: 0.4)
       ..style = PaintingStyle.stroke
       ..strokeWidth = 1.5;
     canvas.drawRRect(
@@ -123,7 +123,7 @@ class _BoutiqueIconPainter extends CustomPainter {
     );
     // Gold ornament highlight
     final shinePaint = Paint()
-      ..color = const Color(0xFFFFFFFF).withOpacity(0.6)
+      ..color = const Color(0xFFFFFFFF).withValues(alpha: 0.6)
       ..style = PaintingStyle.fill;
     canvas.drawCircle(
       Offset(size.width * 0.492, size.height * 0.215),
@@ -133,7 +133,7 @@ class _BoutiqueIconPainter extends CustomPainter {
 
     // Decorative awning with stripes and depth
     final awningBasePaint = Paint()
-      ..color = const Color(0xFFFF85A2).withOpacity(0.3)
+      ..color = const Color(0xFFFF85A2).withValues(alpha: 0.3)
       ..style = PaintingStyle.fill;
     canvas.drawRRect(
       RRect.fromRectAndRadius(
@@ -152,8 +152,8 @@ class _BoutiqueIconPainter extends CustomPainter {
     for (var i = 0; i < 6; i++) {
       final stripePaint = Paint()
         ..color = i % 2 == 0
-            ? const Color(0xFFFFFFFF).withOpacity(0.95)
-            : const Color(0xFFFF85A2).withOpacity(0.8)
+            ? const Color(0xFFFFFFFF).withValues(alpha: 0.95)
+            : const Color(0xFFFF85A2).withValues(alpha: 0.8)
         ..style = PaintingStyle.fill;
       canvas.drawRRect(
         RRect.fromRectAndRadius(
@@ -171,7 +171,7 @@ class _BoutiqueIconPainter extends CustomPainter {
 
     // Awning scalloped edge
     final scallopPaint = Paint()
-      ..color = const Color(0xFFFF006E).withOpacity(0.6)
+      ..color = const Color(0xFFFF006E).withValues(alpha: 0.6)
       ..style = PaintingStyle.stroke
       ..strokeWidth = 2;
     for (var i = 0; i < 6; i++) {
@@ -192,7 +192,7 @@ class _BoutiqueIconPainter extends CustomPainter {
 
         // Window glow
         final windowGlow = Paint()
-          ..color = const Color(0xFFFFE5EC).withOpacity(0.4)
+          ..color = const Color(0xFFFFE5EC).withValues(alpha: 0.4)
           ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 2);
         canvas.drawRRect(
           RRect.fromRectAndRadius(
@@ -208,7 +208,7 @@ class _BoutiqueIconPainter extends CustomPainter {
 
         // Window background
         final windowPaint = Paint()
-          ..color = const Color(0xFFFFE5EC).withOpacity(0.95);
+          ..color = const Color(0xFFFFE5EC).withValues(alpha: 0.95);
         canvas.drawRRect(
           RRect.fromRectAndRadius(
             Rect.fromCenter(
@@ -223,7 +223,7 @@ class _BoutiqueIconPainter extends CustomPainter {
 
         // Window dividers
         final dividerPaint = Paint()
-          ..color = const Color(0xFFFF006E).withOpacity(0.3)
+          ..color = const Color(0xFFFF006E).withValues(alpha: 0.3)
           ..strokeWidth = 1.2
           ..style = PaintingStyle.stroke;
         canvas.drawLine(
@@ -241,7 +241,7 @@ class _BoutiqueIconPainter extends CustomPainter {
 
     // Entrance canopy
     final canopyPaint = Paint()
-      ..color = const Color(0xFFFF4C8C).withOpacity(0.4);
+      ..color = const Color(0xFFFF4C8C).withValues(alpha: 0.4);
     canvas.drawRRect(
       RRect.fromRectAndRadius(
         Rect.fromLTWH(
@@ -283,7 +283,7 @@ class _BoutiqueIconPainter extends CustomPainter {
 
     // Door frame accent
     final doorFramePaint = Paint()
-      ..color = const Color(0xFFFF006E).withOpacity(0.2)
+      ..color = const Color(0xFFFF006E).withValues(alpha: 0.2)
       ..style = PaintingStyle.stroke
       ..strokeWidth = 2;
     canvas.drawRRect(
@@ -316,7 +316,7 @@ class _BoutiqueIconPainter extends CustomPainter {
       handleGradient,
     );
     final handleShine = Paint()
-      ..color = const Color(0xFFFFFFFF).withOpacity(0.7);
+      ..color = const Color(0xFFFFFFFF).withValues(alpha: 0.7);
     canvas.drawCircle(
       Offset(size.width * 0.538, size.height * 0.737),
       size.width * 0.007,
@@ -325,7 +325,7 @@ class _BoutiqueIconPainter extends CustomPainter {
 
     // Entrance step
     final stepPaint = Paint()
-      ..color = const Color(0xFFFF006E).withOpacity(0.15);
+      ..color = const Color(0xFFFF006E).withValues(alpha: 0.15);
     canvas.drawRRect(
       RRect.fromRectAndRadius(
         Rect.fromLTWH(
@@ -344,8 +344,8 @@ class _BoutiqueIconPainter extends CustomPainter {
       ..shader =
           RadialGradient(
             colors: [
-              Colors.black.withOpacity(0.18),
-              Colors.black.withOpacity(0.08),
+              Colors.black.withValues(alpha: 0.18),
+              Colors.black.withValues(alpha: 0.08),
               Colors.transparent,
             ],
           ).createShader(
@@ -369,3 +369,4 @@ class _BoutiqueIconPainter extends CustomPainter {
   bool shouldRepaint(_BoutiqueIconPainter old) =>
       old.glowOpacity != glowOpacity || old.isSelected != isSelected;
 }
+

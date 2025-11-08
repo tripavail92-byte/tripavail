@@ -34,7 +34,7 @@ class _LodgeIconPainter extends CustomPainter {
         ..shader =
             RadialGradient(
               colors: [
-                const Color(0xFF8B4513).withOpacity(glowOpacity * 0.3),
+                const Color(0xFF8B4513).withValues(alpha: glowOpacity * 0.3),
                 Colors.transparent,
               ],
             ).createShader(
@@ -51,7 +51,7 @@ class _LodgeIconPainter extends CustomPainter {
     }
 
     // Forest/mountain background
-    final bgPaint = Paint()..color = const Color(0xFF2D6A4F).withOpacity(0.2);
+    final bgPaint = Paint()..color = const Color(0xFF2D6A4F).withValues(alpha: 0.2);
     canvas.drawRect(
       Rect.fromLTWH(0, 0, size.width, size.height * 0.4),
       bgPaint,
@@ -59,7 +59,7 @@ class _LodgeIconPainter extends CustomPainter {
 
     // Mountain silhouette
     final mountainPaint = Paint()
-      ..color = const Color(0xFF52796F).withOpacity(0.4);
+      ..color = const Color(0xFF52796F).withValues(alpha: 0.4);
     final mountainPath = Path()
       ..moveTo(0, size.height * 0.35)
       ..lineTo(size.width * 0.3, size.height * 0.15)
@@ -92,7 +92,7 @@ class _LodgeIconPainter extends CustomPainter {
 
     // Stone texture
     final stoneLinePaint = Paint()
-      ..color = const Color(0xFF495057).withOpacity(0.5)
+      ..color = const Color(0xFF495057).withValues(alpha: 0.5)
       ..strokeWidth = 1;
     for (var i = 0; i < 3; i++) {
       canvas.drawLine(
@@ -136,7 +136,7 @@ class _LodgeIconPainter extends CustomPainter {
 
     // Wood log lines (horizontal logs)
     final logPaint = Paint()
-      ..color = const Color(0xFF654321).withOpacity(0.7)
+      ..color = const Color(0xFF654321).withValues(alpha: 0.7)
       ..strokeWidth = 2.5
       ..strokeCap = StrokeCap.round;
     for (var i = 0; i < 6; i++) {
@@ -149,7 +149,7 @@ class _LodgeIconPainter extends CustomPainter {
 
     // Wood grain texture on logs
     final grainPaint = Paint()
-      ..color = const Color(0xFF4A2C0D).withOpacity(0.3)
+      ..color = const Color(0xFF4A2C0D).withValues(alpha: 0.3)
       ..strokeWidth = 0.8;
     for (var i = 0; i < 6; i++) {
       for (var j = 0; j < 8; j++) {
@@ -220,7 +220,7 @@ class _LodgeIconPainter extends CustomPainter {
 
     // Chimney brick lines
     final brickPaint = Paint()
-      ..color = const Color(0xFF6B3535).withOpacity(0.6)
+      ..color = const Color(0xFF6B3535).withValues(alpha: 0.6)
       ..strokeWidth = 1;
     for (var i = 0; i < 4; i++) {
       canvas.drawLine(
@@ -232,7 +232,7 @@ class _LodgeIconPainter extends CustomPainter {
 
     // Smoke from chimney
     final smokePaint = Paint()
-      ..color = const Color(0xFF6C757D).withOpacity(0.4)
+      ..color = const Color(0xFF6C757D).withValues(alpha: 0.4)
       ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 3);
     canvas.drawCircle(
       Offset(size.width * 0.665, size.height * 0.17),
@@ -257,7 +257,7 @@ class _LodgeIconPainter extends CustomPainter {
 
       // Window glow (warm light inside)
       final glowWarmPaint = Paint()
-        ..color = const Color(0xFFFFD60A).withOpacity(0.3)
+        ..color = const Color(0xFFFFD60A).withValues(alpha: 0.3)
         ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 3);
       canvas.drawRRect(
         RRect.fromRectAndRadius(
@@ -273,7 +273,7 @@ class _LodgeIconPainter extends CustomPainter {
 
       // Window background (yellow/warm)
       final windowBgPaint = Paint()
-        ..color = const Color(0xFFFFE66D).withOpacity(0.8);
+        ..color = const Color(0xFFFFE66D).withValues(alpha: 0.8);
       canvas.drawRRect(
         RRect.fromRectAndRadius(
           Rect.fromCenter(
@@ -344,7 +344,7 @@ class _LodgeIconPainter extends CustomPainter {
 
     // Door panels
     final doorPanelPaint = Paint()
-      ..color = const Color(0xFF3A1C0D).withOpacity(0.5)
+      ..color = const Color(0xFF3A1C0D).withValues(alpha: 0.5)
       ..style = PaintingStyle.stroke
       ..strokeWidth = 1.5;
     canvas.drawRRect(
@@ -384,8 +384,8 @@ class _LodgeIconPainter extends CustomPainter {
       ..shader =
           RadialGradient(
             colors: [
-              Colors.black.withOpacity(0.2),
-              Colors.black.withOpacity(0.08),
+              Colors.black.withValues(alpha: 0.2),
+              Colors.black.withValues(alpha: 0.08),
               Colors.transparent,
             ],
           ).createShader(
@@ -409,3 +409,4 @@ class _LodgeIconPainter extends CustomPainter {
   bool shouldRepaint(_LodgeIconPainter old) =>
       old.glowOpacity != glowOpacity || old.isSelected != isSelected;
 }
+

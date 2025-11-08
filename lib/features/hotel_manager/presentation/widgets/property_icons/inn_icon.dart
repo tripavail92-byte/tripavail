@@ -34,7 +34,7 @@ class _InnIconPainter extends CustomPainter {
         ..shader =
             RadialGradient(
               colors: [
-                const Color(0xFFDC2F02).withOpacity(glowOpacity * 0.35),
+                const Color(0xFFDC2F02).withValues(alpha: glowOpacity * 0.35),
                 Colors.transparent,
               ],
             ).createShader(
@@ -163,7 +163,7 @@ class _InnIconPainter extends CustomPainter {
 
     // Building outline
     final outlinePaint = Paint()
-      ..color = const Color(0xFFB82601).withOpacity(0.4)
+      ..color = const Color(0xFFB82601).withValues(alpha: 0.4)
       ..style = PaintingStyle.stroke
       ..strokeWidth = 1.5;
     canvas.drawRRect(
@@ -212,7 +212,7 @@ class _InnIconPainter extends CustomPainter {
 
         // Window glow
         final windowGlow = Paint()
-          ..color = const Color(0xFFFFE66D).withOpacity(0.4)
+          ..color = const Color(0xFFFFE66D).withValues(alpha: 0.4)
           ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 3);
         canvas.drawRRect(
           RRect.fromRectAndRadius(
@@ -228,7 +228,7 @@ class _InnIconPainter extends CustomPainter {
 
         // Window background (warm yellow)
         final windowBgPaint = Paint()
-          ..color = const Color(0xFFFFE66D).withOpacity(0.9);
+          ..color = const Color(0xFFFFE66D).withValues(alpha: 0.9);
         canvas.drawRRect(
           RRect.fromRectAndRadius(
             Rect.fromCenter(
@@ -275,7 +275,7 @@ class _InnIconPainter extends CustomPainter {
 
         // Curtain hint (small detail)
         final curtainPaint = Paint()
-          ..color = const Color(0xFFFFFFFF).withOpacity(0.3);
+          ..color = const Color(0xFFFFFFFF).withValues(alpha: 0.3);
         canvas.drawRRect(
           RRect.fromRectAndRadius(
             Rect.fromLTWH(
@@ -293,7 +293,7 @@ class _InnIconPainter extends CustomPainter {
 
     // Entrance canopy
     final canopyPaint = Paint()
-      ..color = const Color(0xFF8B4513).withOpacity(0.7);
+      ..color = const Color(0xFF8B4513).withValues(alpha: 0.7);
     canvas.drawRect(
       Rect.fromLTWH(
         size.width * 0.36,
@@ -332,7 +332,7 @@ class _InnIconPainter extends CustomPainter {
 
     // Door panels (3 panels)
     final doorPanelPaint = Paint()
-      ..color = const Color(0xFF4A2C0D).withOpacity(0.5)
+      ..color = const Color(0xFF4A2C0D).withValues(alpha: 0.5)
       ..style = PaintingStyle.stroke
       ..strokeWidth = 1.5;
     for (var i = 0; i < 3; i++) {
@@ -368,7 +368,7 @@ class _InnIconPainter extends CustomPainter {
     );
 
     // Welcome mat
-    final matPaint = Paint()..color = const Color(0xFF8B4513).withOpacity(0.6);
+    final matPaint = Paint()..color = const Color(0xFF8B4513).withValues(alpha: 0.6);
     canvas.drawRRect(
       RRect.fromRectAndRadius(
         Rect.fromLTWH(
@@ -387,8 +387,8 @@ class _InnIconPainter extends CustomPainter {
       ..shader =
           RadialGradient(
             colors: [
-              Colors.black.withOpacity(0.18),
-              Colors.black.withOpacity(0.08),
+              Colors.black.withValues(alpha: 0.18),
+              Colors.black.withValues(alpha: 0.08),
               Colors.transparent,
             ],
           ).createShader(
@@ -412,3 +412,4 @@ class _InnIconPainter extends CustomPainter {
   bool shouldRepaint(_InnIconPainter old) =>
       old.glowOpacity != glowOpacity || old.isSelected != isSelected;
 }
+

@@ -34,7 +34,7 @@ class _HostelIconPainter extends CustomPainter {
         ..shader =
             RadialGradient(
               colors: [
-                const Color(0xFF06A77D).withOpacity(glowOpacity * 0.35),
+                const Color(0xFF06A77D).withValues(alpha: glowOpacity * 0.35),
                 Colors.transparent,
               ],
             ).createShader(
@@ -84,7 +84,7 @@ class _HostelIconPainter extends CustomPainter {
 
     // Building outline
     final outlinePaint = Paint()
-      ..color = const Color(0xFF048A63).withOpacity(0.4)
+      ..color = const Color(0xFF048A63).withValues(alpha: 0.4)
       ..style = PaintingStyle.stroke
       ..strokeWidth = 1.5;
     canvas.drawRRect(
@@ -102,7 +102,7 @@ class _HostelIconPainter extends CustomPainter {
 
     // Floor separation lines
     final floorLinePaint = Paint()
-      ..color = const Color(0xFF048A63).withOpacity(0.5)
+      ..color = const Color(0xFF048A63).withValues(alpha: 0.5)
       ..strokeWidth = 2;
     canvas.drawLine(
       Offset(size.width * 0.26, size.height * 0.42),
@@ -157,7 +157,7 @@ class _HostelIconPainter extends CustomPainter {
 
         // Window background (white/bright)
         final windowBgPaint = Paint()
-          ..color = const Color(0xFFFFFFFF).withOpacity(0.9);
+          ..color = const Color(0xFFFFFFFF).withValues(alpha: 0.9);
         canvas.drawRRect(
           RRect.fromRectAndRadius(
             Rect.fromCenter(
@@ -300,7 +300,7 @@ class _HostelIconPainter extends CustomPainter {
 
     // Door glass panel (small window in door)
     final glassPaint = Paint()
-      ..color = const Color(0xFF90E0EF).withOpacity(0.7);
+      ..color = const Color(0xFF90E0EF).withValues(alpha: 0.7);
     canvas.drawRRect(
       RRect.fromRectAndRadius(
         Rect.fromCenter(
@@ -322,7 +322,7 @@ class _HostelIconPainter extends CustomPainter {
 
     // Welcome/entrance icons (people silhouettes or backpack icons)
     final iconPaint = Paint()
-      ..color = const Color(0xFF048A63).withOpacity(0.3)
+      ..color = const Color(0xFF048A63).withValues(alpha: 0.3)
       ..style = PaintingStyle.fill;
 
     // Simplified backpack icon on left
@@ -356,8 +356,8 @@ class _HostelIconPainter extends CustomPainter {
       ..shader =
           RadialGradient(
             colors: [
-              Colors.black.withOpacity(0.18),
-              Colors.black.withOpacity(0.08),
+              Colors.black.withValues(alpha: 0.18),
+              Colors.black.withValues(alpha: 0.08),
               Colors.transparent,
             ],
           ).createShader(
@@ -381,3 +381,4 @@ class _HostelIconPainter extends CustomPainter {
   bool shouldRepaint(_HostelIconPainter old) =>
       old.glowOpacity != glowOpacity || old.isSelected != isSelected;
 }
+

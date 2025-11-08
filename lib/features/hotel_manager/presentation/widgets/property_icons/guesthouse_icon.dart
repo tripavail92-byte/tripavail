@@ -34,7 +34,7 @@ class _GuesthouseIconPainter extends CustomPainter {
         ..shader =
             RadialGradient(
               colors: [
-                const Color(0xFF0077B6).withOpacity(glowOpacity * 0.35),
+                const Color(0xFF0077B6).withValues(alpha: glowOpacity * 0.35),
                 Colors.transparent,
               ],
             ).createShader(
@@ -51,7 +51,7 @@ class _GuesthouseIconPainter extends CustomPainter {
     }
 
     // Garden/yard background
-    final yardPaint = Paint()..color = const Color(0xFF52B788).withOpacity(0.3);
+    final yardPaint = Paint()..color = const Color(0xFF52B788).withValues(alpha: 0.3);
     canvas.drawRect(
       Rect.fromLTWH(0, size.height * 0.7, size.width, size.height * 0.18),
       yardPaint,
@@ -121,7 +121,7 @@ class _GuesthouseIconPainter extends CustomPainter {
 
     // Roof tiles texture
     final tilePaint = Paint()
-      ..color = const Color(0xFF02024A).withOpacity(0.5)
+      ..color = const Color(0xFF02024A).withValues(alpha: 0.5)
       ..strokeWidth = 1.5
       ..style = PaintingStyle.stroke;
     for (var i = 0; i < 5; i++) {
@@ -149,7 +149,7 @@ class _GuesthouseIconPainter extends CustomPainter {
 
     // Chimney brick lines
     final brickPaint = Paint()
-      ..color = const Color(0xFF6B3535).withOpacity(0.6)
+      ..color = const Color(0xFF6B3535).withValues(alpha: 0.6)
       ..strokeWidth = 1;
     for (var i = 0; i < 3; i++) {
       canvas.drawLine(
@@ -161,7 +161,7 @@ class _GuesthouseIconPainter extends CustomPainter {
 
     // Smoke from chimney
     final smokePaint = Paint()
-      ..color = const Color(0xFF6C757D).withOpacity(0.4)
+      ..color = const Color(0xFF6C757D).withValues(alpha: 0.4)
       ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 3);
     canvas.drawCircle(
       Offset(size.width * 0.66, size.height * 0.19),
@@ -208,7 +208,7 @@ class _GuesthouseIconPainter extends CustomPainter {
 
     // House outline
     final outlinePaint = Paint()
-      ..color = const Color(0xFF005F8C).withOpacity(0.4)
+      ..color = const Color(0xFF005F8C).withValues(alpha: 0.4)
       ..style = PaintingStyle.stroke
       ..strokeWidth = 1.5;
     canvas.drawRRect(
@@ -238,7 +238,7 @@ class _GuesthouseIconPainter extends CustomPainter {
 
       // Window glow
       final windowGlow = Paint()
-        ..color = const Color(0xFFFFE66D).withOpacity(0.35)
+        ..color = const Color(0xFFFFE66D).withValues(alpha: 0.35)
         ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 3);
       canvas.drawRRect(
         RRect.fromRectAndRadius(
@@ -254,7 +254,7 @@ class _GuesthouseIconPainter extends CustomPainter {
 
       // Window background (yellow/warm)
       final windowBgPaint = Paint()
-        ..color = const Color(0xFFFFE66D).withOpacity(0.85);
+        ..color = const Color(0xFFFFE66D).withValues(alpha: 0.85);
       canvas.drawRRect(
         RRect.fromRectAndRadius(
           Rect.fromCenter(
@@ -269,7 +269,7 @@ class _GuesthouseIconPainter extends CustomPainter {
 
       // Curtains (white semi-transparent on sides)
       final curtainPaint = Paint()
-        ..color = const Color(0xFFFFFFFF).withOpacity(0.4);
+        ..color = const Color(0xFFFFFFFF).withValues(alpha: 0.4);
       canvas.drawRRect(
         RRect.fromRectAndRadius(
           Rect.fromLTWH(
@@ -382,8 +382,8 @@ class _GuesthouseIconPainter extends CustomPainter {
       ..shader =
           LinearGradient(
             colors: [
-              const Color(0xFF8B4513).withOpacity(0.8),
-              const Color(0xFF6F3613).withOpacity(0.6),
+              const Color(0xFF8B4513).withValues(alpha: 0.8),
+              const Color(0xFF6F3613).withValues(alpha: 0.6),
             ],
           ).createShader(
             Rect.fromLTWH(
@@ -411,8 +411,8 @@ class _GuesthouseIconPainter extends CustomPainter {
       ..shader =
           RadialGradient(
             colors: [
-              Colors.black.withOpacity(0.18),
-              Colors.black.withOpacity(0.08),
+              Colors.black.withValues(alpha: 0.18),
+              Colors.black.withValues(alpha: 0.08),
               Colors.transparent,
             ],
           ).createShader(
@@ -436,3 +436,4 @@ class _GuesthouseIconPainter extends CustomPainter {
   bool shouldRepaint(_GuesthouseIconPainter old) =>
       old.glowOpacity != glowOpacity || old.isSelected != isSelected;
 }
+
